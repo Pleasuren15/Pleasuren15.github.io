@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Caveat:wght@500&family=Quicksand&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --bg-danger : #dc3545;
+    --to-top-border : 3px solid rgb(255, 255, 255)
+}
+
+.my-hr-line{
+    margin: 0;
+    border: 7px;
+    width: 20%;
+    height: 3px;
+    background-color: var(--bg-danger);
+}
+
+.my-header{
+    font-family: 'Acme', sans-serif;
+    border-left: 5px solid rgb(197, 17, 17);;
+    padding-left: 15px;
+    margin-bottom: 15px ;
+    color: #292929;
+}
+.caveat-font{
+    font-family: 'Caveat', cursive;
+}
+
+body{
+    font-family: 'Quicksand', sans-serif;
+    scroll-behavior: smooth;
+}
+
+.btn-toggle{
+    border: none;
+    background-color: transparent;
+}
+
+
+.btn-corona-text:hover{
+    background-color: var(--bg-danger);
+    border-color: var(--bg-danger);
+}
+
+#navBar{
+    display: none;
+}
+
+.nav-link{
+    position: relative;
+    padding: 4px;
+    font-size: 13px;
+}
+
+.nav-link::before{
+    position: absolute;
+    bottom: 0;
+    content: '';
+    width: 65%;
+    height: 3px;
+    margin: 0 auto;
+    background-color: var(--bg-danger);
+    visibility:hidden;
+}
+
+.nav-link:hover::before{
+    animation: growRight 0.5s forwards;
+    visibility:visible;
+}
+
+@keyframes growRight{
+    from{
+        width: 0;
+    }
+    to{
+        width: 65%;
+    }
+}
+
+
+.my-intro{
+    z-index: -1;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.my-intro-left{
+}
+
+.my-intro-right{
+    position: relative;
+}
+
+.my-intro-right img{
+    height: 60vh;
+    overflow: hidden; 
+}
+
+.my-skills{
+    margin: 50px 0 5px 0;
+    padding-left: 1rem;
+}
+
+.more-about-me{
+    position: relative;
+}
+
+
+.my-skills-top{
+    display: grid;
+    grid-template-columns: repeat(5 ,1fr);
+    grid-gap: 10px;
+}
+
+.my-skills-top-skill{
+    border-radius: 5px;
+    font-family: 'Caveat', cursive;
+    border: 2px solid #eeeeee;
+    transition: 0.5s;
+}
+
+.my-skills-top-skill:hover{
+    transform: scale(1.05);
+    background-color: var(--bg-danger);
+    border:none;
+}
+
+.my-skills-top-skill img{
+    padding: 25px;
+    width: 200px;
+    height: 200px;
+}
+
+#skills{
+    margin-top: 10px;   
+}
+
+#hideSkills{
+    display: none;
+}
+
+.other-skills{
+    display: grid;
+    grid-template-columns: repeat(3 , 1fr);
+    grid-gap: 10px;
+     font-family: 'Caveat', cursive;
+}
+
+.to-top{
+    display: none;
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    right: 0;
+    top: 60%;
+    background-color: rgb(197, 17, 17);;
+    border-radius: 50% 0 0 50%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    border-left : var(--to-top-border);
+    border-top : var(--to-top-border);
+    border-bottom : var(--to-top-border);
+    transition: 1s;
+    animation: 1s changeOpacityTop forwards;
+}
+
+@keyframes changeOpacityTop{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+.to-top:hover{
+    right: 0;
+    border-radius: 0;
+}
+
+.my-values-con, .more-about-me-con {
+    background-color: #ededed;
+    margin: 0 0 50px 0;
+    padding: 50px 0 75px 1rem;
+}
+
+.my-values{
+    color: rgb(231, 231, 231);
+    padding-left: 1rem;
+}
+
+.my-values-items{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px;
+}
+
+.my-values-item:hover:before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background-color: rgb(221, 25, 64);
+    animation: 1s from0To100W  forwards;
+}
+
+@keyframes from0To100W {
+    from{
+        width: 0%;
+    }
+}
+
+.my-values-item{
+    position: relative;
+    border-radius: 7px 7px 0 0 ;
+    background-color: #ffffff;
+    color: #041c33;
+    border-bottom: 6px solid #041c33;
+    padding : 13px;
+}
+
+.my-values-item:hover{
+    background-color: rgba(11,18,26,1);
+    color: #ffffff;
+    border: none;
+}
+
+#myValuesItem1 , #myValuesItem2 ,#myValuesItem3 ,#myValuesItem4 {
+    display: none;
+}
+
+.my-values-item-letter{
+    position: absolute;
+    bottom: -5px;
+    right: 1.3rem;
+    font: 900 5rem 'Acme', sans-serif;
+    color: rgb(220, 20, 60);
+}
+
+
+
+
+.my-values-item h2, .my-values-item h1{
+    font-family: 'Acme', sans-serif;
+}
+
+.my-values-item p {
+    font-family: 'Caveat', cursive;
+    font-size: 24px;
+}
+
+
+.changeOpa{
+    animation: 2.5s changeOpacity forwards;
+}
+
+@keyframes changeOpacity{
+    from{
+        opacity: 0;
+        transform: translateX(-50%);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.get-in-touch-con {
+    margin: 0 0 15px 0;
+    padding: 60px 0 60px 1rem;
+    background: rgb(11,18,26);
+    background: linear-gradient(90deg, rgba(11,18,26,1) 29%, rgba(70,81,94,1) 81%);
+}
+
+.get-in-touch{
+    padding-left: 1rem;
+}
+
+.get-in-touch h1{
+    color: rgb(240, 240, 240);
+}
+
+.get-in-touch a{
+    background-color: #b31828;
+    padding: 10px 15px;
+    font-weight: 700 ;
+    font-size: 14px;
+    color: #eeeeee;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.get-in-touch a:hover{
+    background-color:rgb(197, 17, 17);
+}
+
+.footer-con{
+    align-items: center;
+    background-color:  #1e242b;
+    color: #eeeeee;
+}
+
+.footer{
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3 , 1fr);
+    grid-gap: 20px;
+    padding: 15px 1rem;
+}
+
+.footer-social{
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgb(220, 20, 60);
+    border-radius: 50%;
+    margin: 5px 5px 5px 0;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-social a {
+    text-decoration: none;
+    color: rgb(220, 20, 60);
+}
+
+.get-in-touch-list{
+    margin: 0;
+    padding: 3px;
+    list-style: none;
+}
+
+@media screen and (max-width: 900px) {
+    .my-intro{
+        display: grid;
+        grid-template-columns:repeat(1, 1fr);
+        align-items: center;
+    }
+
+    .my-intro-right{
+        display: none;
+    }
+}
+
+

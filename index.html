@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.css" />
+  <script src="jquery-3.5.1.min.js"></script>
+  <link rel="stylesheet" href="/styles/main.css" />
+  <title>PsPortfolio</title>
+</head>
+
+<body>
+  <div id="top"></div>
+  <a id="toTopToggler" class="to-top" href="#top"><i class="fas fa-chevron-up"></i></a>
+
+  <!--<div class="container-fluid bg-danger" id="CorText">
+    <div class="container d-flex justify-content-between align-items-center">
+      <button class="btn btn-danger btn-corona-text">
+        Stay informed! Visit the SA Department of Health's website for
+        COVID-19 updates:
+        <a href="https://sacoronavirus.co.za/" target="_blank">
+          www.sacoronavirus.co.za
+        </a>
+      </button>
+      <button id="hideCorText" class="btn btn-sm btn-danger">
+        X
+      </button>
+    </div>
+  </div>-->
+
+  <!--NAVBAR-->
+  <div class="container-fluid shadow sticky-top bg-primary p-2" id="toTopView">
+    <div class="container">
+      <div class="d-flex justify-content-between pt-3">
+        <img src="/images/PsLogo.svg" width="60px" height="60px" alt="">
+        <button id="navBarToggler" class="btn-toggle"><i class="fas fa-bars fa-2x text-danger"></i></button>
+      </div>
+      <div id="navBar" class="navbar navbar-expand-md ">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="#" class="nav-link text-danger fw-bold">ABOUT</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link text-danger fw-bold">SKILLS</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link text-danger fw-bold">PROJECTS</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link text-danger fw-bold">
+              CERTIFICATIONS
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="showContactUs" class="nav-link text-danger fw-bold">
+              CONTACT
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!--MY-INTRO-->
+  <div class="container-fluid" id="toTopView">
+    <div class="container">
+      <div class="my-intro">
+        <div class="my-intro-left">
+          <h1 class="caveat-font text-danger">Welcome To Pleasure Sbu. Ndhlovu's Web Portfolio</h1>
+          <p>Get to know him as an aspiring software developer</p>
+          <a class="btn btn-sm btn-danger" href="#">Contact Me</a>
+        </div>
+
+        <div class="my-intro-right">
+          <img class="mx-auto d-block" src="/images/introIllu.jpg" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--MORE ABOUT ME-->
+  <div class="container-fluid more-about-me-con">
+    <div class="container">
+      <div class="more-about-me">
+        <div>
+          <h2 class="my-header">
+            Get To Know Sbu. Ndhlovu
+          </h2>
+          <p>
+            I completed my degree(Bsc. IT majoring in Computer Science &
+            Business management) at
+            <a class="text-danger text-decoration-none fw-bold" target="_blank" href="https://www.ufs.ac.za">
+              University Of The Free State </a> I'm a hard working, driven, programitically inclined & someone who
+            loves working with other individuals or groups withing my
+            surroundings &amp; online platforms available to achieve my
+            personally set goals.
+          </p>
+          <p>
+            I want to be a software developer because it is a role I'm extremely
+            passionate about &amp; it gives me immense satisfaction to see my work
+            contributing in other's lives. As an aspiring software developer who wants to have a lot of
+            experience &amp; produce code that is of high standard &amp; highly
+            mantainable, I'm actively seeking an opportunity to grow my career. I
+            love working others because it encourages growth by giving one to
+            learn from others. People's contributions matters to me.
+          </p>
+          <p>
+            I constatly improve my skills as time progresses to make sure I'm
+            up-to-date with the continual changes taking place in the software
+            development world, This helps me to be suitable more most jobs
+            descriptions &amp; roles in the sector. It also gives me competitive
+            edge.
+          </p>
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <!--Education-->
+        <div>
+          <h2 class="my-header">Education</h2>
+          <div>
+            <p class="fw-bold">University Of The Free State</p>
+            <p class="small">Computer Sciences And Business managementField Of StudyComputer Programming, Specific
+              Applications
+            </p>
+            <p class="small text-secondary">Dates attended or expected completion: 2018 – 2021</p>
+          </div>
+        </div>
+
+        <!--Experience-->
+        <div class="m-1">
+          <h2 class="my-header">Work Experience</h2>
+          <div>
+            <p class="fw-bold">Psybergate</p>
+            <p class="small">Computer Sciences And Business managementField Of StudyComputer Programming, Specific
+              Applications
+            </p>
+            <p class="small text-secondary">Dates attended or expected completion: 2018 – 2021</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MY SKILLS-->
+  <div class="container">
+    <div class="my-skills">
+      <h2 class="my-header">
+        My skills &amp; applications
+      </h2>
+
+      <div class="my-skills-top">
+        <div class="my-skills-top-skill shadow">
+          <img class="mx-auto d-block" src="https://seeklogo.com/images/C/c-sharp-c-logo-02F17714BA-seeklogo.com.png"
+            alt="C# Image" />
+          <h6 class="text-center text-danger">C#</h6>
+        </div>
+        <div class="my-skills-top-skill shadow">
+          <img class="mx-auto d-block" src="https://seeklogo.com/images/H/html5-logo-EF92D240D7-seeklogo.com.png"
+            alt="HTML Image" />
+          <h6 class="text-center text-danger">HTML</h6>
+        </div>
+        <div class="my-skills-top-skill shadow">
+          <img class="mx-auto d-block"
+            src="https://seeklogo.com/images/J/javascript-js-logo-2949701702-seeklogo.com.png" alt="HTML Image" />
+          <h6 class="text-center text-danger">JavaScript</h6>
+        </div>
+        <div class="my-skills-top-skill shadow">
+          <img class="mx-auto d-block" src="https://seeklogo.com/images/J/jquery-logo-CFE6ECE363-seeklogo.com.png"
+            alt="JQuery Image" />
+          <h6 class="text-center text-danger">JQuery</h6>
+        </div>
+        <div class="my-skills-top-skill shadow">
+          <img class="mx-auto d-block" src="https://seeklogo.com/images/R/react-logo-7B3CE81517-seeklogo.com.png"
+            alt="React Image" />
+          <h6 class="text-center text-danger">React</h6>
+        </div>
+      </div>
+
+      <a id="showSkills" class="btn btn-sm btn-danger mt-2">
+        toggle skills
+      </a>
+
+      <div id="skills">
+        <ul class="list-group list-group-flush other-skills">
+          <li class="list-group-item">.NET Framework</li>
+          <li class="list-group-item">SQL</li>
+          <li class="list-group-item">mySQL</li>
+          <li class="list-group-item">ASP.NET</li>
+          <li class="list-group-item">MVC</li>
+          <li class="list-group-item">Bootstrap</li>
+          <li class="list-group-item">Java</li>
+          <li class="list-group-item">Entity Framework Core</li>
+          <li class="list-group-item">Git</li>
+          <li class="list-group-item">Microsoft Office</li>
+          <li class="list-group-item">Database Design</li>
+          <li class="list-group-item">Databases Implementation</li>
+          <li class="list-group-item">APIs</li>
+          <li class="list-group-item">Data Structures</li>
+          <li class="list-group-item">Design Patterns</li>
+          <li class="list-group-item">Graphic Design</li>
+          <li class="list-group-item">ORMs</li>
+          <li class="list-group-item">VBA</li>
+          <li class="list-group-item"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!--GET-IN-TOUCH-->
+  <div class="container-fluid get-in-touch-con">
+    <div class="container">
+      <div class="get-in-touch">
+        <div class="d-flex justify-content-between align-items-center">
+          <h1 class="my-header">For my contributions, check out my GitHub profile</h1>
+          <a href="#">Visit GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--MY CORE VALUES-->
+  <div class="container-fluid my-values-con">
+    <div class="container">
+      <div class="my-values" id="myValueItems">
+        <h2 class="my-header">
+          My Core Values
+        </h2>
+        <hr>
+        <div class="my-values-items">
+          <div id="myValueItem1" class="my-values-item">
+            <h1>01</h1>
+            <h2>Self-respect</h2>
+            <p>I am intentional about developing and nurturing self-respect, which is the lens through
+              which I engage with the world.</p>
+            <div id="myValuesItem1" class="my-values-item-letter">R</div>
+          </div>
+          <div id="myValueItem2" class="my-values-item">
+            <h1>02</h1>
+            <h2>Courage</h2>
+            <p>I embrace change and ambiguity and understand that it takes courage to grow and evolve.</p>
+            <div id="myValuesItem2" class="my-values-item-letter">C</div>
+          </div>
+          <div id="myValueItem3" class="my-values-item">
+            <h1>03</h1>
+            <h2>Integrity</h2>
+            <p>I am honest, trustworthy and think long-term, which gives me the space to act with
+              integrity.</p>
+            <div id="myValuesItem3" class="my-values-item-letter">I</div>
+          </div>
+          <div id="myValueItem4" class="my-values-item">
+            <h1>04</h1>
+            <h2>Commitment</h2>
+            <p>I am honest, trustworthy and think long-term, which gives me the space to act with
+              integrity.</p>
+            <div id="myValuesItem4" class="my-values-item-letter">C</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--MY FOOTER-->
+  <div class="container-fluid footer-con">
+    <div class="container">
+      <div class="footer">
+        <div>
+          <h4 class="fw-bold">About</h4>
+          <hr />
+          <p class="small">Aim of the site is to help recruiters to get to know who Pleasure Ndhlovu is &amp; see the
+            skills, values &amp; certificates
+            he possess in the software development discipline. Social platforms to reach out are available on-site.
+          </p>
+        </div>
+        <div>
+          <h4 class="fw-bold">Reach Me
+          </h4>
+          <hr />
+          <ul class="get-in-touch-list">
+            <li class="small"><i class="fas fa-map-marker-alt"></i> South Africa</li>
+            <li class="small"><i class="fas fa-phone"></i> +2782 398 2825</li>
+            <li class="small"><i class="fas fa-envelope"></i> Pleasuren15@gmail.com</li>
+            <li class="small"><i class="fas fa-mail-bulk"></i> 2017269214@ufs4life.ac.za</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="fw-bold">Follow Us</h4>
+          <hr />
+          <p class="small">To get to know me better, you can follow me on one of the platforms below</p>
+          <div class="d-flex">
+            <div class="footer-social"><a href="#"><i class="fab fa-github"></i></a></div>
+            <div class="footer-social"><a href="#"><i class="fab fa-linkedin-in"></i></a></div>
+            <div class="footer-social"><a href="#"><i class="fab fa-facebook-f"></i></a></div>
+            <div class="footer-social"><a href="#"><i class="fab fa-instagram"></i></a></div>
+            <div class="footer-social"><a href="#"><i class="fab fa-twitter"></i></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/lib/jquery/jquery.slim.min.js"></script>
+  <script src="/lib/popper.js/popper.min.js"></script>
+  <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
