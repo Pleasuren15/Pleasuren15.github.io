@@ -99,7 +99,9 @@ body{
 
 .my-intro-right img{
     height: 60vh;
+    border-radius:7px;
     overflow: hidden; 
+    animation: 3s changeOpacityTop forwards;
 }
 
 .my-skills{
@@ -109,6 +111,7 @@ body{
 
 .more-about-me{
     position: relative;
+    animation: 3s changeOpacityTop forwards;
 }
 
 
@@ -189,7 +192,7 @@ body{
 
 .my-values-con, .more-about-me-con {
     background-color: #ededed;
-    margin: 0 0 50px 0;
+    margin: 0;
     padding: 50px 0 75px 1rem;
 }
 
@@ -223,15 +226,14 @@ body{
 
 .my-values-item{
     position: relative;
-    border-radius: 7px 7px 0 0 ;
     background-color: #ffffff;
     color: #041c33;
     border-bottom: 6px solid #041c33;
-    padding : 13px;
+    padding : 1rem;
 }
 
 .my-values-item:hover{
-    background-color: rgba(11,18,26,1);
+    background-color: rgb(21, 29, 39);
     color: #ffffff;
     border: none;
 }
@@ -242,7 +244,7 @@ body{
 
 .my-values-item-letter{
     position: absolute;
-    bottom: -5px;
+    bottom: -20px;
     right: 1.3rem;
     font: 900 5rem 'Acme', sans-serif;
     color: rgb(220, 20, 60);
@@ -253,11 +255,6 @@ body{
 
 .my-values-item h2, .my-values-item h1{
     font-family: 'Acme', sans-serif;
-}
-
-.my-values-item p {
-    font-family: 'Caveat', cursive;
-    font-size: 24px;
 }
 
 
@@ -277,7 +274,6 @@ body{
 }
 
 .get-in-touch-con {
-    margin: 0 0 15px 0;
     padding: 60px 0 60px 1rem;
     background: rgb(11,18,26);
     background: linear-gradient(90deg, rgba(11,18,26,1) 29%, rgba(70,81,94,1) 81%);
@@ -342,6 +338,14 @@ body{
     list-style: none;
 }
 
+
+@media screen and (max-width: 1200px) {
+    .my-skills-top{
+        display: grid;
+        grid-template-columns: repeat(3 ,1fr);
+    }
+}
+
 @media screen and (max-width: 900px) {
     .my-intro{
         display: grid;
@@ -352,6 +356,26 @@ body{
     .my-intro-right{
         display: none;
     }
+
+    .my-skills-top{
+        display: grid;
+        grid-template-columns: repeat(3 ,1fr);
+    }
+
+    .my-values-items{
+        display:grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .footer{
+        display: flex;
+        flex-direction: column;
+    }
 }
 
-
+@media screen and (max-width: 760px) {
+    .my-skills-top{
+        display: grid;
+        grid-template-columns: repeat(1 ,1fr);
+    }
+}
