@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Acme&family=Caveat:wght@500&family=Quicksand&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -39,7 +40,6 @@ body{
     background-color: transparent;
 }
 
-
 .btn-corona-text:hover{
     background-color: var(--bg-danger);
     border-color: var(--bg-danger);
@@ -47,6 +47,12 @@ body{
 
 #navBar{
     display: none;
+}
+
+.navbar-brand-img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
 }
 
 .nav-link{

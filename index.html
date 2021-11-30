@@ -17,49 +17,58 @@
   <div id="top"></div>
   <a id="toTopToggler" class="to-top" href="#top"><i class="fas fa-chevron-up"></i></a>
 
-  <!--<div class="container-fluid bg-danger" id="CorText">
+  <!--COVID INFO-->
+  <div class="container-fluid bg-danger" id="CorText">
     <div class="container d-flex justify-content-between align-items-center">
       <button class="btn btn-danger btn-corona-text">
         Stay informed! Visit the SA Department of Health's website for
         COVID-19 updates:
-        <a href="https://sacoronavirus.co.za/" target="_blank">
+        <a class="text-decoration-none fw-bolder text-warning" href="https://sacoronavirus.co.za/" target="_blank">
           www.sacoronavirus.co.za
         </a>
       </button>
-      <button id="hideCorText" class="btn btn-sm btn-danger">
+      <button id="hideCorText" class="btn btn-sm btn-danger fw-bold">
         X
       </button>
     </div>
-  </div>-->
+  </div>
 
   <!--NAVBAR-->
   <div class="container-fluid shadow sticky-top bg-light p-2" id="toTopView">
     <div class="container">
       <div class="d-flex justify-content-between ">
+        <a>
+          <img class="navbar-brand-img" src="/images/LogoWithGradient.png" />
+        </a>
         <button id="navBarToggler" class="btn-toggle"><i class="fas fa-bars fa-2x text-danger"></i></button>
-        <div id="navBar" class="navbar navbar-expand-md ">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a href="#" class="nav-link text-danger fw-bold">ABOUT</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-danger fw-bold">SKILLS</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-danger fw-bold">PROJECTS</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-danger fw-bold">
-                CERTIFICATIONS
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" id="showContactUs" class="nav-link text-danger fw-bold">
-                CONTACT
-              </a>
-            </li>
-          </ul>
-        </div>
+      </div>
+      <div id="navBar" class="navbar navbar-expand-md ">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="#more-about-me" class="nav-link text-danger fw-bold">ABOUT</a>
+          </li>
+          <li class="nav-item">
+            <a href="#my-skills" class="nav-link text-danger fw-bold">SKILLS</a>
+          </li>
+          <li class="nav-item">
+            <a href="#certifications" class="nav-link text-danger fw-bold">PROJECTS</a>
+          </li>
+          <li class="nav-item">
+            <a href="#my-values" class="nav-link text-danger fw-bold">
+              VALUES
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#certifications" class="nav-link text-danger fw-bold">
+              CERTIFICATIONS
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#contact-me" id="showContactUs" class="nav-link text-danger fw-bold">
+              CONTACT
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -82,7 +91,7 @@
   </div>
 
   <!--MORE ABOUT ME-->
-  <div class="container-fluid more-about-me-con">
+  <div class="container-fluid more-about-me-con" id="more-about-me">
     <div class="container">
       <div class="more-about-me">
         <div>
@@ -146,7 +155,7 @@
   </div>
 
   <!-- MY SKILLS-->
-  <div class="container">
+  <div class="container" id="my-skills">
     <div class="my-skills">
       <h2 class="my-header">
         My skills &amp; applications
@@ -222,7 +231,7 @@
   </div>
 
   <!--MY CORE VALUES-->
-  <div class="container-fluid my-values-con">
+  <div class="container-fluid my-values-con" id="my-values">
     <div class="container">
       <div class="my-values" id="myValueItems">
         <h2 class="my-header">
@@ -230,16 +239,16 @@
         </h2>
         <hr>
         <div class="my-values-items">
-          <div  class="my-values-item">
+          <div class="my-values-item">
             <h2>Self-respect</h2>
             <p>I am intentional about developing and nurturing self-respect, which is the lens through
               which I engage with the world.</p>
           </div>
-          <div  class="my-values-item">
+          <div class="my-values-item">
             <h2>Courage</h2>
             <p>I embrace change and ambiguity and understand that it takes courage to grow and evolve.</p>
           </div>
-          <div  class="my-values-item">
+          <div class="my-values-item">
             <h2>Integrity</h2>
             <p>I am honest, trustworthy and think long-term, which gives me the space to act with
               integrity.</p>
@@ -255,7 +264,7 @@
   </div>
 
   <!--CERTIFICATIONS-->
-  <div class="container-fluid certifications-con">
+  <div class="container-fluid certifications-con" id="certifications">
     <div class="container">
       <div class="certifications">
         <h1 class="my-header">Certifications</h1>
@@ -320,7 +329,7 @@
   </div>
 
   <!--CONTACT ME FORM-->
-  <div class="container-fluid my-contact-con">
+  <div class="container-fluid my-contact-con" id="contact-me">
     <div class="container">
       <div class="my-contact">
         <h2 class="my-header">
