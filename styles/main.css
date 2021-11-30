@@ -238,22 +238,9 @@ body{
     border: none;
 }
 
-#myValuesItem1 , #myValuesItem2 ,#myValuesItem3 ,#myValuesItem4 {
-    display: none;
-}
-
-.my-values-item-letter{
-    position: absolute;
-    bottom: -20px;
-    right: 1.3rem;
-    font: 900 5rem 'Acme', sans-serif;
-    color: rgb(220, 20, 60);
-}
-
 .my-values-item h2, .my-values-item h1{
     font-family: 'Acme', sans-serif;
 }
-
 
 .changeOpa{
     animation: 2.5s changeOpacity forwards;
@@ -276,7 +263,7 @@ body{
     background: linear-gradient(90deg, rgba(11,18,26,1) 29%, rgba(70,81,94,1) 81%);
 }
 
-.get-in-touch, .certifications{
+.get-in-touch, .certifications, .projects{
     padding-left: 1rem;
 }
 
@@ -286,7 +273,7 @@ body{
     align-items: center;
 }
 
-.get-in-touch h1, .certifications h1{
+.get-in-touch h1, .certifications h1, .projects h1{
     color: rgb(240, 240, 240);
 }
 
@@ -304,7 +291,6 @@ body{
 .get-in-touch a:hover{
     background-color:rgb(197, 17, 17);
 }
-
 
 .certifications-list{
     display: grid;
@@ -330,6 +316,28 @@ body{
 
 .certifications-list-item h6{
     font-weight: bold;
+}
+
+.projects{
+    margin: 40px 0;
+    color: #ededed;
+}
+
+.project-imgs{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: .5rem;
+}
+
+.project-imgs img{
+    width: 100%;
+    height: 100%;
+    transition: 0.15s;
+    cursor:pointer;
+}
+
+.project-imgs img:hover{
+    transform: scale(1.8);
 }
 
 .my-contact-con{
@@ -382,6 +390,15 @@ body{
         display: grid;
         grid-template-columns: repeat(3 ,1fr);
     }
+
+    .project-imgs{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-imgs img:hover{
+        transform: scale(1);
+    }
 }
 
 @media screen and (max-width: 900px) {
@@ -395,6 +412,12 @@ body{
         display: none;
     }
 
+    .my-values-items{
+        display:grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 15px;
+    }
+
     .my-skills-top{
         display: grid;
         grid-template-columns: repeat(3 ,1fr);
@@ -406,14 +429,7 @@ body{
         justify-content:start;
         align-items: flex-start;
     }
-    
-    .get-in-touch h1{
-    }
 
-    .my-values-items{
-        display:grid;
-        grid-template-columns: repeat(1, 1fr);
-    }
 
     .certifications-list{
         display: grid;
@@ -428,6 +444,13 @@ body{
 }
 
 @media screen and (max-width: 760px) {
+
+    .project-imgs{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 1rem;
+    }
+
     .my-skills-top{
         display: grid;
         grid-template-columns: repeat(1 ,1fr);

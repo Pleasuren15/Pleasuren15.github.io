@@ -11,38 +11,6 @@ $(function () {
     $("#skills").toggle(300);
   });
 
-  $("#myValueItem1").on('mouseover', function(){
-    $("#myValuesItem1").show(300);
-  })
-
-  $("#myValueItem1").on('mouseleave', function(){
-    $("#myValuesItem1").hide(300);
-  })  
-
-  $("#myValueItem2").on('mouseover', function(){
-    $("#myValuesItem2").show(300);
-  })
-
-  $("#myValueItem2").on('mouseleave', function(){
-    $("#myValuesItem2").hide(300);
-  })  
-
-  $("#myValueItem3").on('mouseover', function(){
-    $("#myValuesItem3").show(300);
-  })
-
-  $("#myValueItem3").on('mouseleave', function(){
-    $("#myValuesItem3").hide(300);
-  })  
-
-  $("#myValueItem4").on('mouseover', function(){
-    $("#myValuesItem4").show(300);
-  })
-
-  $("#myValueItem4").on('mouseleave', function(){
-    $("#myValuesItem4").hide(300);
-  })  
-
   function inViewPort(element) {
     let rect = element.getBoundingClientRect();
     return (
