@@ -88,7 +88,6 @@ body{
 
 
 .my-intro{
-    z-index: -1;
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -285,13 +284,6 @@ body{
 
 .get-in-touch a{
     background-color: #b31828;
-    padding: 10px 15px;
-    font-weight: 700 ;
-    font-size: 14px;
-    color: #eeeeee;
-    border-radius: 20px;
-    cursor: pointer;
-    text-decoration: none;
 }
 
 .get-in-touch a:hover{
