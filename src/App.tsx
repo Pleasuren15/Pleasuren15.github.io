@@ -9,7 +9,7 @@ function App() {
         <Silk speed={4} scale={1} color="#011598ff" noiseIntensity={5} rotation={0} />
       </div>
 
-      <div className="app-content">
+      <div className="app-content mt-2">
         <Navbar/>
       </div>
     </div>
