@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* Make the app and root elements full-height so the background can fill the screen */

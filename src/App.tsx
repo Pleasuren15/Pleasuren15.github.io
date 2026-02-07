@@ -1,4 +1,5 @@
 import './App.css'
+import Navbar from './components/Navbar'
 import Silk from './components/Silk'
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
       </div>
 
       <div className="app-content">
-        {/* Page content goes here; it will sit above the Silk background */}
+        <Navbar/>
       </div>
     </div>
   )
