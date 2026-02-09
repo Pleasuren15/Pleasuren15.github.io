@@ -3,13 +3,14 @@ import AnimatedBorderAvatar from './AnimatedBorderAvatar';
 
 const LandingPage: React.FC = () => {
   return (
-    <div className="flex items-center justify-between w-full h-screen">
+    <div className="flex items-center justify-between w-full mt-25">
       {/* Left side - Text */}
       <div className="items-center">
-        <h3 className="text-2xl text-white">Hello, I Am Sbu</h3>
-        <h1 className="text-7xl font-bold text-white leading-tight">
+        <h5 className="text-2xl text-white">Hello, I Am SBU</h5>
+        <h3 className="text-8xl font-bold mt-2 mb-4">
           SOFTWARE ENGINEER
-        </h1>
+        </h3>
+        <p>Delivering Software With Precision, Tested For Reliability, And Built To Scale.</p>
       </div>
 
       {/* Right side - Avatar */}
