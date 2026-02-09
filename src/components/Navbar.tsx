@@ -17,7 +17,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from '.
 
 function Navbar() {
     return (
-        <div className="mx-auto max-w-7xl auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
                 <div className="flex items-center gap-12">
 
@@ -55,19 +54,19 @@ function Navbar() {
                                 <DrawerDescription className="text-left">List of recent updates and changes to the portfolio.</DrawerDescription>
                             <Accordion type="single" collapsible className="">
                                 <AccordionItem value="item-1">
-                                    <AccordionTrigger>Version 1.0</AccordionTrigger>
+                                    <AccordionTrigger>1. Version 1.0</AccordionTrigger>
                                     <AccordionContent className='text-left'>
                                         Initial release of the portfolio website with core structure and styling. Established the foundation for showcasing projects and professional information.
                                     </AccordionContent>
                                 </AccordionItem>
                                 <AccordionItem value="item-2">
-                                    <AccordionTrigger>Add Navigation bar & review color schemes</AccordionTrigger>
+                                    <AccordionTrigger>2. Add Navigation bar & review color schemes</AccordionTrigger>
                                     <AccordionContent className='text-left'>
                                         Added a responsive navigation bar with smooth transitions and links to Home, About, Projects, and Contact sections. Reviewed and refined the color scheme to improve visual hierarchy and user experience across all pages.
                                     </AccordionContent>
                                 </AccordionItem>
                                 <AccordionItem value="item-3">
-                                    <AccordionTrigger>Design & implement landing page</AccordionTrigger>
+                                    <AccordionTrigger>3. Design & implement landing page</AccordionTrigger>
                                     <AccordionContent className='text-left'>
                                         Added a responsive landing page featuring a hero section with compelling call-to-action, showcase of key features, and strategic call-to-action buttons. Optimized for mobile and desktop viewing with engaging animations.
                                     </AccordionContent>
@@ -83,7 +82,6 @@ function Navbar() {
                     </Drawer>
                 </div>
             </div>
-        </div>
     );
 }
 
