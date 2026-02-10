@@ -2,6 +2,17 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import './../styles/TrueFocus.css';
 
+interface TrueFocusProps {
+  sentence?: string;
+  separator?: string;
+  manualMode?: boolean;
+  blurAmount?: number;
+  borderColor?: string;
+  glowColor?: string;
+  animationDuration?: number;
+  pauseBetweenAnimations?: number;
+}
+
 const TrueFocus = ({
   sentence = 'True Focus',
   separator = ' ',
@@ -11,12 +22,12 @@ const TrueFocus = ({
   glowColor = 'rgba(0, 255, 0, 0.6)',
   animationDuration = 0.5,
   pauseBetweenAnimations = 1
-}) => {
+}: TrueFocusProps) => {
   const words = sentence.split(separator);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [lastActiveIndex, setLastActiveIndex] = useState(null);
-  const containerRef = useRef(null);
-  const wordRefs = useRef([]);
+  const [lastActiveIndex, setLastActiveIndex] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const [focusRect, setFocusRect] = useState({ x: 0, y: 0, width: 0, height: 0 });
 
   useEffect(() => {
@@ -48,7 +59,7 @@ const TrueFocus = ({
     });
   }, [currentIndex, words.length]);
 
-  const handleMouseEnter = index => {
+  const handleMouseEnter = (index: number) => {
     if (manualMode) {
       setLastActiveIndex(index);
       setCurrentIndex(index);
@@ -56,7 +67,7 @@ const TrueFocus = ({
   };
 
   const handleMouseLeave = () => {
-    if (manualMode) {
+    if (manualMode && lastActiveIndex !== null) {
       setCurrentIndex(lastActiveIndex);
     }
   };
@@ -68,7 +79,7 @@ const TrueFocus = ({
         return (
           <span
             key={index}
-            ref={el => (wordRefs.current[index] = el)}
+            ref={el => { wordRefs.current[index] = el; }}
             className={`focus-word ${manualMode ? 'manual' : ''} ${isActive && !manualMode ? 'active' : ''}`}
             style={{
               filter: manualMode
@@ -78,8 +89,8 @@ const TrueFocus = ({
                 : isActive
                   ? `blur(0px)`
                   : `blur(${blurAmount}px)`,
-              '--border-color': borderColor,
-              '--glow-color': glowColor,
+              ['--border-color' as any]: borderColor,
+              ['--glow-color' as any]: glowColor,
               transition: `filter ${animationDuration}s ease`
             }}
             onMouseEnter={() => handleMouseEnter(index)}
@@ -103,8 +114,8 @@ const TrueFocus = ({
           duration: animationDuration
         }}
         style={{
-          '--border-color': borderColor,
-          '--glow-color': glowColor
+          ['--border-color' as any]: borderColor,
+          ['--glow-color' as any]: glowColor
         }}
       >
         <span className="corner top-left"></span>
