@@ -15,6 +15,10 @@ import {
 import { Button } from './ui/button.tsx';
 import { DocumentTextIcon } from './ui/document-text.tsx';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from './ui/accordion'
+import { HugeiconsHeartIcon } from './ui/hugeicons-heart.tsx';
+import { HugeiconsHomeIcon } from './ui/hugeicons-home.tsx';
+import { HugeiconsUserIcon } from './ui/hugeicons-user.tsx';
+import { HugeiconsMailIcon } from './ui/hugeicons-mail.tsx';
 
 function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -38,10 +42,26 @@ function Navbar() {
 
                     {/* Desktop Navigation */}
                     <ul className="hidden md:flex space-x-4">
-                        <li><a href="#" className="px-3 py-2 font-medium hover:text-neutral-400 transition-colors">Home</a></li>
-                        <li><a href="#" className="px-3 py-2 font-medium hover:text-neutral-400 transition-colors">About</a></li>
-                        <li><a href="#" className="px-3 py-2 font-medium hover:text-neutral-400 transition-colors">Projects</a></li>
-                        <li><a href="#" className="px-3 py-2 font-medium hover:text-neutral-400 transition-colors">Contact</a></li>
+                        <li className='hover:border-b-2 border-red-500 transition-all duration-100'>
+                            <a href="#" className="flex items-center px-3 py-2 font-medium hover:text-neutral-400 transition-colors ">
+                                <HugeiconsHomeIcon className='mr-2' /> Home
+                            </a>
+                        </li>
+                        <li className='hover:border-b-2 border-red-500 transition-all duration-100'>
+                            <a href="#" className="flex items-center px-3 py-2 font-medium hover:text-neutral-400 transition-colors">
+                                <HugeiconsUserIcon className='mr-2' /> About
+                            </a>
+                        </li>
+                        <li className='hover:border-b-2 border-red-500 transition-all duration-100'>
+                            <a href="#" className="flex items-center px-3 py-2 font-medium hover:text-neutral-400 transition-colors">
+                                <HugeiconsHeartIcon className='mr-2' /> Projects
+                            </a>
+                        </li>
+                        <li className='hover:border-b-2 border-red-500 transition-all duration-100'>
+                            <a href="#" className="flex items-center px-3 py-2 font-medium hover:text-neutral-400 transition-colors">
+                                <HugeiconsMailIcon className='mr-2' /> Contact
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
@@ -52,7 +72,7 @@ function Navbar() {
                             <DrawerTrigger>
                                 <BorderGradientButton duration={1800000}
                                     className="inline-flex h-11 items-center gap-2 rounded-lg bg-white
-                                dark:bg-neutral-900 px-4 sm:px-6 text-sm font-semibold text-neutral-900 dark:text-white">
+                                dark:bg-neutral-900 px-4 sm:px-6 text-sm font-semibold text-neutral-900 dark:text-white cursor-pointer">
                                     Change Log
                                 </BorderGradientButton>
                             </DrawerTrigger>
@@ -63,26 +83,26 @@ function Navbar() {
                                         <>Portfolio Change Log</>
                                     </DrawerTitle>
                                     <DrawerDescription className="text-left">List of recent updates and changes to the portfolio.</DrawerDescription>
-                                <Accordion type="single" collapsible className="">
-                                    <AccordionItem value="item-1">
-                                        <AccordionTrigger>1. Version 1.0</AccordionTrigger>
-                                        <AccordionContent className='text-left'>
-                                            Initial release of the portfolio website with core structure and styling. Established the foundation for showcasing projects and professional information.
-                                        </AccordionContent>
-                                    </AccordionItem>
-                                    <AccordionItem value="item-2">
-                                        <AccordionTrigger>2. Add Navigation bar & review color schemes</AccordionTrigger>
-                                        <AccordionContent className='text-left'>
-                                            Added a responsive navigation bar with smooth transitions and links to Home, About, Projects, and Contact sections. Reviewed and refined the color scheme to improve visual hierarchy and user experience across all pages.
-                                        </AccordionContent>
-                                    </AccordionItem>
-                                    <AccordionItem value="item-3">
-                                        <AccordionTrigger>3. Design & implement landing page</AccordionTrigger>
-                                        <AccordionContent className='text-left'>
-                                            Added a responsive landing page featuring a hero section with compelling call-to-action, showcase of key features, and strategic call-to-action buttons. Optimized for mobile and desktop viewing with engaging animations.
-                                        </AccordionContent>
-                                    </AccordionItem>
-                                </Accordion>
+                                    <Accordion type="single" collapsible className="">
+                                        <AccordionItem value="item-1">
+                                            <AccordionTrigger>1. Version 1.0</AccordionTrigger>
+                                            <AccordionContent className='text-left'>
+                                                Initial release of the portfolio website with core structure and styling. Established the foundation for showcasing projects and professional information.
+                                            </AccordionContent>
+                                        </AccordionItem>
+                                        <AccordionItem value="item-2">
+                                            <AccordionTrigger>2. Add Navigation bar & review color schemes</AccordionTrigger>
+                                            <AccordionContent className='text-left'>
+                                                Added a responsive navigation bar with smooth transitions and links to Home, About, Projects, and Contact sections. Reviewed and refined the color scheme to improve visual hierarchy and user experience across all pages.
+                                            </AccordionContent>
+                                        </AccordionItem>
+                                        <AccordionItem value="item-3">
+                                            <AccordionTrigger>3. Design & implement landing page</AccordionTrigger>
+                                            <AccordionContent className='text-left'>
+                                                Added a responsive landing page featuring a hero section with compelling call-to-action, showcase of key features, and strategic call-to-action buttons. Optimized for mobile and desktop viewing with engaging animations.
+                                            </AccordionContent>
+                                        </AccordionItem>
+                                    </Accordion>
                                 </DrawerHeader>
                                 <DrawerFooter className="justify-start w-full">
                                     <DrawerClose asChild>
@@ -113,11 +133,10 @@ function Navbar() {
 
             {/* Mobile Menu with Animated Entrance */}
             <div
-                className={`md:hidden fixed top-16 left-0 right-0 w-screen z-50 transition-all duration-300 ease-out ${
-                    isMobileMenuOpen
-                        ? 'opacity-100 translate-y-0'
-                        : 'opacity-0 -translate-y-4 pointer-events-none'
-                }`}
+                className={`md:hidden fixed top-16 left-0 right-0 w-screen z-50 transition-all duration-300 ease-out ${isMobileMenuOpen
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 -translate-y-4 pointer-events-none'
+                    }`}
             >
                 <div className="relative bg-gradient-to-br from-neutral-900/98 via-neutral-800/98 to-neutral-900/98 backdrop-blur-xl border-t border-neutral-700/50 shadow-2xl min-h-screen">
                     {/* Gradient overlay for visual effect */}
@@ -130,37 +149,37 @@ function Navbar() {
                         <li>
                             <a
                                 href="#"
-                                className="block px-6 py-3 font-medium hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 hover:pl-8 border-l-2 border-transparent hover:border-red-500"
+                                    className="flex items-center px-6 py-3 font-medium hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 hover:pl-8 border-l-2 border-transparent hover:border-red-500"
                                 onClick={toggleMobileMenu}
                             >
-                                Home
+                                <HugeiconsHomeIcon className='mr-2' /> Home
                             </a>
                         </li>
                         <li>
                             <a
                                 href="#"
-                                className="block px-6 py-3 font-medium hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 hover:pl-8 border-l-2 border-transparent hover:border-red-500"
+                                className="flex items-center px-6 py-3 font-medium hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 hover:pl-8 border-l-2 border-transparent hover:border-red-500"
                                 onClick={toggleMobileMenu}
                             >
-                                About
+                                <HugeiconsUserIcon className='mr-2' /> About
                             </a>
                         </li>
                         <li>
                             <a
                                 href="#"
-                                className="block px-6 py-3 font-medium hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 hover:pl-8 border-l-2 border-transparent hover:border-red-500"
+                                className="flex items-center px-6 py-3 font-medium hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 hover:pl-8 border-l-2 border-transparent hover:border-red-500"
                                 onClick={toggleMobileMenu}
                             >
-                                Projects
+                                <HugeiconsHeartIcon className='mr-2' /> Projects
                             </a>
                         </li>
                         <li>
                             <a
                                 href="#"
-                                className="block px-6 py-3 font-medium hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 hover:pl-8 border-l-2 border-transparent hover:border-red-500"
+                                className="flex items-center px-6 py-3 font-medium hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 hover:pl-8 border-l-2 border-transparent hover:border-red-500"
                                 onClick={toggleMobileMenu}
                             >
-                                Contact
+                                <HugeiconsMailIcon className='mr-2' /> Contact
                             </a>
                         </li>
                         <li className="px-6 py-3 pt-4 sm:hidden border-t border-neutral-700/50 mt-2">
@@ -168,7 +187,7 @@ function Navbar() {
                                 <DrawerTrigger className="w-full">
                                     <BorderGradientButton duration={1800000}
                                         className="w-full inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-white
-                                    dark:bg-neutral-900 px-6 text-sm font-semibold text-neutral-900 dark:text-white hover:scale-105 transition-transform">
+                                    dark:bg-neutral-900 px-6 text-sm font-semibold text-neutral-900 dark:text-white cursor-pointer">
                                         Change Log
                                     </BorderGradientButton>
                                 </DrawerTrigger>
@@ -179,26 +198,26 @@ function Navbar() {
                                             <>Portfolio Change Log</>
                                         </DrawerTitle>
                                         <DrawerDescription className="text-left">List of recent updates and changes to the portfolio.</DrawerDescription>
-                                    <Accordion type="single" collapsible className="">
-                                        <AccordionItem value="item-1">
-                                            <AccordionTrigger>1. Version 1.0</AccordionTrigger>
-                                            <AccordionContent className='text-left'>
-                                                Initial release of the portfolio website with core structure and styling. Established the foundation for showcasing projects and professional information.
-                                            </AccordionContent>
-                                        </AccordionItem>
-                                        <AccordionItem value="item-2">
-                                            <AccordionTrigger>2. Add Navigation bar & review color schemes</AccordionTrigger>
-                                            <AccordionContent className='text-left'>
-                                                Added a responsive navigation bar with smooth transitions and links to Home, About, Projects, and Contact sections. Reviewed and refined the color scheme to improve visual hierarchy and user experience across all pages.
-                                            </AccordionContent>
-                                        </AccordionItem>
-                                        <AccordionItem value="item-3">
-                                            <AccordionTrigger>3. Design & implement landing page</AccordionTrigger>
-                                            <AccordionContent className='text-left'>
-                                                Added a responsive landing page featuring a hero section with compelling call-to-action, showcase of key features, and strategic call-to-action buttons. Optimized for mobile and desktop viewing with engaging animations.
-                                            </AccordionContent>
-                                        </AccordionItem>
-                                    </Accordion>
+                                        <Accordion type="single" collapsible className="">
+                                            <AccordionItem value="item-1">
+                                                <AccordionTrigger>1. Version 1.0</AccordionTrigger>
+                                                <AccordionContent className='text-left'>
+                                                    Initial release of the portfolio website with core structure and styling. Established the foundation for showcasing projects and professional information.
+                                                </AccordionContent>
+                                            </AccordionItem>
+                                            <AccordionItem value="item-2">
+                                                <AccordionTrigger>2. Add Navigation bar & review color schemes</AccordionTrigger>
+                                                <AccordionContent className='text-left'>
+                                                    Added a responsive navigation bar with smooth transitions and links to Home, About, Projects, and Contact sections. Reviewed and refined the color scheme to improve visual hierarchy and user experience across all pages.
+                                                </AccordionContent>
+                                            </AccordionItem>
+                                            <AccordionItem value="item-3">
+                                                <AccordionTrigger>3. Design & implement landing page</AccordionTrigger>
+                                                <AccordionContent className='text-left'>
+                                                    Added a responsive landing page featuring a hero section with compelling call-to-action, showcase of key features, and strategic call-to-action buttons. Optimized for mobile and desktop viewing with engaging animations.
+                                                </AccordionContent>
+                                            </AccordionItem>
+                                        </Accordion>
                                     </DrawerHeader>
                                     <DrawerFooter className="justify-start w-full">
                                         <DrawerClose asChild>
