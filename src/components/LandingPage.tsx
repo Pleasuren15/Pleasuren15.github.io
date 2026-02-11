@@ -28,18 +28,17 @@ const LandingPage: React.FC = () => {
             useOriginalCharsOnly={false}
           />
         </p>
-        <h3 className="flex items-center text-4xl sm:text-5xl md:text-4xl lg:text-5xl font-bold text-center md:text-left">
+        <h3 className="flex flex-col md:flex-col lg:flex-row items-center text-4xl sm:text-5xl md:text-4xl lg:text-5xl font-bold text-center md:text-left">
           <DecryptedText
-            text="SOFTWARE "
+            text="SOFTWARE"
             animateOn="view"
             revealDirection="start"
-            // sequential
             useOriginalCharsOnly={false}
           />
           <RotatingText
-            texts={['ENGINEER', 'DEVELOPER' ,'AUTOMATER', 'CI/CD LOVER', 'DESIGNER']}
-            mainClassName="px-2 sm:px-3 md:px-4 lg:px-5 bg-red-600 text-white overflow-hidden sm:py-1.5 md:py-2 lg:py-3 justify-center rounded-lg"
-            staggerFrom={"last"}
+            texts={['ENGINEER', 'DEVELOPER', 'AUTOMATER', 'CI/CD LOVER', 'DESIGNER']}
+            mainClassName="mt-2 lg:mt-0 lg:ml-3 px-2 sm:px-3 md:px-4 lg:px-5 bg-red-600 text-white overflow-hidden sm:py-1.5 md:py-2 lg:py-3 justify-center rounded-lg"
+            staggerFrom="last"
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "-120%" }}
@@ -49,6 +48,7 @@ const LandingPage: React.FC = () => {
             rotationInterval={5000}
           />
         </h3>
+
       </div>
 
       {/* Right side - Avatar (completely hidden on mobile and tablet) */}
