@@ -29,7 +29,7 @@ function Navbar() {
 
     return (
         <nav className="relative">
-            <div className="flex h-16 items-center justify-between">
+            <div className="flex h-16 items-center justify-between sm:px-6">
                 <div className="flex items-center gap-4 md:gap-12">
                     <TrueFocus
                         sentence="Ps .Devs"
@@ -42,23 +42,23 @@ function Navbar() {
 
                     {/* Desktop Navigation */}
                     <ul className="hidden md:flex space-x-4">
-                        <li className='hover:border-b-2 border-red-500 transition-all duration-100'>
-                            <a href="#" className="flex items-center px-3 py-2 font-medium hover:text-neutral-400 transition-colors ">
+                        <li className='transition-all duration-100 hover:text-red-400'>
+                            <a href="#" className="flex items-center px-3 py-2 font-medium">
                                 <HugeiconsHomeIcon className='mr-2' /> Home
                             </a>
                         </li>
-                        <li className='hover:border-b-2 border-red-500 transition-all duration-100'>
-                            <a href="#" className="flex items-center px-3 py-2 font-medium hover:text-neutral-400 transition-colors">
+                        <li className='transition-all duration-100 hover:text-red-400'>
+                            <a href="#" className="flex items-center px-3 py-2 font-medium">
                                 <HugeiconsUserIcon className='mr-2' /> About
                             </a>
                         </li>
-                        <li className='hover:border-b-2 border-red-500 transition-all duration-100'>
-                            <a href="#" className="flex items-center px-3 py-2 font-medium hover:text-neutral-400 transition-colors">
+                        <li className='transition-all duration-100 hover:text-red-400'>
+                            <a href="#" className="flex items-center px-3 py-2 font-medium">
                                 <HugeiconsHeartIcon className='mr-2' /> Projects
                             </a>
                         </li>
-                        <li className='hover:border-b-2 border-red-500 transition-all duration-100'>
-                            <a href="#" className="flex items-center px-3 py-2 font-medium hover:text-neutral-400 transition-colors">
+                        <li className='transition-all duration-100 hover:text-red-400'>
+                            <a href="#" className="flex items-center px-3 py-2 font-medium">
                                 <HugeiconsMailIcon className='mr-2' /> Contact
                             </a>
                         </li>
