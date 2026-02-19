@@ -2,6 +2,8 @@ import React from 'react';
 // import AnimatedBorderAvatar from './AnimatedBorderAvatar';
 import DecryptedText from './DecryptedText';
 import RotatingText from './RotatingText';
+import { HugeiconsMailIcon } from './ui/hugeicons-mail';
+import { HugeiconsDownloadIcon } from './ui/hugeicons-download';
 
 const LandingPage: React.FC = () => {
   return (
@@ -25,7 +27,7 @@ const LandingPage: React.FC = () => {
             useOriginalCharsOnly={false}
           />
           <RotatingText
-            texts={['ENGINEER', 'DEVELOPER', 'AUTOMATER', 'CI/CD LOVER', 'DESIGNER']}
+            texts={['ENGINEER', 'DEVELOPER', 'AUTOMATER', 'DESIGNER']}
             mainClassName="mt-2 lg:mt-0 lg:ml-3 px-2 sm:px-3 md:px-4 lg:px-5 bg-red-600 text-white overflow-hidden sm:py-1.5 md:py-2 lg:py-3 justify-center rounded-lg"
             staggerFrom="last"
             initial={{ y: "100%" }}
@@ -47,6 +49,19 @@ const LandingPage: React.FC = () => {
             useOriginalCharsOnly={false}
           />
         </h3>
+        <div className='flex gap-4'>
+          <button className="flex items-center bg-red-600 py-3 px-10 border border-transparent text-center text-white transition-all shadow-sm hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+            <HugeiconsMailIcon className='mr-2' />
+
+            Resume
+          </button>
+
+          <button className="flex items-center bg-blue-600 py-3 px-10 border border-transparent text-center text-white transition-all shadow-sm hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+            <HugeiconsDownloadIcon className='mr-2' />
+
+            Reach Out
+          </button>
+        </div>
       </div>
     </div>
   );
