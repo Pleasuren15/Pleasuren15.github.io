@@ -5,9 +5,9 @@ import RotatingText from './RotatingText';
 
 const LandingPage: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-[80vh] pt-16 px-4 sm:px-6 md:px-8 lg:px-0 font-bold text-center">
-      <div className="flex flex-col items-center justify-center w-full space-y-4 md:space-y-6">
-        <h3 className="sm:text-6xl md:text-9xl lg:text-[11rem]">
+    <div className="flex flex-col items-center justify-center w-full min-h-[55vh] pt-16 px-4 sm:px-6 md:px-8 lg:px-0 font-bold">
+      <div className="flex flex-col justify-center w-full space-y-4 md:space-y-6">
+        <h3 className="sm:text-6xl md:text-8xl lg:text-[10rem]">
           <DecryptedText
             text="PLEASURE NDHLOVU"
             animateOn="view"
@@ -17,7 +17,7 @@ const LandingPage: React.FC = () => {
             useOriginalCharsOnly={false}
           />
         </h3>
-        <h3 className="flex flex-col md:flex-col lg:flex-row items-center text-4xl sm:text-5xl md:text-4xl lg:text-9xl font-bold text-gray-300">
+        <h3 className="flex flex-col md:flex-col lg:flex-row items-center text-4xl sm:text-5xl md:text-4xl lg:text-9xl font-bold">
           <DecryptedText
             text="SOFTWARE"
             animateOn="view"
@@ -37,7 +37,7 @@ const LandingPage: React.FC = () => {
             rotationInterval={5000}
           />
         </h3>
-        <p className="text-base sm:text-lg md:text-base lg:text-lg leading-relaxed text-gray-400">
+        <h3 className="sm:text-2xl md:text-3xl lg:text-4xl font-medium">
           <DecryptedText
             text="Delivering Software With Precision, Tested For Reliability And Built To Scale."
             animateOn="view"
@@ -46,7 +46,7 @@ const LandingPage: React.FC = () => {
             speed={10}
             useOriginalCharsOnly={false}
           />
-        </p>
+        </h3>
       </div>
     </div>
   );
