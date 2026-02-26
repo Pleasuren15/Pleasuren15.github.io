@@ -132,22 +132,22 @@ function Navbar() {
                 </div>
             </div>
 
-            {/* Mobile Menu with Enhanced Animated Entrance */}
+            {/* Mobile Menu with Enhanced Animated Entrance/Exit */}
             <div
-                className={`md:hidden fixed top-0 left-0 right-0 bottom-0 w-screen h-screen z-50 transition-all duration-500 ease-out ${isMobileMenuOpen
-                    ? 'opacity-100 scale-100'
-                    : 'opacity-0 scale-95 pointer-events-none'
+                className={`md:hidden fixed top-0 left-0 right-0 bottom-0 w-screen h-screen z-50 transition-all duration-600 ${isMobileMenuOpen
+                    ? 'opacity-100 scale-100 ease-out'
+                    : 'opacity-0 scale-95 pointer-events-none ease-in-out'
                     }`}
             >
-                <div className={`relative bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 backdrop-blur-xl shadow-2xl h-full flex flex-col items-center justify-start pt-20 transition-all duration-700 ease-out ${isMobileMenuOpen ? 'transform translate-y-0' : 'transform -translate-y-full'}`}>
+                <div className={`relative bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 backdrop-blur-xl shadow-2xl h-full flex flex-col items-center justify-start pt-20 transition-all duration-800 ${isMobileMenuOpen ? 'transform translate-y-0 ease-out' : 'transform -translate-y-full ease-in'}`}>
                     {/* Gradient overlay for visual effect */}
                     <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-purple-500/5 pointer-events-none" />
 
                     {/* Animated gradient accent line */}
                     <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent animate-pulse" />
 
-                    <ul className={`flex flex-col space-y-6 relative z-10 text-center transition-all duration-700 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                        <li className={`transition-all duration-500 delay-100 ${isMobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+                    <ul className={`flex flex-col space-y-6 relative z-10 text-center transition-all duration-800 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                        <li className={`transition-all duration-600 ${isMobileMenuOpen ? 'opacity-100 translate-x-0 scale-100 delay-100' : 'opacity-0 translate-x-8 scale-90 delay-0'}`}>
                             <a
                                 href="#"
                                 className="flex items-center justify-center px-8 py-4 font-medium text-lg hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 rounded-lg border-2 border-transparent hover:border-red-500/30 transform hover:scale-105"
@@ -156,7 +156,7 @@ function Navbar() {
                                 <HugeiconsHomeIcon className='mr-3' /> Home
                             </a>
                         </li>
-                        <li className={`transition-all duration-500 delay-200 ${isMobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+                        <li className={`transition-all duration-600 ${isMobileMenuOpen ? 'opacity-100 translate-x-0 scale-100 delay-200' : 'opacity-0 translate-x-8 scale-90 delay-50'}`}>
                             <a
                                 href="#"
                                 className="flex items-center justify-center px-8 py-4 font-medium text-lg hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 rounded-lg border-2 border-transparent hover:border-red-500/30 transform hover:scale-105"
@@ -165,7 +165,7 @@ function Navbar() {
                                 <HugeiconsUserIcon className='mr-3' /> About
                             </a>
                         </li>
-                        <li className={`transition-all duration-500 delay-300 ${isMobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+                        <li className={`transition-all duration-600 ${isMobileMenuOpen ? 'opacity-100 translate-x-0 scale-100 delay-300' : 'opacity-0 translate-x-8 scale-90 delay-100'}`}>
                             <a
                                 href="#"
                                 className="flex items-center justify-center px-8 py-4 font-medium text-lg hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 rounded-lg border-2 border-transparent hover:border-red-500/30 transform hover:scale-105"
@@ -174,7 +174,7 @@ function Navbar() {
                                 <HugeiconsHeartIcon className='mr-3' /> Projects
                             </a>
                         </li>
-                        <li className={`transition-all duration-500 delay-400 ${isMobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+                        <li className={`transition-all duration-600 ${isMobileMenuOpen ? 'opacity-100 translate-x-0 scale-100 delay-400' : 'opacity-0 translate-x-8 scale-90 delay-150'}`}>
                             <a
                                 href="#"
                                 className="flex items-center justify-center px-8 py-4 font-medium text-lg hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 rounded-lg border-2 border-transparent hover:border-red-500/30 transform hover:scale-105"
@@ -183,7 +183,7 @@ function Navbar() {
                                 <HugeiconsMailIcon className='mr-3' /> Contact
                             </a>
                         </li>
-                        <li className={`pt-8 transition-all duration-500 delay-500 w-full flex justify-center ${isMobileMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
+                        <li className={`pt-8 transition-all duration-600 w-full flex justify-center ${isMobileMenuOpen ? 'opacity-100 scale-100 delay-500' : 'opacity-0 scale-90 delay-200'}`}>
                             <Drawer>
                                 <DrawerTrigger asChild>
                                     <button className="w-[90vw] inline-flex h-12 items-center justify-center gap-2 bg-red-500 hover:bg-red-600 px-8 text-base font-semibold text-white cursor-pointer transition-all duration-200 transform hover:scale-105">
