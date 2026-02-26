@@ -9,13 +9,13 @@
 html,
 body,
 #root {
-  height: 100%;
+  min-height: 100vh;
   margin: 0;
 }
 
 .app-root {
   position: relative;
-  min-height: 100%;
+  min-height: 100vh;
 }
 
 /* Full-screen fixed container for the Silk canvas (background)

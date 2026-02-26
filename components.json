@@ -23,6 +23,7 @@
     "@react-bits": "https://reactbits.dev/r/{name}.json",
     "@animbits": "https://animbits.dev/r/{name}.json",
     "@heroicons-animated": "https://www.heroicons-animated.com/r/{name}.json",
-    "@icons-animated": "https://icons.lndev.me/r/{name}.json"
+    "@icons-animated": "https://icons.lndev.me/r/{name}.json",
+    "@elements": "https://www.tryelements.dev/r/{name}.json"
   }
 }
