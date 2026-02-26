@@ -29,8 +29,8 @@ function Navbar() {
 
     return (
         <nav className="relative">
-            <div className="flex h-16 items-center justify-between sm:px-6">
-                <div className="flex items-center gap-4 md:gap-12">
+            <div className="flex h-16 items-center justify-between sm:px-6 ">
+                <div className="flex items-center gap-4 md:gap-12 ml-4">
                     <TrueFocus
                         sentence="Ps .Devs"
                         separator=' '
@@ -113,83 +113,82 @@ function Navbar() {
                         </Drawer>
                     </div>
 
-                    {/* Mobile Menu Button with Animation */}
+                    {/* Mobile Menu Button with Enhanced Animation */}
                     <button
                         onClick={toggleMobileMenu}
-                        className="md:hidden p-2 rounded-lg hover:bg-gradient-to-r hover:from-red-500/20 hover:to-purple-500/20 transition-all duration-300 relative overflow-hidden group"
+                        className={`md:hidden p-2 rounded-lg transition-all duration-500 relative overflow-hidden group transform mr-4 ${isMobileMenuOpen ? 'scale-110 z-[60]' : 'scale-100'}`}
                         aria-label="Toggle menu"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className={`absolute inset-0 transition-all duration-500 ${isMobileMenuOpen ? 'opacity-0' : 'opacity-0'}`} />
                         <div className="relative">
-                            {isMobileMenuOpen ? (
-                                <X className="h-6 w-6 transition-all duration-300 rotate-90" />
-                            ) : (
-                                <Menu className="h-6 w-6 transition-all duration-300" />
-                            )}
+                            <div className={`absolute inset-0 transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100 rotate-180 scale-110' : 'opacity-0 rotate-0 scale-90'}`}>
+                                <X className="h-6 w-6" />
+                            </div>
+                            <div className={`transition-all duration-500 ${isMobileMenuOpen ? 'opacity-0 rotate-180 scale-90' : 'opacity-100 rotate-0 scale-100'}`}>
+                                <Menu className="h-6 w-6" />
+                            </div>
                         </div>
                     </button>
                 </div>
             </div>
 
-            {/* Mobile Menu with Animated Entrance */}
+            {/* Mobile Menu with Enhanced Animated Entrance */}
             <div
-                className={`md:hidden fixed top-16 left-0 right-0 w-screen z-50 transition-all duration-300 ease-out ${isMobileMenuOpen
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 -translate-y-4 pointer-events-none'
+                className={`md:hidden fixed top-0 left-0 right-0 bottom-0 w-screen h-screen z-50 transition-all duration-500 ease-out ${isMobileMenuOpen
+                    ? 'opacity-100 scale-100'
+                    : 'opacity-0 scale-95 pointer-events-none'
                     }`}
             >
-                <div className="relative bg-gradient-to-br from-neutral-900/98 via-neutral-800/98 to-neutral-900/98 backdrop-blur-xl border-t border-neutral-700/50 shadow-2xl min-h-screen">
+                <div className={`relative bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 backdrop-blur-xl shadow-2xl h-full flex flex-col items-center justify-start pt-20 transition-all duration-700 ease-out ${isMobileMenuOpen ? 'transform translate-y-0' : 'transform -translate-y-full'}`}>
                     {/* Gradient overlay for visual effect */}
                     <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-purple-500/5 pointer-events-none" />
 
                     {/* Animated gradient accent line */}
                     <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent animate-pulse" />
 
-                    <ul className="flex flex-col py-4 relative z-10">
-                        <li>
+                    <ul className={`flex flex-col space-y-6 relative z-10 text-center transition-all duration-700 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                        <li className={`transition-all duration-500 delay-100 ${isMobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
                             <a
                                 href="#"
-                                    className="flex items-center px-6 py-3 font-medium hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 hover:pl-8 border-l-2 border-transparent hover:border-red-500"
+                                className="flex items-center justify-center px-8 py-4 font-medium text-lg hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 rounded-lg border-2 border-transparent hover:border-red-500/30 transform hover:scale-105"
                                 onClick={toggleMobileMenu}
                             >
-                                <HugeiconsHomeIcon className='mr-2' /> Home
+                                <HugeiconsHomeIcon className='mr-3' /> Home
                             </a>
                         </li>
-                        <li>
+                        <li className={`transition-all duration-500 delay-200 ${isMobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
                             <a
                                 href="#"
-                                className="flex items-center px-6 py-3 font-medium hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 hover:pl-8 border-l-2 border-transparent hover:border-red-500"
+                                className="flex items-center justify-center px-8 py-4 font-medium text-lg hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 rounded-lg border-2 border-transparent hover:border-red-500/30 transform hover:scale-105"
                                 onClick={toggleMobileMenu}
                             >
-                                <HugeiconsUserIcon className='mr-2' /> About
+                                <HugeiconsUserIcon className='mr-3' /> About
                             </a>
                         </li>
-                        <li>
+                        <li className={`transition-all duration-500 delay-300 ${isMobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
                             <a
                                 href="#"
-                                className="flex items-center px-6 py-3 font-medium hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 hover:pl-8 border-l-2 border-transparent hover:border-red-500"
+                                className="flex items-center justify-center px-8 py-4 font-medium text-lg hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 rounded-lg border-2 border-transparent hover:border-red-500/30 transform hover:scale-105"
                                 onClick={toggleMobileMenu}
                             >
-                                <HugeiconsHeartIcon className='mr-2' /> Projects
+                                <HugeiconsHeartIcon className='mr-3' /> Projects
                             </a>
                         </li>
-                        <li>
+                        <li className={`transition-all duration-500 delay-400 ${isMobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
                             <a
                                 href="#"
-                                className="flex items-center px-6 py-3 font-medium hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 hover:pl-8 border-l-2 border-transparent hover:border-red-500"
+                                className="flex items-center justify-center px-8 py-4 font-medium text-lg hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 rounded-lg border-2 border-transparent hover:border-red-500/30 transform hover:scale-105"
                                 onClick={toggleMobileMenu}
                             >
-                                <HugeiconsMailIcon className='mr-2' /> Contact
+                                <HugeiconsMailIcon className='mr-3' /> Contact
                             </a>
                         </li>
-                        <li className="px-6 py-3 pt-4 sm:hidden border-t border-neutral-700/50 mt-2">
+                        <li className={`pt-8 transition-all duration-500 delay-500 w-full flex justify-center ${isMobileMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
                             <Drawer>
-                                <DrawerTrigger className="w-full">
-                                    <BorderGradientButton duration={1800000}
-                                        className="w-full inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-white
-                                    dark:bg-neutral-900 px-6 text-sm font-semibold text-neutral-900 dark:text-white cursor-pointer">
+                                <DrawerTrigger asChild>
+                                    <button className="w-[90vw] inline-flex h-12 items-center justify-center gap-2 bg-red-500 hover:bg-red-600 px-8 text-base font-semibold text-white cursor-pointer transition-all duration-200 transform hover:scale-105">
                                         Change Log
-                                    </BorderGradientButton>
+                                    </button>
                                 </DrawerTrigger>
                                 <DrawerContent className="px-4 bg-neutral-900 text-white border-neutral-700 rounded-none text-left">
                                     <DrawerHeader className="text-left flex flex-col gap-2">
