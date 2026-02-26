@@ -50,16 +50,15 @@ const LandingPage: React.FC = () => {
           />
         </h3>
         <div className='flex gap-4'>
-          <button className="flex items-center bg-red-600 py-3 px-10 border border-transparent text-center text-white transition-all shadow-sm hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
-            <HugeiconsMailIcon className='mr-2' />
-
-            Resume
+          <button className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-heading group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 w-50">
+            <span className=" relative px-4 py-2.5 transition-all ease-in duration-75 bg-neutral-primary-soft group-hover:bg-transparent group-hover:dark:bg-transparent leading-5">
+              Resume
+            </span>
           </button>
-
-          <button className="flex items-center bg-blue-600 py-3 px-10 border border-transparent text-center text-white transition-all shadow-sm hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
-            <HugeiconsDownloadIcon className='mr-2' />
-
-            Reach Out
+          <button className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-heading group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 w-50">
+            <span className=" relative px-4 py-2.5 transition-all ease-in duration-75 bg-neutral-primary-soft group-hover:bg-transparent group-hover:dark:bg-transparent leading-5">
+              Contact Me
+            </span>
           </button>
         </div>
       </div>
