@@ -116,7 +116,8 @@ function Navbar() {
                     {/* Mobile Menu Button with Enhanced Animation */}
                     <button
                         onClick={toggleMobileMenu}
-                        className={`md:hidden p-2 rounded-lg transition-all duration-500 relative overflow-hidden group transform mr-4 ${isMobileMenuOpen ? 'scale-110 z-[60]' : 'scale-100'}`}
+                        className={`md:hidden p-2 rounded-lg transition-all duration-500 relative overflow-hidden group transform mr-4 ${isMobileMenuOpen ? 'scale-110' : 'scale-100'}`}
+                        style={{ zIndex: 10000 }}
                         aria-label="Toggle menu"
                     >
                         <div className={`absolute inset-0 transition-all duration-500 ${isMobileMenuOpen ? 'opacity-0' : 'opacity-0'}`} />
@@ -134,10 +135,11 @@ function Navbar() {
 
             {/* Mobile Menu with Enhanced Animated Entrance/Exit */}
             <div
-                className={`md:hidden fixed top-0 left-0 right-0 bottom-0 w-screen h-screen z-50 transition-all duration-600 ${isMobileMenuOpen
+                className={`md:hidden fixed top-0 left-0 right-0 bottom-0 w-screen h-screen transition-all duration-600 ${isMobileMenuOpen
                     ? 'opacity-100 scale-100 ease-out'
                     : 'opacity-0 scale-95 pointer-events-none ease-in-out'
                     }`}
+                style={{ zIndex: 9999 }}
             >
                 <div className={`relative bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 backdrop-blur-xl shadow-2xl h-full flex flex-col items-center justify-start pt-20 transition-all duration-800 ${isMobileMenuOpen ? 'transform translate-y-0 ease-out' : 'transform -translate-y-full ease-in'}`}>
                     {/* Gradient overlay for visual effect */}
