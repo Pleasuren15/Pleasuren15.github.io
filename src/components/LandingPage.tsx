@@ -79,7 +79,7 @@ const LandingPage: React.FC = () => {
       {/* Mouse Scroll Indicator */}
       <div className="flex flex-col items-center space-y-2 mb-8 animate-bounce">
         <svg 
-          className="w-6 h-8 text-white opacity-70" 
+          className="w-6 h-8 text-white" 
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24"
@@ -92,7 +92,7 @@ const LandingPage: React.FC = () => {
           />
           <circle cx="12" cy="7" r="1" fill="currentColor" className="animate-pulse"/>
         </svg>
-        <div className="text-xs text-white opacity-50">Scroll</div>
+        <div className="text-xs text-white">Scroll For More</div>
       </div>
     </div>
   );
