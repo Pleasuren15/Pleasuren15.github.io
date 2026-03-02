@@ -14,8 +14,11 @@ const LandingPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-[55vh] sm:min-h-[65vh] pt-12 sm:pt-16 px-4 sm:px-6 md:px-8 lg:px-0 font-bold">
-      <div className="flex flex-col justify-center w-full max-w-7xl space-y-3 sm:space-y-4 md:space-y-6">
+    <div className="flex flex-col items-center justify-between w-full h-[100vh] px-4 sm:px-6 md:px-8 lg:px-0 font-bold">
+      {/* Spacer to push content to center */}
+      <div></div>
+      
+      <div className="flex flex-col items-center w-full max-w-7xl space-y-3 sm:space-y-4 md:space-y-6">
         <h3 className="text-center text-3xl sm:text-6xl md:text-8xl lg:text-[10rem] leading-tight whitespace-nowrap overflow-hidden">
           <DecryptedText
             text="PLEASURE NDHLOVU"
@@ -71,6 +74,25 @@ const LandingPage: React.FC = () => {
             </span>
           </button>
         </div>
+      </div>
+      
+      {/* Mouse Scroll Indicator */}
+      <div className="flex flex-col items-center space-y-2 mb-8 animate-bounce">
+        <svg 
+          className="w-6 h-8 text-white opacity-70" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth={2} 
+            d="M12 3v0a4 4 0 014 4v10a4 4 0 01-8 0V7a4 4 0 014-4v0z"
+          />
+          <circle cx="12" cy="7" r="1" fill="currentColor" className="animate-pulse"/>
+        </svg>
+        <div className="text-xs text-white opacity-50">Scroll</div>
       </div>
     </div>
   );

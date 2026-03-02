@@ -3,6 +3,7 @@ import LandingPage from './components/LandingPage'
 import Navbar from './components/Navbar'
 import Silk from './components/Silk'
 import Footer from './components/Footer'
+import AboutMe from './components/AboutMe'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <div className="app-content mt-2">
           <Navbar />
           <LandingPage />
+          <AboutMe />
         </div>
       </div>
       
