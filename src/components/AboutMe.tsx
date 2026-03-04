@@ -8,7 +8,7 @@ const AboutMe: React.FC = () => {
             </h3>
             <div className="w-[25%] h-1 bg-red-500 mb-3 mx-auto"></div>
             <p className='text-center mx-auto text-lg sm:text-xl md:text-2xl lg:text-4xl font-medium leading-relaxed'>
-                I am a software engineer with a passion for building scalable and efficient applications. With experience in various programming languages and frameworks, I enjoy tackling complex problems and delivering high-quality solutions. I am always eager to learn new technologies and stay updated with industry trends to continuously improve my skills and contribute to impactful projects.
+                I have over 4 years of experience developing globally used software, with hands-on experience in the iGaming industry. I’m a strong advocate for test automation and build performance-driven, scalable systems designed for reliability and growth.
             </p>
         </div>
     )
