@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Silk from './components/Silk'
 import Footer from './components/Footer'
 import AboutMe from './components/AboutMe'
+import Skills from './components/Skills'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Navbar />
           <LandingPage />
           <AboutMe />
+          <Skills />
         </div>
       </div>
       
