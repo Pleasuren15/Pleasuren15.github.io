@@ -14,7 +14,10 @@ const LandingPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-between w-full h-[85vh] px-4 sm:px-6 md:px-8 lg:px-0 font-bold">
+    <div
+      className="flex flex-col items-center justify-between w-full px-4 sm:px-6 md:px-8 lg:px-0 font-bold"
+      style={{ height: "calc(100vh - var(--navbar-height))" }}
+    >
       {/* Spacer to push content to center */}
       <div></div>
       

@@ -127,17 +127,14 @@ type SkillRowProps = {
 const SkillRow: React.FC<SkillRowProps> = ({ category, animationDelay = 0 }) => {
     const { ref, inView } = useInView();
     const scrollRef = useRef<HTMLDivElement>(null);
-
-    const canScrollLeft = useRef(false);
-    const canScrollRight = useRef(false);
-    const [, forceUpdate] = useState(0);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(false);
 
     const updateScrollState = () => {
         const el = scrollRef.current;
         if (!el) return;
-        canScrollLeft.current = el.scrollLeft > 4;
-        canScrollRight.current = el.scrollLeft + el.clientWidth < el.scrollWidth - 4;
-        forceUpdate((n) => n + 1);
+        setCanScrollLeft(el.scrollLeft > 4);
+        setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
     };
 
     useEffect(() => {
@@ -155,7 +152,7 @@ const SkillRow: React.FC<SkillRowProps> = ({ category, animationDelay = 0 }) => 
     const scroll = (dir: "left" | "right") => {
         const el = scrollRef.current;
         if (!el) return;
-        el.scrollBy({ left: dir === "right" ? 240 : -240, behavior: "smooth" });
+        el.scrollBy({ left: dir === "right" ? 280 : -280, behavior: "smooth" });
     };
 
     return (
@@ -168,22 +165,22 @@ const SkillRow: React.FC<SkillRowProps> = ({ category, animationDelay = 0 }) => 
                 transitionDelay: `${animationDelay}ms`,
             }}
         >
-            <h4 className="text-xs sm:text-base font-semibold mb-3 text-neutral-300 uppercase tracking-widest">
+            <h4 className="text-xs sm:text-sm md:text-base font-semibold mb-3 text-neutral-300 uppercase tracking-widest">
                 {category.title}
             </h4>
 
-            <div className="relative group">
+            <div className="relative">
                 {/* Left fade + arrow */}
                 <div
-                    className="absolute left-0 top-0 h-full w-10 z-10 flex items-center justify-start pointer-events-none transition-opacity duration-300"
+                    className="absolute left-0 top-0 h-full w-12 z-10 flex items-center justify-start pointer-events-none transition-opacity duration-300"
                     style={{
-                        opacity: canScrollLeft.current ? 1 : 0,
-                        background: "linear-gradient(to right, rgba(10,10,10,0.85), transparent)",
+                        opacity: canScrollLeft ? 1 : 0,
+                        background: "linear-gradient(to right, rgba(10,10,10,0.9), transparent)",
                     }}
                 >
                     <button
                         onClick={() => scroll("left")}
-                        className="pointer-events-auto ml-1 text-white/60 hover:text-white text-lg leading-none transition-colors"
+                        className="pointer-events-auto ml-1 w-7 h-7 flex items-center justify-center text-white/70 hover:text-white text-xl leading-none transition-colors"
                     >
                         ‹
                     </button>
@@ -198,7 +195,7 @@ const SkillRow: React.FC<SkillRowProps> = ({ category, animationDelay = 0 }) => 
                     {category.icons.map((src, i) => (
                         <div
                             key={i}
-                            className="flex-shrink-0 flex items-center justify-center bg-neutral-800 w-14 h-14 sm:w-16 sm:h-16 p-2 hover:scale-105 transition-transform duration-200"
+                            className="flex-shrink-0 flex items-center justify-center bg-neutral-800 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 p-2.5 hover:scale-105 transition-transform duration-200"
                             style={{
                                 opacity: inView ? 1 : 0,
                                 transform: inView ? "scale(1)" : "scale(0.75)",
@@ -217,15 +214,15 @@ const SkillRow: React.FC<SkillRowProps> = ({ category, animationDelay = 0 }) => 
 
                 {/* Right fade + arrow */}
                 <div
-                    className="absolute right-0 top-0 h-full w-10 z-10 flex items-center justify-end pointer-events-none transition-opacity duration-300"
+                    className="absolute right-0 top-0 h-full w-12 z-10 flex items-center justify-end pointer-events-none transition-opacity duration-300"
                     style={{
-                        opacity: canScrollRight.current ? 1 : 0,
-                        background: "linear-gradient(to left, rgba(10,10,10,0.85), transparent)",
+                        opacity: canScrollRight ? 1 : 0,
+                        background: "linear-gradient(to left, rgba(10,10,10,0.9), transparent)",
                     }}
                 >
                     <button
                         onClick={() => scroll("right")}
-                        className="pointer-events-auto mr-1 text-white/60 hover:text-white text-lg leading-none transition-colors"
+                        className="pointer-events-auto mr-1 w-7 h-7 flex items-center justify-center text-white/70 hover:text-white text-xl leading-none transition-colors"
                     >
                         ›
                     </button>
@@ -257,19 +254,19 @@ const Skills: React.FC = () => {
     };
 
     return (
-        <div className="ml-4 mr-4 mt-6 mb-6 w-[90%]">
+        <div className="w-full px-4 sm:px-0 mt-6 mb-10">
             <div
                 ref={headingRef}
-                className="transition-all duration-700 ease-out"
+                className="transition-all duration-700 ease-out mb-8"
                 style={{
                     opacity: headingInView ? 1 : 0,
                     transform: headingInView ? "translateX(0)" : "translateX(-48px)",
                 }}
             >
-                <h3 className="text-3xl sm:text-6xl md:text-8xl lg:text-[10rem] leading-tight whitespace-nowrap overflow-hidden font-bold">
+                <h3 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
                     Skills & Experience
                 </h3>
-                <div className="w-[25%] h-1 bg-red-500 mb-6" />
+                <div className="w-24 h-1 bg-red-500 mt-2 mb-2" />
             </div>
 
             <div>
@@ -307,15 +304,25 @@ const Skills: React.FC = () => {
                 >
                     <span
                         key={showAll ? "less" : "more"}
-                        className="animate-fade-slide"
+                        style={{ animation: "fadeSlide 0.3s ease forwards" }}
                     >
                         {showAll ? "Show less" : `Show ${hiddenCount} more categories`}
                     </span>
-                    <span className={`inline-block transition-transform duration-300 ${showAll ? "rotate-180" : "group-hover:translate-y-0.5"}`}>
+                    <span
+                        className="inline-block transition-transform duration-300"
+                        style={{ transform: showAll ? "rotate(180deg)" : "rotate(0deg)" }}
+                    >
                         ↓
                     </span>
                 </button>
             </div>
+
+            <style>{`
+                @keyframes fadeSlide {
+                    from { opacity: 0; transform: translateY(6px); }
+                    to   { opacity: 1; transform: translateY(0); }
+                }
+            `}</style>
         </div>
     );
 };

@@ -82,7 +82,7 @@ function TimelineSeparator({
     info: "bg-blue-500",
     success: "bg-green-500",
     warning: "bg-yellow-500",
-    error: "bg-destructive",
+    error: "bg-red-500",
   }
 
   return (
@@ -110,13 +110,13 @@ function TimelineIcon({
     info: "bg-blue-500 text-white",
     success: "bg-green-500 text-white",
     warning: "bg-yellow-500 text-white",
-    error: "bg-destructive text-white",
+    error: "bg-red-500 text-white",
   }
 
   return (
     <div
       className={cn(
-        "relative z-10 flex size-6 items-center justify-center rounded-full",
+        "relative z-10 flex size-3 items-center justify-center rounded-full",
         colorClasses[color],
         className
       )}
