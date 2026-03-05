@@ -95,8 +95,6 @@ const logos: SkillCategory[] = [
 ];
 
 const INITIAL_CATEGORIES = 3;
-// Show 11 icons + the "+" button = 12 slots (2 full rows of 6)
-const COLLAPSED_VISIBLE = 11;
 
 function useInView(threshold = 0.15) {
     const ref = useRef<HTMLDivElement>(null);
@@ -121,65 +119,117 @@ function useInView(threshold = 0.15) {
     return { ref, inView };
 }
 
-type SkillGridProps = {
+type SkillRowProps = {
     category: SkillCategory;
     animationDelay?: number;
 };
 
-const SkillGrid: React.FC<SkillGridProps> = ({ category, animationDelay = 0 }) => {
-    const [expanded, setExpanded] = useState(false);
+const SkillRow: React.FC<SkillRowProps> = ({ category, animationDelay = 0 }) => {
     const { ref, inView } = useInView();
+    const scrollRef = useRef<HTMLDivElement>(null);
 
-    const hasMore = category.icons.length > COLLAPSED_VISIBLE + 1;
-    const visibleIcons =
-        hasMore && !expanded
-            ? category.icons.slice(0, COLLAPSED_VISIBLE)
-            : category.icons;
+    const canScrollLeft = useRef(false);
+    const canScrollRight = useRef(false);
+    const [, forceUpdate] = useState(0);
+
+    const updateScrollState = () => {
+        const el = scrollRef.current;
+        if (!el) return;
+        canScrollLeft.current = el.scrollLeft > 4;
+        canScrollRight.current = el.scrollLeft + el.clientWidth < el.scrollWidth - 4;
+        forceUpdate((n) => n + 1);
+    };
+
+    useEffect(() => {
+        const el = scrollRef.current;
+        if (!el) return;
+        updateScrollState();
+        el.addEventListener("scroll", updateScrollState, { passive: true });
+        window.addEventListener("resize", updateScrollState);
+        return () => {
+            el.removeEventListener("scroll", updateScrollState);
+            window.removeEventListener("resize", updateScrollState);
+        };
+    }, []);
+
+    const scroll = (dir: "left" | "right") => {
+        const el = scrollRef.current;
+        if (!el) return;
+        el.scrollBy({ left: dir === "right" ? 240 : -240, behavior: "smooth" });
+    };
 
     return (
         <div
             ref={ref}
-            className="mb-10 transition-all duration-700 ease-out"
+            className="mb-8 transition-all duration-700 ease-out"
             style={{
                 opacity: inView ? 1 : 0,
-                transform: inView ? "translateY(0)" : "translateY(32px)",
+                transform: inView ? "translateY(0)" : "translateY(28px)",
                 transitionDelay: `${animationDelay}ms`,
             }}
         >
-            <h4 className="text-base sm:text-lg md:text-xl font-semibold mb-3 text-neutral-300 uppercase tracking-widest">
+            <h4 className="text-xs sm:text-base font-semibold mb-3 text-neutral-300 uppercase tracking-widest">
                 {category.title}
             </h4>
 
-            <div className="grid grid-cols-6 gap-2 sm:gap-3">
-                {visibleIcons.map((src, i) => (
-                    <div
-                        key={i}
-                        className="flex items-center justify-center aspect-square p-2 sm:p-2.5 transition-transform duration-200 hover:scale-105"
-                        style={{
-                            transitionDelay: inView ? `${animationDelay + i * 40}ms` : "0ms",
-                            opacity: inView ? 1 : 0,
-                            transform: inView ? "scale(1)" : "scale(0.8)",
-                            transition: `opacity 0.4s ease ${animationDelay + i * 40}ms, transform 0.4s ease ${animationDelay + i * 40}ms`,
-                        }}
-                    >
-                        <img
-                            src={src}
-                            alt={`${category.title} icon ${i + 1}`}
-                            className="w-3/4 h-3/4 object-contain"
-                            loading="lazy"
-                        />
-                    </div>
-                ))}
-
-                {hasMore && !expanded && (
+            <div className="relative group">
+                {/* Left fade + arrow */}
+                <div
+                    className="absolute left-0 top-0 h-full w-10 z-10 flex items-center justify-start pointer-events-none transition-opacity duration-300"
+                    style={{
+                        opacity: canScrollLeft.current ? 1 : 0,
+                        background: "linear-gradient(to right, rgba(10,10,10,0.85), transparent)",
+                    }}
+                >
                     <button
-                        onClick={() => setExpanded(true)}
-                        className="flex items-center justify-center aspect-square bg-neutral-800 text-white text-xl font-bold active:scale-95 transition-all duration-200 hover:bg-neutral-700"
-                        aria-label={`Show ${category.icons.length - COLLAPSED_VISIBLE} more icons`}
+                        onClick={() => scroll("left")}
+                        className="pointer-events-auto ml-1 text-white/60 hover:text-white text-lg leading-none transition-colors"
                     >
-                        +{category.icons.length - COLLAPSED_VISIBLE}
+                        ‹
                     </button>
-                )}
+                </div>
+
+                {/* Scrollable row */}
+                <div
+                    ref={scrollRef}
+                    className="flex flex-row gap-2 overflow-x-auto scroll-smooth"
+                    style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                >
+                    {category.icons.map((src, i) => (
+                        <div
+                            key={i}
+                            className="flex-shrink-0 flex items-center justify-center bg-neutral-800 w-14 h-14 sm:w-16 sm:h-16 p-2 hover:scale-105 transition-transform duration-200"
+                            style={{
+                                opacity: inView ? 1 : 0,
+                                transform: inView ? "scale(1)" : "scale(0.75)",
+                                transition: `opacity 0.35s ease ${animationDelay + i * 45}ms, transform 0.35s ease ${animationDelay + i * 45}ms`,
+                            }}
+                        >
+                            <img
+                                src={src}
+                                alt={`${category.title} icon ${i + 1}`}
+                                className="w-full h-full object-contain"
+                                loading="lazy"
+                            />
+                        </div>
+                    ))}
+                </div>
+
+                {/* Right fade + arrow */}
+                <div
+                    className="absolute right-0 top-0 h-full w-10 z-10 flex items-center justify-end pointer-events-none transition-opacity duration-300"
+                    style={{
+                        opacity: canScrollRight.current ? 1 : 0,
+                        background: "linear-gradient(to left, rgba(10,10,10,0.85), transparent)",
+                    }}
+                >
+                    <button
+                        onClick={() => scroll("right")}
+                        className="pointer-events-auto mr-1 text-white/60 hover:text-white text-lg leading-none transition-colors"
+                    >
+                        ›
+                    </button>
+                </div>
             </div>
         </div>
     );
@@ -224,7 +274,7 @@ const Skills: React.FC = () => {
 
             <div>
                 {initialCategories.map((category, index) => (
-                    <SkillGrid
+                    <SkillRow
                         key={category.title}
                         category={category}
                         animationDelay={index * 100}
@@ -241,7 +291,7 @@ const Skills: React.FC = () => {
                 }}
             >
                 {extraCategories.map((category, index) => (
-                    <SkillGrid
+                    <SkillRow
                         key={category.title}
                         category={category}
                         animationDelay={index * 80}
