@@ -1,5 +1,14 @@
 import React from 'react';
 
+const SectionHeading: React.FC<{ children: string; color?: 'red' | 'blue' }> = ({ children, color = 'blue' }) => (
+    <>
+        <h3 className="text-3xl sm:text-6xl md:text-8xl lg:text-[10rem] leading-tight whitespace-nowrap overflow-hidden font-bold mb-2">
+            {children}
+        </h3>
+        <div className={`w-[25%] h-1 mb-8 ${color === 'blue' ? 'bg-blue-500' : 'bg-red-500'}`} />
+    </>
+);
+
 const experiences = [
     {
         title: "Senior Full Stack Developer",
@@ -96,10 +105,7 @@ const ExperienceCard: React.FC<{ exp: typeof experiences[0] }> = ({ exp }) => (
 
 const Experience: React.FC = () => (
     <div className="px-4 sm:px-0 w-full">
-        <h3 className="text-3xl sm:text-6xl md:text-8xl lg:text-[10rem] leading-tight whitespace-nowrap overflow-hidden font-bold">
-            Experience
-        </h3>
-        <div className="w-[25%] h-1 bg-red-500 mb-8" />
+        <SectionHeading color="red">Experience</SectionHeading>
 
         <div className="relative">
             <div

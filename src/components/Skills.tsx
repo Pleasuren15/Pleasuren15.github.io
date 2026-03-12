@@ -1,5 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 
+const SectionHeading: React.FC<{ children: string; color?: 'red' | 'blue' }> = ({ children, color = 'blue' }) => (
+    <>
+        <h3 className="text-3xl sm:text-6xl md:text-8xl lg:text-[10rem] leading-tight whitespace-nowrap overflow-hidden font-bold mb-2">
+            {children}
+        </h3>
+        <div className={`w-[25%] h-1 mb-8 ${color === 'blue' ? 'bg-blue-500' : 'bg-red-500'}`} />
+    </>
+);
+
 type SkillCategory = {
     title: string;
     icons: string[];
@@ -257,16 +266,13 @@ const Skills: React.FC = () => {
         <div className="w-full px-4 sm:px-0 mt-6 mb-10">
             <div
                 ref={headingRef}
-                className="transition-all duration-700 ease-out mb-8"
+                className="transition-all duration-700 ease-out"
                 style={{
                     opacity: headingInView ? 1 : 0,
                     transform: headingInView ? "translateX(0)" : "translateX(-48px)",
                 }}
             >
-                <h3 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
-                    Skills & Experience
-                </h3>
-                <div className="w-24 h-1 bg-red-500 mt-2 mb-2" />
+                <SectionHeading color="red">Skills & Experience</SectionHeading>
             </div>
 
             <div>
