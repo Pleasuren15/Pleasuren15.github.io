@@ -28,7 +28,7 @@ function Navbar() {
     };
 
     return (
-        <nav className="relative">
+        <nav className="relative mt-4">
             <div className="flex h-16 items-center justify-between sm:px-6 ">
                 <div className="flex items-center gap-4 md:gap-12 ml-4">
                     <TrueFocus
