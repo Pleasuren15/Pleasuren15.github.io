@@ -80,7 +80,7 @@ const LandingPage: React.FC = () => {
       </div>
       
       {/* Mouse Scroll Indicator */}
-      <div className="flex flex-col items-center space-y-2 mb-8 animate-bounce">
+      <div className="flex flex-col items-center space-y-2 mb-20 animate-bounce">
         <svg 
           className="w-6 h-8 text-white" 
           fill="none" 
