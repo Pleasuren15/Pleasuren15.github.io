@@ -1,5 +1,13 @@
 import { DevicePhoneMobileIcon } from "./ui/device-phone-mobile";
 import { HugeiconsMailIcon } from "./ui/hugeicons-mail";
+import { Linkedin, Github, Instagram, MessageCircle } from "lucide-react";
+
+const socials = [
+    { icon: <Linkedin className="w-5 h-5" strokeWidth={1.5} />, label: "LinkedIn", href: "#" },
+    { icon: <Github className="w-5 h-5" strokeWidth={1.5} />, label: "GitHub", href: "#" },
+    { icon: <Instagram className="w-5 h-5" strokeWidth={1.5} />, label: "Instagram", href: "#" },
+    { icon: <MessageCircle className="w-5 h-5" strokeWidth={1.5} />, label: "WhatsApp", href: "#" },
+];
 
 function Footer() {
     return (
@@ -11,11 +19,17 @@ function Footer() {
 
             <h2 className="text-lg font-semibold mb-2">Socials</h2>
             <div className="w-[25%] h-1 bg-red-500 mb-3"></div>
-            <div className="flex items-center gap-3 mb-4">
-                <div><img width="35" height="35" src="https://img.icons8.com/nolan/64/linkedin-circled.png" alt="linkedin-circled" /></div>
-                <div><img width="35" height="35" src="https://img.icons8.com/nolan/64/github.png" alt="github" /></div>
-                <div><img width="35" height="35" src="https://img.icons8.com/nolan/64/instagram-new.png" alt="instagram-new" /></div>
-                <div><img width="35" height="35" src="https://img.icons8.com/nolan/64/whatsapp.png" alt="whatsapp" /></div>
+            <div className="flex items-center gap-2 mb-4">
+                {socials.map(({ icon, label, href }) => (
+                    <a
+                        key={label}
+                        href={href}
+                        aria-label={label}
+                        className="flex items-center justify-center w-9 h-9 border border-neutral-700/60 bg-neutral-900/60 text-neutral-400 transition-all duration-200 hover:border-red-500/60 hover:text-white hover:bg-red-500/10 hover:shadow-[0_0_12px_rgba(239,68,68,0.2)]"
+                    >
+                        {icon}
+                    </a>
+                ))}
             </div>
 
             <div className="w-[50%] h-1 bg-red-500 mt-4 mb-2"></div>

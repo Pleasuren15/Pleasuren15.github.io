@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import AnimatedBorderAvatar from './AnimatedBorderAvatar';
 import DecryptedText from './DecryptedText';
 import RotatingText from './RotatingText';
+import ContactModal from './ContactModal';
 
 const LandingPage: React.FC = () => {
+  const [contactOpen, setContactOpen] = useState(false);
   const handleDownloadResume = () => {
     const link = document.createElement('a');
     link.href = '/src/files/sample.pdf';
@@ -71,13 +73,15 @@ const LandingPage: React.FC = () => {
               Resume
             </span>
           </button>
-          <button className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-xs sm:text-sm font-medium text-heading group bg-gradient-to-r from-red-500 to-red-500 group-hover:from-red-500 group-hover:to-red-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-red-200 dark:focus:ring-red-800 w-30 sm:w-auto">
+          <button className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-xs sm:text-sm font-medium text-heading group bg-gradient-to-r from-red-500 to-red-500 group-hover:from-red-500 group-hover:to-red-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-red-200 dark:focus:ring-red-800 w-30 sm:w-auto" onClick={() => setContactOpen(true)}>
             <span className="relative px-3 sm:px-6 py-2 sm:py-3 transition-all ease-in duration-75 bg-neutral-primary-soft group-hover:bg-transparent group-hover:dark:bg-transparent leading-5 text-center">
               Contact Me
             </span>
           </button>
         </div>
       </div>
+
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
       
       {/* Mouse Scroll Indicator */}
       <div className="flex flex-col items-center space-y-2 mb-20 animate-bounce">

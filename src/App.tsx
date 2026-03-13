@@ -12,6 +12,7 @@ const NAVBAR_HEIGHT = "4rem";
 
 function ScrollToTop() {
   const [visible, setVisible] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 80);
@@ -19,16 +20,58 @@ function ScrollToTop() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const handleClick = () => {
+    setScrolling(true);
+    const start = window.scrollY;
+    const duration = Math.min(800, start * 0.4);
+    const startTime = performance.now();
+
+    const step = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 4);
+      window.scrollTo(0, start * (1 - ease));
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        setScrolling(false);
+      }
+    };
+
+    requestAnimationFrame(step);
+  };
+
   return (
     <button
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      onClick={handleClick}
       aria-label="Back to top"
-      className="fixed bottom-8 right-8 z-50 flex items-center justify-center w-11 h-11 rounded-full bg-red-500 text-white shadow-lg shadow-red-500/30 transition-all duration-300 hover:bg-red-400 hover:scale-110 hover:shadow-red-400/50"
       style={{
+        position: "fixed",
+        bottom: "2rem",
+        right: "2rem",
+        zIndex: 50,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "2.75rem",
+        height: "2.75rem",
+        background: scrolling ? "#ef4444cc" : "#ef4444",
+        color: "white",
+        border: "none",
+        cursor: "pointer",
+        boxShadow: "0 4px 16px rgba(239,68,68,0.35)",
         opacity: visible ? 1 : 0,
         pointerEvents: visible ? "auto" : "none",
-        transform: visible ? "translateY(0)" : "translateY(16px)",
-        transition: "opacity 0.3s ease, transform 0.3s ease",
+        transform: visible ? "translateY(0) scale(1)" : "translateY(16px) scale(0.95)",
+        transition: "opacity 0.3s ease, transform 0.3s ease, background 0.2s ease, box-shadow 0.2s ease",
+      }}
+      onMouseEnter={e => {
+        (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0) scale(1.1)";
+        (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 6px 24px rgba(239,68,68,0.55)";
+      }}
+      onMouseLeave={e => {
+        (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0) scale(1)";
+        (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 4px 16px rgba(239,68,68,0.35)";
       }}
     >
       <svg
@@ -41,6 +84,10 @@ function ScrollToTop() {
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        style={{
+          transform: scrolling ? "translateY(-2px)" : "translateY(0)",
+          transition: "transform 0.15s ease",
+        }}
       >
         <polyline points="18 15 12 9 6 15" />
       </svg>
