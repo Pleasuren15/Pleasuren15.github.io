@@ -101,6 +101,15 @@ const logos: SkillCategory[] = [
             "https://icon.icepanel.io/Technology/svg/Figma.svg",
         ],
     },
+    {
+        title: "Others",
+        icons: [
+            "https://www.svgrepo.com/show/354135/oauth.svg",
+            "https://nbomber.com/assets/img/nbomber-logo.svg",
+            "https://icon.icepanel.io/Technology/svg/RabbitMQ.svg",
+            "https://www.svgrepo.com/show/452062/microsoft.svg",
+        ],
+    }
 ];
 
 const CATEGORIES_PER_PAGE = 3;
