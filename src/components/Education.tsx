@@ -12,13 +12,6 @@ const SectionHeading: React.FC<{ children: string; color?: 'red' | 'blue' }> = (
     </div>
 );
 
-const TAG_COLORS = [
-    { bg: '#1d4ed8', border: '#3b82f6' }, // blue
-    { bg: '#b91c1c', border: '#ef4444' }, // red
-    { bg: '#065f46', border: '#10b981' }, // emerald
-    { bg: '#5b21b6', border: '#8b5cf6' }, // violet
-    { bg: '#92400e', border: '#f59e0b' }, // amber
-];
 
 const education = [
     {
@@ -70,18 +63,14 @@ const Education: React.FC = () => {
                                 </span>
                                 <p className="text-xs text-white mb-2">{item.institution}</p>
                                 <div className="flex flex-wrap gap-1.5">
-                                    {item.tags.map((tag, j) => {
-                                        const c = TAG_COLORS[j % TAG_COLORS.length];
-                                        return (
-                                            <span
-                                                key={tag}
-                                                className="px-2 py-0.5 text-[10px] font-medium"
-                                                style={{ color: 'white', background: c.bg, border: `1px solid ${c.border}` }}
-                                            >
-                                                {tag}
-                                            </span>
-                                        );
-                                    })}
+                                    {item.tags.map((tag) => (
+                                        <span
+                                            key={tag}
+                                            className="px-2 py-0.5 text-[10px] font-medium text-white bg-neutral-800 border border-neutral-700"
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
                                 </div>
                             </div>
                         </div>

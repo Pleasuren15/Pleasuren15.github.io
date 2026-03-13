@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import AboutMe from './components/AboutMe'
 import Experience from './components/Experience'
 import Education from './components/Education'
+import Projects from './components/Projects'
 import Skills from './components/Skills'
 
 const NAVBAR_HEIGHT = "4rem";
@@ -165,6 +166,10 @@ function App() {
 
         <Section>
           <Education />
+        </Section>
+
+        <Section>
+          <Projects />
         </Section>
 
         <Section>
