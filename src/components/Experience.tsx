@@ -186,18 +186,20 @@ const Experience: React.FC = () => {
                     className="overflow-x-auto pb-4 px-2"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
-                    {/* Connector row */}
-                    <div className="flex min-w-max items-center mb-5" style={{ gap: `${CARD_GAP}px` }}>
+                    {/* Connector row — single continuous line with dots on top */}
+                    <div className="relative flex min-w-max items-center mb-5" style={{ gap: `${CARD_GAP}px` }}>
+                        {/* Full-width continuous line behind everything */}
+                        <div
+                            className="absolute top-1/2 -translate-y-1/2 h-px bg-gradient-to-r from-red-500 via-red-500/60 to-red-500/10 pointer-events-none"
+                            style={{ left: 6, right: 6 }}
+                        />
                         {experiences.map((_, index) => (
                             <div
                                 key={index}
-                                className="flex items-center shrink-0"
+                                className="shrink-0 flex items-center justify-start"
                                 style={{ width: `${CARD_WIDTH}px` }}
                             >
                                 <div className="shrink-0 w-3 h-3 rounded-full bg-red-500 z-10 shadow-[0_0_8px_rgba(239,68,68,0.6)]" />
-                                {index < experiences.length - 1 && (
-                                    <div className="flex-1 h-px bg-gradient-to-r from-red-500 to-red-500/30" />
-                                )}
                             </div>
                         ))}
                     </div>
@@ -213,8 +215,8 @@ const Experience: React.FC = () => {
 
             {/* ── MOBILE: vertical stacked timeline ── */}
             <div className="sm:hidden relative pl-6">
-                {/* Vertical line */}
-                <div className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-red-500 via-red-500/40 to-transparent" />
+                {/* Vertical line — uses 100% height of the flex container */}
+                <div className="absolute left-[7px] top-0 h-full w-px bg-gradient-to-b from-red-500 via-red-500/40 to-transparent" />
 
                 <div className="flex flex-col gap-6">
                     {experiences.map((exp, index) => (

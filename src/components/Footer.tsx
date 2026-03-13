@@ -49,21 +49,21 @@ function Footer() {
                     <div className="flex flex-col gap-3">
                         <a
                             href="tel:+27023982825"
-                            className="group flex items-center gap-3 text-neutral-300 hover:text-white transition-colors duration-200"
+                            className="group flex items-center gap-3 text-white hover:text-white transition-colors duration-200"
                         >
                             <span className="flex items-center justify-center w-8 h-8 border border-neutral-700/60 bg-neutral-900/60 text-neutral-400 group-hover:border-red-500/50 group-hover:text-red-400 transition-all duration-200">
                                 <Phone className="w-3.5 h-3.5" strokeWidth={1.5} />
                             </span>
-                            <span className="text-sm">+27 (0) 23 982 825</span>
+                            <span className="text-sm font-medium">+27 (0) 23 982 825</span>
                         </a>
                         <a
                             href="mailto:Pleasuren15@gmail.com"
-                            className="group flex items-center gap-3 text-neutral-300 hover:text-white transition-colors duration-200"
+                            className="group flex items-center gap-3 text-white hover:text-white transition-colors duration-200"
                         >
                             <span className="flex items-center justify-center w-8 h-8 border border-neutral-700/60 bg-neutral-900/60 text-neutral-400 group-hover:border-red-500/50 group-hover:text-red-400 transition-all duration-200">
                                 <Mail className="w-3.5 h-3.5" strokeWidth={1.5} />
                             </span>
-                            <span className="text-sm">Pleasuren15@gmail.com</span>
+                            <span className="text-sm font-medium">Pleasuren15@gmail.com</span>
                         </a>
                     </div>
                 </div>
