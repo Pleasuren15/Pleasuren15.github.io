@@ -1,4 +1,5 @@
 import React from 'react';
+import { ShieldCheck, TrendingUp, Star, Users } from 'lucide-react';
 
 const SectionHeading: React.FC<{ children: string; color?: 'red' | 'blue' }> = ({ children, color = 'blue' }) => (
     <>
@@ -11,10 +12,10 @@ const SectionHeading: React.FC<{ children: string; color?: 'red' | 'blue' }> = (
 
 const AboutMe: React.FC = () => {
     const values = [
-        { label: "Integrity", icon: "🎯" },
-        { label: "Growth", icon: "📚" },
-        { label: "Excellence", icon: "⭐" },
-        { label: "Collaboration", icon: "🤝" },
+        { label: "Integrity", icon: <ShieldCheck className="w-8 h-8 md:w-10 md:h-10 text-blue-400" strokeWidth={1.5} /> },
+        { label: "Growth", icon: <TrendingUp className="w-8 h-8 md:w-10 md:h-10 text-blue-400" strokeWidth={1.5} /> },
+        { label: "Excellence", icon: <Star className="w-8 h-8 md:w-10 md:h-10 text-blue-400" strokeWidth={1.5} /> },
+        { label: "Collaboration", icon: <Users className="w-8 h-8 md:w-10 md:h-10 text-blue-400" strokeWidth={1.5} /> },
     ];
 
     return (
@@ -45,7 +46,7 @@ const AboutMe: React.FC = () => {
                                     key={idx}
                                     className="flex flex-col items-center justify-center p-4 md:p-6 bg-neutral-900/60 border border-blue-500/20 backdrop-blur hover:border-blue-500/50 transition-all duration-300 electric-border"
                                 >
-                                    <span className="text-3xl md:text-4xl mb-2">{value.icon}</span>
+                                    <span className="mb-3">{value.icon}</span>
                                     <p className="text-lg md:text-xl font-bold text-blue-400">{value.label}</p>
                                 </div>
                             ))}
