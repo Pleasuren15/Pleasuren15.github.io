@@ -103,7 +103,8 @@ const logos: SkillCategory[] = [
     },
 ];
 
-const INITIAL_CATEGORIES = 3;
+const CATEGORIES_PER_PAGE = 3;
+const TOTAL_PAGES = Math.ceil(logos.length / CATEGORIES_PER_PAGE);
 
 function useInView(threshold = 0.15) {
     const ref = useRef<HTMLDivElement>(null);
@@ -131,9 +132,11 @@ function useInView(threshold = 0.15) {
 type SkillRowProps = {
     category: SkillCategory;
     animationDelay?: number;
+    animating: boolean;
+    direction: "left" | "right" | null;
 };
 
-const SkillRow: React.FC<SkillRowProps> = ({ category, animationDelay = 0 }) => {
+const SkillRow: React.FC<SkillRowProps> = ({ category, animationDelay = 0, animating, direction }) => {
     const { ref, inView } = useInView();
     const scrollRef = useRef<HTMLDivElement>(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -164,14 +167,20 @@ const SkillRow: React.FC<SkillRowProps> = ({ category, animationDelay = 0 }) => 
         el.scrollBy({ left: dir === "right" ? 280 : -280, behavior: "smooth" });
     };
 
+    const slideClass = animating && direction
+        ? direction === "right"
+            ? "skills-slide-in-right"
+            : "skills-slide-in-left"
+        : "";
+
     return (
         <div
             ref={ref}
-            className="mb-8 transition-all duration-700 ease-out"
+            className={`mb-8 transition-all duration-700 ease-out ${slideClass}`}
             style={{
                 opacity: inView ? 1 : 0,
-                transform: inView ? "translateY(0)" : "translateY(28px)",
-                transitionDelay: `${animationDelay}ms`,
+                transform: inView && !animating ? "translateY(0)" : inView && animating ? undefined : "translateY(28px)",
+                transitionDelay: animating ? `${animationDelay}ms` : `${animationDelay}ms`,
             }}
         >
             <h4 className="text-xs sm:text-sm md:text-base font-semibold mb-3 text-neutral-300 uppercase tracking-widest">
@@ -242,25 +251,29 @@ const SkillRow: React.FC<SkillRowProps> = ({ category, animationDelay = 0 }) => 
 };
 
 const Skills: React.FC = () => {
-    const [showAll, setShowAll] = useState(false);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [animating, setAnimating] = useState(false);
+    const [direction, setDirection] = useState<"left" | "right" | null>(null);
     const { ref: headingRef, inView: headingInView } = useInView(0.2);
-    const buttonRef = useRef<HTMLButtonElement>(null);
-    const extraRef = useRef<HTMLDivElement>(null);
 
-    const initialCategories = logos.slice(0, INITIAL_CATEGORIES);
-    const extraCategories = logos.slice(INITIAL_CATEGORIES);
-    const hiddenCount = extraCategories.length;
+    const pageCategories = logos.slice(
+        currentPage * CATEGORIES_PER_PAGE,
+        currentPage * CATEGORIES_PER_PAGE + CATEGORIES_PER_PAGE
+    );
 
-    const handleToggle = () => {
-        if (showAll) {
-            setShowAll(false);
-        } else {
-            setShowAll(true);
-            setTimeout(() => {
-                buttonRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-            }, 500);
-        }
+    const goToPage = (page: number) => {
+        if (page === currentPage || animating) return;
+        const dir = page > currentPage ? "right" : "left";
+        setDirection(dir);
+        setAnimating(true);
+        setTimeout(() => {
+            setCurrentPage(page);
+            setAnimating(false);
+        }, 350);
     };
+
+    const goPrev = () => goToPage(currentPage - 1);
+    const goNext = () => goToPage(currentPage + 1);
 
     return (
         <div className="w-full px-4 sm:px-0 mt-6 mb-10">
@@ -275,58 +288,116 @@ const Skills: React.FC = () => {
                 <SectionHeading color="red">Skills & Experience</SectionHeading>
             </div>
 
-            <div>
-                {initialCategories.map((category, index) => (
-                    <SkillRow
-                        key={category.title}
-                        category={category}
-                        animationDelay={index * 100}
-                    />
-                ))}
-            </div>
-
-            <div
-                ref={extraRef}
-                className="overflow-hidden transition-all duration-500 ease-in-out"
-                style={{
-                    maxHeight: showAll ? `${extraRef.current?.scrollHeight ?? 9999}px` : "0px",
-                    opacity: showAll ? 1 : 0,
-                }}
-            >
-                {extraCategories.map((category, index) => (
-                    <SkillRow
-                        key={category.title}
-                        category={category}
-                        animationDelay={index * 80}
-                    />
-                ))}
-            </div>
-
-            <div className="mt-2 mb-4">
-                <button
-                    ref={buttonRef}
-                    onClick={handleToggle}
-                    className="group flex items-center justify-center gap-2 w-full py-3 bg-red-800 border border-red-600 text-white text-sm uppercase tracking-widest font-semibold hover:bg-red-600 hover:border-red-600 transition-all duration-300"
+            {/* Page content with overflow hidden to clip slide animation */}
+            <div className="overflow-hidden">
+                <div
+                    key={currentPage}
+                    className={
+                        animating
+                            ? direction === "right"
+                                ? "skills-exit-left"
+                                : "skills-exit-right"
+                            : direction === "right"
+                                ? "skills-enter-right"
+                                : direction === "left"
+                                    ? "skills-enter-left"
+                                    : "skills-enter-initial"
+                    }
                 >
-                    <span
-                        key={showAll ? "less" : "more"}
-                        style={{ animation: "fadeSlide 0.3s ease forwards" }}
-                    >
-                        {showAll ? "Show less" : `Show ${hiddenCount} more categories`}
-                    </span>
-                    <span
-                        className="inline-block transition-transform duration-300"
-                        style={{ transform: showAll ? "rotate(180deg)" : "rotate(0deg)" }}
-                    >
-                        ↓
-                    </span>
+                    {pageCategories.map((category, index) => (
+                        <SkillRow
+                            key={category.title}
+                            category={category}
+                            animationDelay={index * 80}
+                            animating={animating}
+                            direction={direction}
+                        />
+                    ))}
+                </div>
+            </div>
+
+            {/* Pagination controls */}
+            <div className="flex items-center justify-between mt-4 mb-2">
+                {/* Prev button */}
+                <button
+                    onClick={goPrev}
+                    disabled={currentPage === 0 || animating}
+                    className="flex items-center gap-2 px-4 py-2 text-sm font-semibold uppercase tracking-widest border border-neutral-700 text-neutral-300 hover:border-red-500 hover:text-white transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-neutral-700 disabled:hover:text-neutral-300"
+                >
+                    <span className="text-base leading-none">‹</span>
+                    Prev
+                </button>
+
+                {/* Page dots */}
+                <div className="flex items-center gap-2">
+                    {Array.from({ length: TOTAL_PAGES }).map((_, i) => (
+                        <button
+                            key={i}
+                            onClick={() => goToPage(i)}
+                            disabled={animating}
+                            className="transition-all duration-300 rounded-full focus:outline-none"
+                            style={{
+                                width: i === currentPage ? "28px" : "8px",
+                                height: "8px",
+                                background: i === currentPage ? "#ef4444" : "#525252",
+                                borderRadius: "9999px",
+                            }}
+                            aria-label={`Go to page ${i + 1}`}
+                        />
+                    ))}
+                </div>
+
+                {/* Next button */}
+                <button
+                    onClick={goNext}
+                    disabled={currentPage === TOTAL_PAGES - 1 || animating}
+                    className="flex items-center gap-2 px-4 py-2 text-sm font-semibold uppercase tracking-widest border border-neutral-700 text-neutral-300 hover:border-red-500 hover:text-white transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-neutral-700 disabled:hover:text-neutral-300"
+                >
+                    Next
+                    <span className="text-base leading-none">›</span>
                 </button>
             </div>
 
+            {/* Page counter */}
+            <p className="text-center text-xs text-neutral-500 tracking-widest uppercase mt-1">
+                Page {currentPage + 1} of {TOTAL_PAGES}
+            </p>
+
             <style>{`
-                @keyframes fadeSlide {
-                    from { opacity: 0; transform: translateY(6px); }
+                @keyframes slideInFromRight {
+                    from { opacity: 0; transform: translateX(60px); }
+                    to   { opacity: 1; transform: translateX(0); }
+                }
+                @keyframes slideInFromLeft {
+                    from { opacity: 0; transform: translateX(-60px); }
+                    to   { opacity: 1; transform: translateX(0); }
+                }
+                @keyframes slideOutToLeft {
+                    from { opacity: 1; transform: translateX(0); }
+                    to   { opacity: 0; transform: translateX(-60px); }
+                }
+                @keyframes slideOutToRight {
+                    from { opacity: 1; transform: translateX(0); }
+                    to   { opacity: 0; transform: translateX(60px); }
+                }
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(12px); }
                     to   { opacity: 1; transform: translateY(0); }
+                }
+                .skills-enter-right {
+                    animation: slideInFromRight 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+                }
+                .skills-enter-left {
+                    animation: slideInFromLeft 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+                }
+                .skills-enter-initial {
+                    animation: fadeIn 0.4s ease forwards;
+                }
+                .skills-exit-left {
+                    animation: slideOutToLeft 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+                }
+                .skills-exit-right {
+                    animation: slideOutToRight 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
                 }
             `}</style>
         </div>
