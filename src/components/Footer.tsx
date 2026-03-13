@@ -80,19 +80,21 @@ function Footer() {
                                 className="group flex flex-col items-center gap-1.5"
                             >
                                 <span
-                                    className="flex items-center justify-center w-9 h-9 border border-neutral-700/60 bg-neutral-900/60 transition-all duration-200"
-                                    style={{ color: "#737373" }}
+                                    className="flex items-center justify-center w-9 h-9 border transition-all duration-200"
+                                    style={{
+                                        color,
+                                        borderColor: hoverBorder,
+                                        background: hoverBg,
+                                    }}
                                     onMouseEnter={e => {
                                         const el = e.currentTarget as HTMLElement;
-                                        el.style.color = color;
-                                        el.style.borderColor = hoverBorder;
-                                        el.style.background = hoverBg;
+                                        el.style.transform = "translateY(-2px)";
+                                        el.style.boxShadow = `0 4px 14px ${hoverBg.replace("0.12", "0.4").replace("0.08", "0.3")}`;
                                     }}
                                     onMouseLeave={e => {
                                         const el = e.currentTarget as HTMLElement;
-                                        el.style.color = "#737373";
-                                        el.style.borderColor = "rgba(64,64,64,0.6)";
-                                        el.style.background = "rgba(10,10,10,0.6)";
+                                        el.style.transform = "translateY(0)";
+                                        el.style.boxShadow = "none";
                                     }}
                                 >
                                     {icon}
