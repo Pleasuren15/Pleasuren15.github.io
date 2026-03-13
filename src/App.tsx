@@ -115,8 +115,8 @@ function Section({ children }: { children: React.ReactNode }) {
       ref={ref}
       className="flex items-center justify-center w-full sm:px-8 lg:px-30"
       style={{
-        paddingTop: "5rem",
-        paddingBottom: "5rem",
+        paddingTop: "2.5rem",
+        paddingBottom: "2.5rem",
         scrollMarginTop: NAVBAR_HEIGHT,
       }}
     >

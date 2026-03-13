@@ -71,7 +71,7 @@ function Footer() {
                 {/* Right — Socials */}
                 <div>
                     <h2 className="text-xs font-bold tracking-widest uppercase text-neutral-400 mb-4">Socials</h2>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-between w-full max-w-xs">
                         {socials.map(({ icon, label, href, color, hoverBg, hoverBorder }) => (
                             <a
                                 key={label}

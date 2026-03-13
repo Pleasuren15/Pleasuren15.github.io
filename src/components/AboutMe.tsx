@@ -2,12 +2,15 @@ import React from 'react';
 import { ShieldCheck, TrendingUp, Star, Users } from 'lucide-react';
 
 const SectionHeading: React.FC<{ children: string; color?: 'red' | 'blue' }> = ({ children, color = 'blue' }) => (
-    <>
-        <h3 className="text-3xl sm:text-6xl md:text-8xl lg:text-[10rem] leading-tight whitespace-nowrap overflow-hidden font-bold mb-2">
+    <div className="mb-8">
+        <p className="text-xs font-semibold tracking-[0.2em] uppercase text-neutral-500 mb-2">
+            {color === 'blue' ? '— Personal' : '— Career'}
+        </p>
+        <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight mb-3">
             {children}
         </h3>
-        <div className={`w-[25%] h-1 mb-8 ${color === 'blue' ? 'bg-blue-500' : 'bg-red-500'}`} />
-    </>
+        <div className={`h-[3px] w-12 ${color === 'blue' ? 'bg-blue-600' : 'bg-red-500'}`} />
+    </div>
 );
 
 const values = [
