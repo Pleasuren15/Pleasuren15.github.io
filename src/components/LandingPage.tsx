@@ -84,7 +84,10 @@ const LandingPage: React.FC = () => {
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
       
       {/* Mouse Scroll Indicator */}
-      <div className="flex flex-col items-center space-y-2 mb-20 animate-bounce">
+      <div
+        className="flex flex-col items-center space-y-2 mb-20"
+        style={{ animation: "bounce 2s infinite" }}
+      >
         <svg 
           className="w-6 h-8 text-white" 
           fill="none" 

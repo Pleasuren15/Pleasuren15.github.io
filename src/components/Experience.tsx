@@ -1,14 +1,13 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 
 const SectionHeading: React.FC<{ children: string; color?: 'red' | 'blue' }> = ({ children, color = 'blue' }) => (
     <div className="mb-8">
         <p className="text-xs font-semibold tracking-[0.2em] uppercase text-neutral-500 mb-2">
             {color === 'blue' ? '— Personal' : '— Career'}
         </p>
-        <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight mb-3">
+        <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight">
             {children}
         </h3>
-        <div className={`h-[3px] w-12 ${color === 'blue' ? 'bg-blue-600' : 'bg-red-500'}`} />
     </div>
 );
 
@@ -51,233 +50,221 @@ const experiences = [
     },
 ];
 
-const CARD_WIDTH = 300;
-const CARD_GAP = 24;
-const SCROLL_STEP = CARD_WIDTH + CARD_GAP;
+const DRAG_THRESHOLD = 60;
 
-const ExperienceCard: React.FC<{ exp: typeof experiences[0] }> = ({ exp }) => (
-    <div className="shrink-0 flex flex-col" style={{ width: `${CARD_WIDTH}px` }}>
-        <div className="relative flex flex-col h-full rounded-xl border border-neutral-700/60 bg-neutral-900/80 backdrop-blur-sm p-5 overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1 hover:border-red-500/50 hover:shadow-[0_8px_32px_rgba(239,68,68,0.15)] group">
-            {/* Top accent line */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-red-500 via-red-400 to-transparent rounded-t-xl" />
+function useDragNav(onNext: () => void, onPrev: () => void) {
+    const startX = useRef<number | null>(null);
+    const dragging = useRef(false);
 
-            {/* Period + current badge */}
-            <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-semibold text-red-400 tracking-wide uppercase">
-                    {exp.period}
-                </span>
-                {exp.current && (
-                    <span className="flex items-center gap-1.5 text-[10px] font-semibold text-green-400 bg-green-500/10 border border-green-500/30 px-2 py-0.5 rounded-full">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                        Current
-                    </span>
+    const onPointerDown = useCallback((e: React.PointerEvent) => {
+        startX.current = e.clientX;
+        dragging.current = true;
+    }, []);
+
+    const onPointerUp = useCallback((e: React.PointerEvent) => {
+        if (!dragging.current || startX.current === null) return;
+        const delta = startX.current - e.clientX;
+        if (delta > DRAG_THRESHOLD) onNext();
+        else if (delta < -DRAG_THRESHOLD) onPrev();
+        startX.current = null;
+        dragging.current = false;
+    }, [onNext, onPrev]);
+
+    const onPointerLeave = useCallback(() => {
+        startX.current = null;
+        dragging.current = false;
+    }, []);
+
+    return { onPointerDown, onPointerUp, onPointerLeave };
+}
+
+const ExperienceCard: React.FC<{
+    exp: typeof experiences[0];
+    animKey: number;
+    size: 'lg' | 'sm';
+}> = ({ exp, animKey, size }) => {
+    const p           = size === 'lg' ? 'p-6'     : 'p-5';
+    const titleSize   = size === 'lg' ? 'text-lg' : 'text-sm';
+    const companySize = size === 'lg' ? 'text-sm' : 'text-xs';
+    const descSize    = size === 'lg' ? 'text-sm' : 'text-xs';
+    const mb          = size === 'lg' ? 'mb-4'    : 'mb-3';
+
+    return (
+        <div
+            key={animKey}
+            className="exp-fade p-px"
+            style={{ background: 'linear-gradient(135deg, #ef4444 0%, #1d4ed8 50%, #ef4444 100%)' }}
+        >
+            <div className={`bg-neutral-900 ${p}`}>
+                <div className={`flex items-start justify-between ${mb}`}>
+                    <div>
+                        <h4 className={`${titleSize} font-bold text-white leading-snug`}>{exp.title}</h4>
+                        <p className={`${companySize} font-medium text-neutral-400 mt-0.5`}>{exp.company}</p>
+                    </div>
+                    {exp.current && (
+                        <span className="flex items-center gap-1.5 text-[10px] font-semibold text-green-400 bg-green-500/10 border border-green-500/30 px-2 py-0.5 rounded-full shrink-0 ml-4">
+                            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                            Current
+                        </span>
+                    )}
+                </div>
+
+                {size === 'sm' && (
+                    <span className="text-[10px] font-semibold text-red-400 tracking-wide uppercase">{exp.period}</span>
                 )}
-            </div>
 
-            {/* Title */}
-            <h4 className="text-sm font-bold text-white leading-snug mb-1">
-                {exp.title}
-            </h4>
+                <div className={`h-px bg-neutral-700/60 ${size === 'sm' ? 'my-3' : 'mb-4'}`} />
+                <p className={`${descSize} text-neutral-400 leading-relaxed mb-4`}>{exp.description}</p>
 
-            {/* Company */}
-            <p className="text-xs font-medium text-neutral-400 mb-3">
-                {exp.company}
-            </p>
-
-            {/* Divider */}
-            <div className="h-px bg-neutral-700/60 mb-3" />
-
-            {/* Description */}
-            <p className="text-xs text-neutral-400 leading-relaxed flex-1 mb-4">
-                {exp.description}
-            </p>
-
-            {/* Tech pills */}
-            <div className="flex flex-wrap gap-1.5">
-                {exp.technologies.map((tech) => (
-                    <span
-                        key={tech}
-                        className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-neutral-800 text-neutral-300 border border-neutral-700/80 transition-colors duration-200 group-hover:border-red-500/30 group-hover:text-neutral-200"
-                    >
-                        {tech}
-                    </span>
-                ))}
+                <div className="flex flex-wrap gap-1.5">
+                    {exp.technologies.map((tech) => (
+                        <span
+                            key={tech}
+                            className="px-2 py-0.5 text-[10px] font-medium bg-neutral-800 text-neutral-300 border border-neutral-700/80"
+                        >
+                            {tech}
+                        </span>
+                    ))}
+                </div>
             </div>
         </div>
+    );
+};
+
+const Breadcrumbs: React.FC<{ active: number; total: number; onSelect: (i: number) => void }> = ({ active, total, onSelect }) => (
+    <div className="flex items-center justify-center gap-2 mt-5">
+        {Array.from({ length: total }).map((_, i) => (
+            <button
+                key={i}
+                onClick={() => onSelect(i)}
+                aria-label={`Go to ${experiences[i].title}`}
+                className="transition-all duration-300"
+                style={{
+                    width: i === active ? '24px' : '8px',
+                    height: '8px',
+                    borderRadius: i === active ? '4px' : '50%',
+                    background: i === active ? '#ef4444' : '#404040',
+                }}
+            />
+        ))}
     </div>
 );
 
 const Experience: React.FC = () => {
-    const scrollRef = useRef<HTMLDivElement>(null);
-    const [canScrollLeft, setCanScrollLeft] = useState(false);
-    const [canScrollRight, setCanScrollRight] = useState(true);
+    const [active, setActive] = useState(0);
+    const [animKey, setAnimKey] = useState(0);
 
-    const updateScrollState = useCallback(() => {
-        const el = scrollRef.current;
-        if (!el) return;
-        setCanScrollLeft(el.scrollLeft > 4);
-        setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
-    }, []);
+    const navigate = useCallback((next: number) => {
+        if (next < 0 || next >= experiences.length || next === active) return;
+        setAnimKey(k => k + 1);
+        setActive(next);
+    }, [active]);
 
-    useEffect(() => {
-        const el = scrollRef.current;
-        if (!el) return;
-        updateScrollState();
-        el.addEventListener('scroll', updateScrollState, { passive: true });
-        const ro = new ResizeObserver(updateScrollState);
-        ro.observe(el);
-        return () => {
-            el.removeEventListener('scroll', updateScrollState);
-            ro.disconnect();
-        };
-    }, [updateScrollState]);
+    const goNext = useCallback(() => navigate(active + 1), [active, navigate]);
+    const goPrev = useCallback(() => navigate(active - 1), [active, navigate]);
 
-    const scrollBy = (dir: 'left' | 'right') => {
-        scrollRef.current?.scrollBy({
-            left: dir === 'right' ? SCROLL_STEP : -SCROLL_STEP,
-            behavior: 'smooth',
-        });
-    };
+    const drag = useDragNav(goNext, goPrev);
+    const exp  = experiences[active];
+    const next = active < experiences.length - 1 ? experiences[active + 1] : null;
 
     return (
         <div className="px-4 sm:px-0 w-full">
             <SectionHeading color="red">Experience</SectionHeading>
 
-            {/* ── DESKTOP: horizontal scrolling timeline ── */}
-            <div className="hidden sm:block relative">
-                {/* Left fade + arrow */}
-                <div
-                    className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none transition-opacity duration-300"
-                    style={{
-                        background: 'linear-gradient(to right, rgb(10,10,10) 0%, transparent 100%)',
-                        opacity: canScrollLeft ? 1 : 0,
-                    }}
-                />
-                <button
-                    onClick={() => scrollBy('left')}
-                    disabled={!canScrollLeft}
-                    aria-label="Scroll left"
-                    className="absolute left-0 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-9 h-9 rounded-full bg-neutral-900 border border-neutral-700 text-neutral-300 shadow-lg transition-all duration-200 hover:border-red-500 hover:text-red-400 hover:shadow-[0_0_12px_rgba(239,68,68,0.3)] disabled:opacity-0 disabled:pointer-events-none"
-                >
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                </button>
-
-                {/* Right fade + arrow */}
-                <div
-                    className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none transition-opacity duration-300"
-                    style={{
-                        background: 'linear-gradient(to left, rgb(10,10,10) 0%, transparent 100%)',
-                        opacity: canScrollRight ? 1 : 0,
-                    }}
-                />
-                <button
-                    onClick={() => scrollBy('right')}
-                    disabled={!canScrollRight}
-                    aria-label="Scroll right"
-                    className="absolute right-0 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-9 h-9 rounded-full bg-neutral-900 border border-neutral-700 text-neutral-300 shadow-lg transition-all duration-200 hover:border-red-500 hover:text-red-400 hover:shadow-[0_0_12px_rgba(239,68,68,0.3)] disabled:opacity-0 disabled:pointer-events-none"
-                >
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                </button>
-
-                {/* Scrollable area */}
-                <div
-                    ref={scrollRef}
-                    className="overflow-x-auto pb-4 px-2"
-                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                >
-                    {/* Connector row — single continuous line with dots on top */}
-                    <div className="relative flex min-w-max items-center mb-5" style={{ gap: `${CARD_GAP}px` }}>
-                        {/* Full-width continuous line behind everything */}
-                        <div
-                            className="absolute top-1/2 -translate-y-1/2 h-px bg-gradient-to-r from-red-500 via-red-500/60 to-red-500/10 pointer-events-none"
-                            style={{ left: 6, right: 6 }}
-                        />
-                        {experiences.map((_, index) => (
+            {/* ── DESKTOP ── */}
+            <div className="hidden sm:block">
+                <div className="relative flex items-center mb-8">
+                    <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-px bg-neutral-700" />
+                    <div
+                        className="absolute top-1/2 -translate-y-1/2 left-0 h-px bg-red-500 transition-all duration-500"
+                        style={{ width: `${(active / (experiences.length - 1)) * 100}%` }}
+                    />
+                    {experiences.map((e, i) => (
+                        <button
+                            key={i}
+                            onClick={() => navigate(i)}
+                            className="relative z-10 flex flex-col items-center"
+                            style={{ flex: 1 }}
+                            aria-label={e.title}
+                        >
                             <div
-                                key={index}
-                                className="shrink-0 flex items-center justify-start"
-                                style={{ width: `${CARD_WIDTH}px` }}
+                                className="w-3 h-3 rounded-full border-2 transition-all duration-300"
+                                style={{
+                                    background: i <= active ? '#ef4444' : '#262626',
+                                    borderColor: i <= active ? '#ef4444' : '#525252',
+                                    boxShadow: i === active ? '0 0 10px rgba(239,68,68,0.7)' : 'none',
+                                }}
+                            />
+                            <span
+                                className="absolute top-5 text-[10px] font-medium tracking-wide whitespace-nowrap transition-colors duration-200"
+                                style={{ color: i === active ? '#ef4444' : '#737373' }}
                             >
-                                <div className="shrink-0 w-3 h-3 rounded-full bg-red-500 z-10 shadow-[0_0_8px_rgba(239,68,68,0.6)]" />
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Cards row */}
-                    <div className="flex min-w-max items-stretch" style={{ gap: `${CARD_GAP}px` }}>
-                        {experiences.map((exp, index) => (
-                            <ExperienceCard key={index} exp={exp} />
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            {/* ── MOBILE: vertical stacked timeline ── */}
-            <div className="sm:hidden relative pl-6">
-                {/* Vertical line — uses 100% height of the flex container */}
-                <div className="absolute left-[7px] top-0 h-full w-px bg-gradient-to-b from-red-500 via-red-500/40 to-transparent" />
-
-                <div className="flex flex-col gap-6">
-                    {experiences.map((exp, index) => (
-                        <div key={index} className="relative">
-                            {/* Dot on the vertical line */}
-                            <div className="absolute -left-[25px] top-4 w-3 h-3 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)] z-10" />
-
-                            <div className="relative flex flex-col rounded-xl border border-neutral-700/60 bg-neutral-900/80 backdrop-blur-sm p-5 overflow-hidden transition-all duration-300 group">
-                                {/* Top accent line */}
-                                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-red-500 via-red-400 to-transparent rounded-t-xl" />
-
-                                {/* Period + current badge */}
-                                <div className="flex items-center justify-between mb-3">
-                                    <span className="text-xs font-semibold text-red-400 tracking-wide uppercase">
-                                        {exp.period}
-                                    </span>
-                                    {exp.current && (
-                                        <span className="flex items-center gap-1.5 text-[10px] font-semibold text-green-400 bg-green-500/10 border border-green-500/30 px-2 py-0.5 rounded-full">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                                            Current
-                                        </span>
-                                    )}
-                                </div>
-
-                                {/* Title */}
-                                <h4 className="text-sm font-bold text-white leading-snug mb-1">
-                                    {exp.title}
-                                </h4>
-
-                                {/* Company */}
-                                <p className="text-xs font-medium text-neutral-400 mb-3">
-                                    {exp.company}
-                                </p>
-
-                                {/* Divider */}
-                                <div className="h-px bg-neutral-700/60 mb-3" />
-
-                                {/* Description */}
-                                <p className="text-xs text-neutral-400 leading-relaxed mb-4">
-                                    {exp.description}
-                                </p>
-
-                                {/* Tech pills */}
-                                <div className="flex flex-wrap gap-1.5">
-                                    {exp.technologies.map((tech) => (
-                                        <span
-                                            key={tech}
-                                            className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-neutral-800 text-neutral-300 border border-neutral-700/80"
-                                        >
-                                            {tech}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                                {e.period}
+                            </span>
+                        </button>
                     ))}
                 </div>
+
+                <div
+                    className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none"
+                    {...drag}
+                >
+                    {next && (
+                        <div
+                            className="absolute top-0 right-0 w-[30%] pointer-events-none p-px"
+                            style={{
+                                background: 'linear-gradient(135deg, #ef4444 0%, #1d4ed8 50%, #ef4444 100%)',
+                                opacity: 0.22,
+                                transform: 'translateX(60%)',
+                            }}
+                        >
+                            <div className="bg-neutral-900 p-4">
+                                <p className="text-[10px] font-semibold text-red-400 tracking-wide uppercase mb-1">{next.period}</p>
+                                <p className="text-xs font-bold text-white truncate">{next.title}</p>
+                                <p className="text-[10px] text-neutral-400 truncate">{next.company}</p>
+                            </div>
+                        </div>
+                    )}
+                    <ExperienceCard key={animKey} exp={exp} animKey={animKey} size="lg" />
+                </div>
+
+                <Breadcrumbs active={active} total={experiences.length} onSelect={navigate} />
             </div>
+
+            {/* ── MOBILE ── */}
+            <div className="sm:hidden">
+                <div
+                    className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none"
+                    {...drag}
+                >
+                    {next && (
+                        <div
+                            className="absolute top-0 right-0 w-[40%] pointer-events-none p-px"
+                            style={{
+                                background: 'linear-gradient(135deg, #ef4444 0%, #1d4ed8 50%, #ef4444 100%)',
+                                opacity: 0.22,
+                                transform: 'translateX(55%)',
+                            }}
+                        >
+                            <div className="bg-neutral-900 p-3">
+                                <p className="text-[9px] font-semibold text-red-400 tracking-wide uppercase mb-1">{next.period}</p>
+                                <p className="text-[10px] font-bold text-white truncate">{next.title}</p>
+                                <p className="text-[9px] text-neutral-400 truncate">{next.company}</p>
+                            </div>
+                        </div>
+                    )}
+                    <ExperienceCard key={animKey} exp={exp} animKey={animKey} size="sm" />
+                </div>
+                <Breadcrumbs active={active} total={experiences.length} onSelect={navigate} />
+            </div>
+
+            <style>{`
+                @keyframes expFade {
+                    from { opacity: 0; }
+                    to   { opacity: 1; }
+                }
+                .exp-fade { animation: expFade 0.25s ease both; }
+            `}</style>
         </div>
     );
 };

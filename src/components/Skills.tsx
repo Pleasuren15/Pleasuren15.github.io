@@ -1,14 +1,41 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+
+const DRAG_THRESHOLD = 60;
+
+function useDragNav(onNext: () => void, onPrev: () => void) {
+    const startX = useRef<number | null>(null);
+    const dragging = useRef(false);
+
+    const onPointerDown = useCallback((e: React.PointerEvent) => {
+        startX.current = e.clientX;
+        dragging.current = true;
+    }, []);
+
+    const onPointerUp = useCallback((e: React.PointerEvent) => {
+        if (!dragging.current || startX.current === null) return;
+        const delta = startX.current - e.clientX;
+        if (delta > DRAG_THRESHOLD) onNext();
+        else if (delta < -DRAG_THRESHOLD) onPrev();
+        startX.current = null;
+        dragging.current = false;
+    }, [onNext, onPrev]);
+
+    const onPointerLeave = useCallback(() => {
+        startX.current = null;
+        dragging.current = false;
+    }, []);
+
+    return { onPointerDown, onPointerUp, onPointerLeave };
+}
 
 const SectionHeading: React.FC<{ children: string; color?: 'red' | 'blue' }> = ({ children, color = 'blue' }) => (
     <div className="mb-8">
         <p className="text-xs font-semibold tracking-[0.2em] uppercase text-neutral-500 mb-2">
             {color === 'blue' ? '— Personal' : '— Career'}
         </p>
-        <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight mb-3">
+        <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight">
             {children}
         </h3>
-        <div className={`h-[3px] w-12 ${color === 'blue' ? 'bg-blue-600' : 'bg-red-500'}`} />
     </div>
 );
 
@@ -195,7 +222,8 @@ const SkillRow: React.FC<SkillRowProps> = ({ category, animationDelay = 0, anima
                 transitionDelay: animating ? `${animationDelay}ms` : `${animationDelay}ms`,
             }}
         >
-            <h4 className="text-xs sm:text-sm md:text-base font-semibold mb-3 text-neutral-300 uppercase tracking-widest">
+            <h4 className="text-xs sm:text-sm font-semibold mb-3 text-neutral-400 uppercase tracking-[0.18em] flex items-center gap-2">
+                <span className="w-3 h-px bg-red-500 inline-block" />
                 {category.title}
             </h4>
 
@@ -225,7 +253,7 @@ const SkillRow: React.FC<SkillRowProps> = ({ category, animationDelay = 0, anima
                     {category.icons.map((src, i) => (
                         <div
                             key={i}
-                            className="flex-shrink-0 flex items-center justify-center bg-neutral-800 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 p-2.5 hover:scale-105 transition-transform duration-200"
+                            className="flex-shrink-0 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 p-2.5 border border-neutral-700/50 bg-neutral-900/80 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-red-500/40 hover:shadow-[0_4px_16px_rgba(239,68,68,0.12)] group/icon"
                             style={{
                                 opacity: inView ? 1 : 0,
                                 transform: inView ? "scale(1)" : "scale(0.75)",
@@ -286,6 +314,7 @@ const Skills: React.FC = () => {
 
     const goPrev = () => goToPage(currentPage - 1);
     const goNext = () => goToPage(currentPage + 1);
+    const drag = useDragNav(goNext, goPrev);
 
     return (
         <div className="w-full px-4 sm:px-0">
@@ -301,7 +330,10 @@ const Skills: React.FC = () => {
             </div>
 
             {/* Page content with overflow hidden to clip slide animation */}
-            <div className="overflow-hidden">
+            <div
+                className="overflow-hidden cursor-grab active:cursor-grabbing select-none"
+                {...drag}
+            >
                 <div
                     key={currentPage}
                     className={
@@ -371,7 +403,7 @@ const Skills: React.FC = () => {
             </div>
 
             {/* Page counter */}
-            <p className="text-center text-xs text-neutral-500 tracking-widest uppercase mt-1">
+            <p className="text-center text-xs text-white tracking-widest uppercase mt-1">
                 Page {currentPage + 1} of {TOTAL_PAGES}
             </p>
 

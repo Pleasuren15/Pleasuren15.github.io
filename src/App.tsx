@@ -6,6 +6,7 @@ import Silk from './components/Silk'
 import Footer from './components/Footer'
 import AboutMe from './components/AboutMe'
 import Experience from './components/Experience'
+import Education from './components/Education'
 import Skills from './components/Skills'
 
 const NAVBAR_HEIGHT = "4rem";
@@ -49,12 +50,13 @@ function ScrollToTop() {
         position: "fixed",
         bottom: "2rem",
         right: "2rem",
-        zIndex: 50,
+        zIndex: 9999,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         width: "2.75rem",
         height: "2.75rem",
+        borderRadius: "50%",
         background: scrolling ? "#ef4444cc" : "#ef4444",
         color: "white",
         border: "none",
@@ -159,6 +161,10 @@ function App() {
 
         <Section>
           <Experience />
+        </Section>
+
+        <Section>
+          <Education />
         </Section>
 
         <Section>

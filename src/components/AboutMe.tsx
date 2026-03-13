@@ -6,10 +6,9 @@ const SectionHeading: React.FC<{ children: string; color?: 'red' | 'blue' }> = (
         <p className="text-xs font-semibold tracking-[0.2em] uppercase text-neutral-500 mb-2">
             {color === 'blue' ? '— Personal' : '— Career'}
         </p>
-        <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight mb-3">
+        <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight">
             {children}
         </h3>
-        <div className={`h-[3px] w-12 ${color === 'blue' ? 'bg-blue-600' : 'bg-red-500'}`} />
     </div>
 );
 
@@ -60,9 +59,6 @@ const AboutMe: React.FC = () => {
                             key={value.label}
                             className="relative flex flex-col gap-3 p-5 border border-neutral-700/60 bg-neutral-900/60 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-500/50 hover:shadow-[0_8px_32px_rgba(59,130,246,0.12)] group"
                         >
-                            {/* Top accent line */}
-                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-red-500 via-blue-400 to-transparent" />
-
                             <div className="flex items-center gap-3">
                                 <div className="flex items-center justify-center w-10 h-10 bg-blue-500/10 border border-blue-500/20 group-hover:border-blue-500/40 transition-colors duration-300">
                                     {value.icon}
