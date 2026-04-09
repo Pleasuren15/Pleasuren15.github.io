@@ -13,40 +13,40 @@ const SectionHeading: React.FC<{ children: string; color?: 'red' | 'blue' }> = (
 
 const experiences = [
     {
-        title: "Senior Full Stack Developer",
-        company: "TechCorp Solutions",
-        period: "2023 - Present",
+        title: "Intermediate Software Engineer",
+        company: "Derivco",
+        period: "Apr 2023 - Present",
         current: true,
         description:
-            "Led the development of enterprise-scale web applications, mentored junior developers, and implemented best practices for code quality and performance optimization.",
-        technologies: ["React", "Node.js", "TypeScript", "AWS", "MongoDB"],
+            "I Contributed across the full stack of a real-time, blockchain-based gaming platform, delivering features spanning financial systems, game mechanics, and user experience. Built and maintained the infrastructure pipelines that automated deployment across multiple environments, ensuring reliable and secure releases. Designed and implemented core backend systems  including wallet management, transaction processing, and configurable fee handling, while also contributing to the frontend with UI improvements and real-time interaction features. Established automated testing practices to improve code quality and release confidence throughout the development lifecycle",
+        technologies: ["C#", "React", "PostgreSQL", "SignalR", "Terraform", "+ More"],
     },
     {
-        title: "Full Stack Developer",
-        company: "Digital Innovations Inc",
-        period: "2021 - 2023",
+        title: "Junior Software Engineer",
+        company: "Derivco",
+        period: "Feb 2023 - Mar 2024",
         current: false,
         description:
-            "Developed and maintained multiple client projects, implemented responsive designs, and integrated third-party APIs for enhanced functionality.",
-        technologies: ["React", "Express.js", "PostgreSQL", "Docker", "Redis"],
+            "Played a key role in the initial development of a real-time AI-driven messaging product, built to replace a legacy messaging system. Contributed to scaffolding the core API architecture and delivering foundational features from the ground up. Led the design and implementation of continuous integration pipelines across all APIs, navigating the complexities of integrating new technologies to deliver an automated, fast, and reliable feedback loop that freed the team to focus on product development.",
+        technologies: ["C#", "MVC", "Docker", "NUnit", "Dapper", "+ More"],
     },
     {
-        title: "Junior Developer",
-        company: "Startup Hub",
+        title: "Graduate Developer",
+        company: "Derivco",
         period: "2020 - 2021",
         current: false,
         description:
-            "Built internal tools and contributed to frontend development using React and vanilla JS, collaborating in an agile team environment.",
-        technologies: ["React", "JavaScript", "CSS", "REST APIs"],
+            "Worked on a high-volume iGaming platform responsible for prize distribution, implementing, testing, and deploying assigned features while contributing to technical documentation.  Progressed from manual testing to leading automated testing efforts — covering unit, integration, and regression — on an established promotional and customer messaging product, resulting in a measurable reduction in bugs. Also contributed to feature development across both products, gaining a strong practical understanding of the full software development lifecycle in a production environment.",
+        technologies: ["C#", "YAML", "MsSQL", "LGTM", "EFC", "+ More"],
     },
     {
-        title: "Intern Developer",
-        company: "CodeBase Agency",
-        period: "2019 - 2020",
+        title: "Vacation Student",
+        company: "Psybergate",
+        period: "2021 - 7 Days",
         current: false,
         description:
-            "Assisted in building client websites, fixed bugs across a variety of stacks, and wrote unit tests to improve code coverage.",
-        technologies: ["HTML", "CSS", "jQuery", "PHP"],
+            "Completed vacation work that served as an early introduction to the professional technology industry, gaining exposure to real-world software development practices and team collaboration. Worked alongside fellow students on a tax calculation project, building foundational experience in collaborative development.",
+        technologies: ["Java", "Spring Boot", "MySQL", "Git", "Excel"],
     },
 ];
 
@@ -83,11 +83,11 @@ const ExperienceCard: React.FC<{
     animKey: number;
     size: 'lg' | 'sm';
 }> = ({ exp, animKey, size }) => {
-    const p           = size === 'lg' ? 'p-6'     : 'p-5';
-    const titleSize   = size === 'lg' ? 'text-lg' : 'text-sm';
+    const p = size === 'lg' ? 'p-6' : 'p-5';
+    const titleSize = size === 'lg' ? 'text-lg' : 'text-sm';
     const companySize = size === 'lg' ? 'text-sm' : 'text-xs';
-    const descSize    = size === 'lg' ? 'text-sm' : 'text-xs';
-    const mb          = size === 'lg' ? 'mb-4'    : 'mb-3';
+    const descSize = size === 'lg' ? 'text-sm' : 'text-xs';
+    const mb = size === 'lg' ? 'mb-4' : 'mb-3';
 
     return (
         <div
@@ -164,7 +164,7 @@ const Experience: React.FC = () => {
     const goPrev = useCallback(() => navigate(active - 1), [active, navigate]);
 
     const drag = useDragNav(goNext, goPrev);
-    const exp  = experiences[active];
+    const exp = experiences[active];
     const next = active < experiences.length - 1 ? experiences[active + 1] : null;
 
     return (
