@@ -19,7 +19,7 @@ const education = [
         institution: "University of Pretoria",
         period: "2019 - 2022",
         icon: <GraduationCap className="w-4 h-4 text-blue-400" strokeWidth={1.5} />,
-        tags: ["Algorithms", "Data Structures", "Software Engineering", "Systems Design"],
+        tags: ["Algorithms", "Data Structures", "Software Engineering", "Systems Design", "+ More"],
         color: '#1d4ed8',
     },
     {
@@ -27,7 +27,7 @@ const education = [
         institution: "High School",
         period: "2018",
         icon: <BookOpen className="w-4 h-4 text-red-400" strokeWidth={1.5} />,
-        tags: ["Mathematics", "Physical Sciences", "Information Technology"],
+        tags: ["Mathematics", "Physical Sciences", "Information Technology", "+ More"],
         color: '#ef4444',
     },
 ];
