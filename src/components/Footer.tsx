@@ -41,7 +41,7 @@ const socials = [
 ];
 
 const PHONE = "+27823982825";
-const PHONE_DISPLAY = "+27 (0) 823 982 825";
+const PHONE_DISPLAY = "+27(0) 82 398 2825";
 
 function Footer() {
     const [toast, setToast] = useState(false);
