@@ -1,54 +1,62 @@
 import { useState } from "react";
-import { Linkedin, Github, Instagram, MessageCircle, Phone, Mail, ClipboardCheck, Axe } from "lucide-react";
+import { Linkedin, Github, Phone, Mail, ClipboardCheck, Gamepad2 } from "lucide-react";
 
 
-const socials = [
+const PHONE = "+27823982825";
+
+type SocialItem = {
+    icon: React.ReactNode;
+    label: string;
+    href?: string;
+    color: string;
+    hoverBorder: string;
+    copyOnClick?: string;
+};
+
+const socials: SocialItem[] = [
     {
         icon: <Linkedin className="w-4 h-4" strokeWidth={1.5} />,
         label: "LinkedIn",
-        href: "#",
+        href: "https://www.linkedin.com/in/pleasure-ndhlovu-n15/",
         color: "#0A66C2",
         hoverBorder: "rgba(10,102,194,0.6)",
     },
     {
         icon: <Github className="w-4 h-4" strokeWidth={1.5} />,
         label: "GitHub",
-        href: "#",
+        href: "https://github.com/Pleasuren15",
         color: "#e5e5e5",
         hoverBorder: "rgba(229,229,229,0.5)",
     },
     {
-        icon: <Instagram className="w-4 h-4" strokeWidth={1.5} />,
-        label: "Instagram",
-        href: "#",
-        color: "#E1306C",
-        hoverBorder: "rgba(225,48,108,0.6)",
+        icon: <Phone className="w-4 h-4" strokeWidth={1.5} />,
+        label: "Phone",
+        color: "#10B981",
+        hoverBorder: "rgba(16,185,129,0.6)",
+        copyOnClick: PHONE,
     },
     {
-        icon: <MessageCircle className="w-4 h-4" strokeWidth={1.5} />,
-        label: "WhatsApp",
-        href: "#",
-        color: "#25D366",
-        hoverBorder: "rgba(37,211,102,0.6)",
+        icon: <Mail className="w-4 h-4" strokeWidth={1.5} />,
+        label: "Gmail",
+        href: "mailto:Pleasuren15@gmail.com",
+        color: "#EA4335",
+        hoverBorder: "rgba(234,67,53,0.6)",
     },
     {
-        icon: <Axe className="w-4 h-4" strokeWidth={1.5} />,
+        icon: <Gamepad2 className="w-4 h-4" strokeWidth={1.5} />,
         label: "Xbox",
-        href: "#",
         color: "#107C10",
         hoverBorder: "rgba(16,124,16,0.6)",
+        copyOnClick: "Pleasuren15",
     },
 ];
-
-const PHONE = "+27823982825";
-const PHONE_DISPLAY = "+27(0) 82 398 2825";
 
 function Footer() {
     const [toast, setToast] = useState(false);
 
-    const handleCopyPhone = (e: React.MouseEvent) => {
+    const handleCopy = (e: React.MouseEvent, text: string) => {
         e.preventDefault();
-        navigator.clipboard.writeText(PHONE).then(() => {
+        navigator.clipboard.writeText(text).then(() => {
             setToast(true);
             setTimeout(() => setToast(false), 2500);
         });
@@ -59,45 +67,37 @@ function Footer() {
             {/* Top accent line */}
             <div className="h-[2px] w-full bg-gradient-to-r from-red-500 via-blue-700 to-transparent mb-10" />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mb-10">
-
-                {/* Left — Contact */}
-                <div>
-                    <h2 className="text-xs font-bold tracking-widest uppercase mb-4">Get In Touch</h2>
-                    <div className="flex flex-col gap-3">
-                        {/* Phone — click to copy */}
-                        <button
-                            onClick={handleCopyPhone}
-                            className="group flex items-center gap-3 text-white cursor-pointer text-left"
-                        >
-                            <span className="flex items-center justify-center w-8 h-8 border border-neutral-700/60 bg-neutral-900/60 text-neutral-400 group-hover:border-red-500/50 group-hover:text-red-400 transition-all duration-200">
-                                <Phone className="w-3.5 h-3.5" strokeWidth={1.5} />
-                            </span>
-                            <span className="text-sm font-medium text-red-400 group-hover:text-red-300 transition-colors duration-200">
-                                {PHONE_DISPLAY}
-                            </span>
-                        </button>
-
-                        {/* Email */}
-                        <a
-                            href="mailto:Pleasuren15@gmail.com"
-                            className="group flex items-center gap-3 text-white hover:text-white transition-colors duration-200"
-                        >
-                            <span className="flex items-center justify-center w-8 h-8 border border-neutral-700/60 bg-neutral-900/60 text-neutral-400 group-hover:border-red-500/50 group-hover:text-red-400 transition-all duration-200">
-                                <Mail className="w-3.5 h-3.5" strokeWidth={1.5} />
-                            </span>
-                            <span className="text-sm font-medium text-red-400 group-hover:text-red-300 transition-colors duration-200">
-                                Pleasuren15@gmail.com
-                            </span>
-                        </a>
-                    </div>
-                </div>
-
-                {/* Right — Socials */}
-                <div>
-                    <h2 className="text-xs font-bold tracking-widest uppercase mb-4">Socials</h2>
-                    <div className="flex items-center gap-3">
-                        {socials.map(({ icon, label, href, color, hoverBorder }) => (
+            {/* Socials */}
+            <div className="mb-10">
+                <h2 className="text-xs font-bold tracking-widest uppercase mb-4">Socials</h2>
+                <div className="flex items-center gap-3">
+                    {socials.map(({ icon, label, href, color, hoverBorder, copyOnClick }) => (
+                        copyOnClick ? (
+                            <button
+                                key={label}
+                                onClick={(e) => handleCopy(e, copyOnClick)}
+                                aria-label={label}
+                                className="flex items-center justify-center w-10 h-10 transition-all duration-200 cursor-pointer"
+                                style={{
+                                    color,
+                                    borderRadius: '50%',
+                                    border: `1px solid ${hoverBorder}`,
+                                    background: 'transparent',
+                                }}
+                                onMouseEnter={e => {
+                                    const el = e.currentTarget as HTMLElement;
+                                    el.style.transform = "translateY(-2px)";
+                                    el.style.boxShadow = `0 0 12px ${hoverBorder}`;
+                                }}
+                                onMouseLeave={e => {
+                                    const el = e.currentTarget as HTMLElement;
+                                    el.style.transform = "translateY(0)";
+                                    el.style.boxShadow = "none";
+                                }}
+                            >
+                                {icon}
+                            </button>
+                        ) : (
                             <a
                                 key={label}
                                 href={href}
@@ -122,10 +122,9 @@ function Footer() {
                             >
                                 {icon}
                             </a>
-                        ))}
-                    </div>
+                        )
+                    ))}
                 </div>
-
             </div>
 
             {/* Bottom bar */}
