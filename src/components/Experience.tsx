@@ -94,7 +94,7 @@ const ExperienceCard: React.FC<{
     const descSize = size === 'lg' ? 'text-sm' : 'text-xs';
     const mb = size === 'lg' ? 'mb-4' : 'mb-3';
 
-    const maxLines = size === 'lg' ? 3 : 2;
+    const maxLines = size === 'lg' ? 7 : 6;
 
     useEffect(() => {
         const el = descRef.current;
