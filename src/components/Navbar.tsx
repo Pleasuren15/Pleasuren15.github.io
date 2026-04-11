@@ -140,15 +140,32 @@ function Navbar() {
                     }`}
                 style={{ zIndex: 9999 }}
             >
-                <div className={`relative bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 backdrop-blur-xl shadow-2xl h-full flex flex-col items-center justify-start pt-20 transition-all duration-800 ${isMobileMenuOpen ? 'transform translate-y-0 ease-out' : 'transform -translate-y-full ease-in'}`}>
+                {/* Backdrop */}
+                <div 
+                    className="absolute inset-0 bg-black/60 backdrop-blur-sm" 
+                    onClick={toggleMobileMenu}
+                />
+
+                <div className={`relative bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 backdrop-blur-xl shadow-2xl h-full flex flex-col transition-all duration-800 ${isMobileMenuOpen ? 'transform translate-x-0 ease-out' : 'transform -translate-x-full ease-in'}`}>
                     {/* Gradient overlay for visual effect */}
                     <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-purple-500/5 pointer-events-none" />
 
                     {/* Animated gradient accent line */}
                     <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent animate-pulse" />
 
-                    {/* Navigation Links */}
-                    <ul className={`flex flex-col space-y-4 relative z-10 text-center transition-all duration-800 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                    {/* Close button */}
+                    <div className="flex justify-end p-4">
+                        <button
+                            onClick={toggleMobileMenu}
+                            className="p-2 text-neutral-400 hover:text-white transition-colors duration-200"
+                            aria-label="Close menu"
+                        >
+                            <X className="w-6 h-6" />
+                        </button>
+                    </div>
+
+                    {/* Navigation Links - Left aligned */}
+                    <ul className={`flex flex-col space-y-2 relative z-10 text-left px-4 transition-all duration-800 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                         {sections.map((section, index) => (
                             <li
                                 key={section.id}
@@ -157,7 +174,7 @@ function Navbar() {
                             >
                                 <a
                                     href={`#${section.id}`}
-                                    className="flex items-center justify-center px-8 py-4 font-medium text-lg hover:bg-gradient-to-r hover:from-red-500/10 hover:to-purple-500/10 transition-all duration-200 rounded-lg border-2 border-transparent hover:border-red-500/30 transform hover:scale-105"
+                                    className="flex items-center px-4 py-3 font-medium text-lg hover:bg-red-500/10 transition-all duration-200 rounded-lg border-2 border-transparent hover:border-red-500/30"
                                     onClick={toggleMobileMenu}
                                 >
                                     <section.icon className='mr-3' />
@@ -168,10 +185,10 @@ function Navbar() {
                     </ul>
 
                     {/* Change Log Button - Bottom of Mobile Menu */}
-                    <div className={`mt-auto mb-8 w-full flex justify-center transition-all duration-800 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: isMobileMenuOpen ? '500ms' : '0ms' }}>
+                    <div className={`mt-auto mb-8 px-4 w-full transition-all duration-800 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: isMobileMenuOpen ? '500ms' : '0ms' }}>
                         <Drawer>
                             <DrawerTrigger asChild>
-                                <button className="w-[90vw] max-w-[300px] inline-flex h-12 items-center justify-center gap-2 bg-red-500 hover:bg-red-600 px-8 text-base font-semibold text-white cursor-pointer transition-all duration-200 transform hover:scale-105">
+                                <button className="w-full max-w-[300px] inline-flex h-12 items-center justify-center gap-2 bg-red-500 hover:bg-red-600 px-8 text-base font-semibold text-white cursor-pointer transition-all duration-200 transform hover:scale-105">
                                     <DocumentTextIcon className="inline-block" />
                                     Change Log
                                 </button>
