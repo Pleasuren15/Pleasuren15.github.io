@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 
 const SectionHeading: React.FC<{ children: string; color?: 'red' | 'blue' }> = ({ children, color = 'blue' }) => (
     <div className="mb-8">
@@ -15,7 +15,7 @@ const experiences = [
     {
         title: "Intermediate Software Engineer",
         company: "Derivco",
-        period: "Apr 2023 - Present",
+        period: "Apr 2024 - Present",
         current: true,
         description:
             "I Contributed across the full stack of a real-time, blockchain-based gaming platform, delivering features spanning financial systems, game mechanics, and user experience. Built and maintained the infrastructure pipelines that automated deployment across multiple environments, ensuring reliable and secure releases. Designed and implemented core backend systems  including wallet management, transaction processing, and configurable fee handling, while also contributing to the frontend with UI improvements and real-time interaction features. Established automated testing practices to improve code quality and release confidence throughout the development lifecycle",
@@ -83,19 +83,38 @@ const ExperienceCard: React.FC<{
     animKey: number;
     size: 'lg' | 'sm';
 }> = ({ exp, animKey, size }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [needsTruncation, setNeedsTruncation] = useState(false);
+    const descRef = useRef<HTMLParagraphElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
+
     const p = size === 'lg' ? 'p-6' : 'p-5';
     const titleSize = size === 'lg' ? 'text-lg' : 'text-sm';
     const companySize = size === 'lg' ? 'text-sm' : 'text-xs';
     const descSize = size === 'lg' ? 'text-sm' : 'text-xs';
     const mb = size === 'lg' ? 'mb-4' : 'mb-3';
 
+    const maxLines = size === 'lg' ? 3 : 2;
+
+    useEffect(() => {
+        const el = descRef.current;
+        if (!el) return;
+        
+        const lineHeight = parseFloat(getComputedStyle(el).lineHeight);
+        const maxHeight = lineHeight * maxLines;
+        
+        if (el.scrollHeight > maxHeight + 4) {
+            setNeedsTruncation(true);
+        }
+    }, [maxLines]);
+
     return (
         <div
             key={animKey}
-            className="exp-fade p-px"
+            className="exp-fade p-px h-full flex flex-col"
             style={{ background: 'linear-gradient(135deg, #ef4444 0%, #1d4ed8 50%, #ef4444 100%)' }}
         >
-            <div className={`bg-neutral-900 ${p}`}>
+            <div className={`bg-neutral-900 ${p} flex flex-col h-full`}>
                 <div className={`flex items-start justify-between ${mb}`}>
                     <div>
                         <h4 className={`${titleSize} font-bold text-white leading-snug`}>{exp.title}</h4>
@@ -114,9 +133,32 @@ const ExperienceCard: React.FC<{
                 )}
 
                 <div className={`h-px bg-neutral-700/60 ${size === 'sm' ? 'my-3' : 'mb-4'}`} />
-                <p className={`${descSize} text-neutral-400 leading-relaxed mb-4`}>{exp.description}</p>
+                
+                <div ref={contentRef} className="relative flex-1">
+                    <p 
+                        ref={descRef}
+                        className={`${descSize} text-neutral-400 leading-relaxed transition-all duration-300 ease-in-out`}
+                        style={{
+                            overflow: 'hidden',
+                            display: '-webkit-box',
+                            WebkitLineClamp: isExpanded ? 'unset' : maxLines,
+                            WebkitBoxOrient: 'vertical',
+                        }}
+                    >
+                        {exp.description}
+                    </p>
+                    
+                    {needsTruncation && (
+                        <button
+                            onClick={() => setIsExpanded(!isExpanded)}
+                            className="text-[10px] font-medium text-red-400 hover:text-red-300 transition-colors duration-200 mt-2 focus:outline-none focus:underline"
+                        >
+                            {isExpanded ? 'Show less' : 'Show more'}
+                        </button>
+                    )}
+                </div>
 
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-1.5 mt-auto pt-4">
                     {exp.technologies.map((tech) => (
                         <span
                             key={tech}
@@ -225,7 +267,9 @@ const Experience: React.FC = () => {
                             </div>
                         </div>
                     )}
-                    <ExperienceCard key={animKey} exp={exp} animKey={animKey} size="lg" />
+                    <div className="min-h-[320px]">
+                        <ExperienceCard key={animKey} exp={exp} animKey={animKey} size="lg" />
+                    </div>
                 </div>
 
                 <Breadcrumbs active={active} total={experiences.length} onSelect={navigate} />
@@ -253,7 +297,9 @@ const Experience: React.FC = () => {
                             </div>
                         </div>
                     )}
-                    <ExperienceCard key={animKey} exp={exp} animKey={animKey} size="sm" />
+                    <div className="min-h-[280px]">
+                        <ExperienceCard key={animKey} exp={exp} animKey={animKey} size="sm" />
+                    </div>
                 </div>
                 <Breadcrumbs active={active} total={experiences.length} onSelect={navigate} />
             </div>

@@ -16,7 +16,7 @@ const SectionHeading: React.FC<{ children: string; color?: 'red' | 'blue' }> = (
 const education = [
     {
         qualification: "Bachelor of Science in Computer Science",
-        institution: "University of Pretoria",
+        institution: "University of the Free State",
         period: "2019 - 2022",
         icon: <GraduationCap className="w-4 h-4 text-blue-400" strokeWidth={1.5} />,
         tags: ["Algorithms", "Data Structures", "Software Engineering", "Systems Design", "+ More"],
@@ -27,7 +27,7 @@ const education = [
         institution: "High School",
         period: "2018",
         icon: <BookOpen className="w-4 h-4 text-red-400" strokeWidth={1.5} />,
-        tags: ["Mathematics", "Physical Sciences", "Information Technology", "+ More"],
+        tags: ["Mathematics", "Physical Sciences", "English", "Life Sciences", "+ More"],
         color: '#ef4444',
     },
 ];
