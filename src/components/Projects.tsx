@@ -51,9 +51,9 @@ const projects = [
         name: "Portfolio Website",
         description: "A personal portfolio website showcasing projects, skills, and experience with a modern dark theme design and responsive layout.",
         stack: ["React", "TypeScript", "Tailwind CSS", "Vercel"],
-        status: "In Progress" as Status,
+        status: "Completed" as Status,
         github: "https://github.com/Pleasuren15/Pleasuren15.github.io",
-        live: "https://given-ndhlovu-optometrists.vercel.app/",
+        live: "https://pleasuren15-github-io.vercel.app/",
         year: "2026",
     },
 ];
