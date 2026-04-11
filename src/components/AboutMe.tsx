@@ -45,9 +45,13 @@ const AboutMe: React.FC = () => {
                 {/* Left — bio + stats */}
                 <div className="flex flex-col gap-8">
                     <p className="text-lg sm:text-xl md:text-2xl font-medium leading-relaxed text-neutral-300">
-                        I have over 4 years of experience developing globally used software, with hands-on
-                        experience in the iGaming industry. I'm a strong advocate for test automation and
-                        build performance-driven, scalable systems designed for reliability and growth.
+                        I'm an Intermediate Software Engineer with over 4 years of experience building
+                        globally-used software in the iGaming industry. My core strength is .NET development —
+                        building scalable backend systems and APIs. I also have solid React skills for
+                        crafting responsive frontend interfaces and real-time features. Beyond that, I
+                        bring strong DevOps practices with CI/CD pipelines, cloud infrastructure on Azure,
+                        PostgreSQL databases, and a focus on test automation. Passionate about clean
+                        architecture and continuously learning new technologies.
                     </p>
 
                 </div>
