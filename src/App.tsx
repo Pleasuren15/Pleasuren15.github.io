@@ -156,25 +156,35 @@ function App() {
           <LandingPage />
         </div>
 
-        <Section>
-          <AboutMe />
-        </Section>
+        <div id="about">
+          <Section>
+            <AboutMe />
+          </Section>
+        </div>
 
-        <Section>
-          <Experience />
-        </Section>
+        <div id="experience">
+          <Section>
+            <Experience />
+          </Section>
+        </div>
 
-        <Section>
-          <Education />
-        </Section>
+        <div id="education">
+          <Section>
+            <Education />
+          </Section>
+        </div>
 
-        <Section>
-          <Projects />
-        </Section>
+        <div id="projects">
+          <Section>
+            <Projects />
+          </Section>
+        </div>
 
-        <Section>
-          <Skills />
-        </Section>
+        <div id="skills">
+          <Section>
+            <Skills />
+          </Section>
+        </div>
 
         <Footer />
       </div>
