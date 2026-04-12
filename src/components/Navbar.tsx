@@ -188,7 +188,10 @@ function Navbar() {
                     <div className={`mt-auto mb-8 px-4 w-full transition-all duration-800 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: isMobileMenuOpen ? '500ms' : '0ms' }}>
                         <Drawer>
                             <DrawerTrigger asChild>
-                                <button className="w-full max-w-[300px] inline-flex h-12 items-center justify-center gap-2 bg-red-500 hover:bg-red-600 px-8 text-base font-semibold text-white cursor-pointer transition-all duration-200 transform hover:scale-105">
+                                <button 
+                                    className="w-full max-w-[300px] inline-flex h-12 items-center justify-center gap-2 bg-red-500 hover:bg-red-600 px-8 text-base font-semibold text-white cursor-pointer transition-all duration-200 transform hover:scale-105"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                >
                                     <DocumentTextIcon className="inline-block" />
                                     Change Log
                                 </button>
