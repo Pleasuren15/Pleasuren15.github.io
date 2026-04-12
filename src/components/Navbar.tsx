@@ -199,24 +199,47 @@ function Navbar() {
                                         <DocumentTextIcon className="inline-block mr-2" />
                                         <>Portfolio Change Log</>
                                     </DrawerTitle>
-                                    <DrawerDescription className="text-left">List of recent updates and changes to the portfolio.</DrawerDescription>
-                                    <Accordion type="single" collapsible className="">
+                                    <DrawerDescription className="text-left">List of all updates and changes made to this portfolio.</DrawerDescription>
+                                    <Accordion type="single" collapsible className="w-full">
                                         <AccordionItem value="item-1">
-                                            <AccordionTrigger>1. Version 1.0</AccordionTrigger>
-                                            <AccordionContent className='text-left'>
-                                                Initial release of the portfolio website with core structure and styling. Established the foundation for showcasing projects and professional information.
+                                            <AccordionTrigger>Experience Section - Job Cards</AccordionTrigger>
+                                            <AccordionContent className='text-left text-neutral-300 space-y-2'>
+                                                <p>• Made job experience cards uniform height for consistent layout</p>
+                                                <p>• Added "Show more/Show less" functionality for long descriptions</p>
+                                                <p>• Implemented smooth sliding animation for expand/collapse</p>
+                                                <p>• Increased visible lines (7 desktop, 6 mobile) before truncation</p>
                                             </AccordionContent>
                                         </AccordionItem>
                                         <AccordionItem value="item-2">
-                                            <AccordionTrigger>2. Add Navigation bar & review color schemes</AccordionTrigger>
-                                            <AccordionContent className='text-left'>
-                                                Added a responsive navigation bar with smooth transitions and links to Home, About, Projects, and Contact sections. Reviewed and refined the color scheme to improve visual hierarchy and user experience across all pages.
+                                            <AccordionTrigger>Navigation Improvements</AccordionTrigger>
+                                            <AccordionContent className='text-left text-neutral-300 space-y-2'>
+                                                <p>• Added all site sections: Experience, Education, Projects, Skills</p>
+                                                <p>• Implemented proper smooth-scroll navigation with section IDs</p>
+                                                <p>• Added close button (X) to mobile menu</p>
+                                                <p>• Left-aligned menu items for better readability</p>
+                                                <p>• Added backdrop overlay for mobile menu</p>
+                                                <p>• Changed log button to bottom of expanded mobile menu</p>
                                             </AccordionContent>
                                         </AccordionItem>
                                         <AccordionItem value="item-3">
-                                            <AccordionTrigger>3. Design & implement landing page</AccordionTrigger>
-                                            <AccordionContent className='text-left'>
-                                                Added a responsive landing page featuring a hero section with compelling call-to-action, showcase of key features, and strategic call-to-action buttons. Optimized for mobile and desktop viewing with engaging animations.
+                                            <AccordionTrigger>Socials & Footer</AccordionTrigger>
+                                            <AccordionContent className='text-left text-neutral-300 space-y-2'>
+                                                <p>• Removed Instagram, WhatsApp, Xbox from socials</p>
+                                                <p>• Added Gmail and Xbox (Gamepad2 icon) to socials</p>
+                                                <p>• LinkedIn now links to profile: pleasure-ndhlovu-n15</p>
+                                                <p>• GitHub now links to: github.com/Pleasuren15</p>
+                                                <p>• Xbox icon now copies gamer tag "Pleasuren15"</p>
+                                                <p>• Phone icon copies number when clicked</p>
+                                                <p>• Removed "Get In Touch" section from footer</p>
+                                            </AccordionContent>
+                                        </AccordionItem>
+                                        <AccordionItem value="item-4">
+                                            <AccordionTrigger>About Me Section</AccordionTrigger>
+                                            <AccordionContent className='text-left text-neutral-300 space-y-2'>
+                                                <p>• Rewrote About Me based on site content</p>
+                                                <p>• Highlighted .NET as primary skill</p>
+                                                <p>• Positioned React as secondary skill</p>
+                                                <p>• Removed specific company and system names</p>
                                             </AccordionContent>
                                         </AccordionItem>
                                     </Accordion>
