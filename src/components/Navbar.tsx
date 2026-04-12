@@ -1,18 +1,13 @@
 import { useState } from 'react';
 import { Menu, X, Briefcase, GraduationCap, Zap } from 'lucide-react';
-import { BorderGradientButton } from './border-gradient.tsx'
 import TrueFocus from './TrueFocus.tsx';
 import {
     Drawer,
-    DrawerClose,
     DrawerContent,
     DrawerDescription,
-    DrawerFooter,
     DrawerHeader,
     DrawerTitle,
-    DrawerTrigger,
 } from "./ui/drawer.tsx"
-import { Button } from './ui/button.tsx';
 import { DocumentTextIcon } from './ui/document-text.tsx';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from './ui/accordion'
 import { HugeiconsHeartIcon } from './ui/hugeicons-heart.tsx';
@@ -33,9 +28,15 @@ const sections = [
 
 function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isChangelogOpen, setIsChangelogOpen] = useState(false);
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    const openChangelog = () => {
+        setIsMobileMenuOpen(false);
+        setIsChangelogOpen(true);
     };
 
     return (
@@ -67,49 +68,13 @@ function Navbar() {
                 <div className="flex items-center gap-4">
                     {/* Change Log Button - Hidden on small screens */}
                     <div className="hidden sm:block">
-                        <Drawer>
-                            <DrawerTrigger>
-                                <BorderGradientButton duration={1800000}
-                                    className="inline-flex h-11 items-center gap-2 rounded-lg bg-white
-                                dark:bg-neutral-900 px-4 sm:px-6 text-sm font-semibold text-neutral-900 dark:text-white cursor-pointer">
-                                    Change Log
-                                </BorderGradientButton>
-                            </DrawerTrigger>
-                            <DrawerContent className="px-4 sm:px-20 md:px-40 bg-neutral-900 text-white border-neutral-700 rounded-none text-left">
-                                <DrawerHeader className="text-left flex flex-col gap-2">
-                                    <DrawerTitle className="text-left flex items-center">
-                                        <DocumentTextIcon className="inline-block mr-2" />
-                                        <>Portfolio Change Log</>
-                                    </DrawerTitle>
-                                    <DrawerDescription className="text-left">List of recent updates and changes to the portfolio.</DrawerDescription>
-                                    <Accordion type="single" collapsible className="">
-                                        <AccordionItem value="item-1">
-                                            <AccordionTrigger>1. Version 1.0</AccordionTrigger>
-                                            <AccordionContent className='text-left'>
-                                                Initial release of the portfolio website with core structure and styling. Established the foundation for showcasing projects and professional information.
-                                            </AccordionContent>
-                                        </AccordionItem>
-                                        <AccordionItem value="item-2">
-                                            <AccordionTrigger>2. Add Navigation bar & review color schemes</AccordionTrigger>
-                                            <AccordionContent className='text-left'>
-                                                Added a responsive navigation bar with smooth transitions and links to Home, About, Projects, and Contact sections. Reviewed and refined the color scheme to improve visual hierarchy and user experience across all pages.
-                                            </AccordionContent>
-                                        </AccordionItem>
-                                        <AccordionItem value="item-3">
-                                            <AccordionTrigger>3. Design & implement landing page</AccordionTrigger>
-                                            <AccordionContent className='text-left'>
-                                                Added a responsive landing page featuring a hero section with compelling call-to-action, showcase of key features, and strategic call-to-action buttons. Optimized for mobile and desktop viewing with engaging animations.
-                                            </AccordionContent>
-                                        </AccordionItem>
-                                    </Accordion>
-                                </DrawerHeader>
-                                <DrawerFooter className="justify-start w-full">
-                                    <DrawerClose asChild>
-                                        <Button variant="secondary" className='bg-red-500 text-white hover:bg-red-700 w-fit'>Cancel</Button>
-                                    </DrawerClose>
-                                </DrawerFooter>
-                            </DrawerContent>
-                        </Drawer>
+                        <button
+                            onClick={() => setIsChangelogOpen(true)}
+                            className="inline-flex h-11 items-center gap-2 rounded-lg bg-white dark:bg-neutral-900 px-4 sm:px-6 text-sm font-semibold text-neutral-900 dark:text-white cursor-pointer hover:opacity-90 transition-opacity"
+                        >
+                            <DocumentTextIcon className="w-4 h-4" />
+                            Change Log
+                        </button>
                     </div>
 
                     {/* Mobile Menu Button with Enhanced Animation */}
@@ -153,17 +118,6 @@ function Navbar() {
                     {/* Animated gradient accent line */}
                     <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent animate-pulse" />
 
-                    {/* Close button */}
-                    <div className="flex justify-end p-4">
-                        <button
-                            onClick={toggleMobileMenu}
-                            className="p-2 text-neutral-400 hover:text-white transition-colors duration-200"
-                            aria-label="Close menu"
-                        >
-                            <X className="w-6 h-6" />
-                        </button>
-                    </div>
-
                     {/* Navigation Links - Left aligned */}
                     <ul className={`flex flex-col space-y-2 relative z-10 text-left px-4 transition-all duration-800 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                         {sections.map((section, index) => (
@@ -186,77 +140,72 @@ function Navbar() {
 
                     {/* Change Log Button - Bottom of Mobile Menu */}
                     <div className={`mt-auto mb-8 px-4 w-full transition-all duration-800 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: isMobileMenuOpen ? '500ms' : '0ms' }}>
-                        <Drawer>
-                            <DrawerTrigger asChild>
-                                <button 
-                                    className="w-full max-w-[300px] inline-flex h-12 items-center justify-center gap-2 bg-red-500 hover:bg-red-600 px-8 text-base font-semibold text-white cursor-pointer transition-all duration-200 transform hover:scale-105"
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                    <DocumentTextIcon className="inline-block" />
-                                    Change Log
-                                </button>
-                            </DrawerTrigger>
-                            <DrawerContent className="px-4 bg-neutral-900 text-white border-neutral-700 rounded-none text-left">
-                                <DrawerHeader className="text-left flex flex-col gap-2">
-                                    <DrawerTitle className="text-left flex items-center">
-                                        <DocumentTextIcon className="inline-block mr-2" />
-                                        <>Portfolio Change Log</>
-                                    </DrawerTitle>
-                                    <DrawerDescription className="text-left">List of all updates and changes made to this portfolio.</DrawerDescription>
-                                    <Accordion type="single" collapsible className="w-full">
-                                        <AccordionItem value="item-1">
-                                            <AccordionTrigger>Experience Section - Job Cards</AccordionTrigger>
-                                            <AccordionContent className='text-left text-neutral-300 space-y-2'>
-                                                <p>• Made job experience cards uniform height for consistent layout</p>
-                                                <p>• Added "Show more/Show less" functionality for long descriptions</p>
-                                                <p>• Implemented smooth sliding animation for expand/collapse</p>
-                                                <p>• Increased visible lines (7 desktop, 6 mobile) before truncation</p>
-                                            </AccordionContent>
-                                        </AccordionItem>
-                                        <AccordionItem value="item-2">
-                                            <AccordionTrigger>Navigation Improvements</AccordionTrigger>
-                                            <AccordionContent className='text-left text-neutral-300 space-y-2'>
-                                                <p>• Added all site sections: Experience, Education, Projects, Skills</p>
-                                                <p>• Implemented proper smooth-scroll navigation with section IDs</p>
-                                                <p>• Added close button (X) to mobile menu</p>
-                                                <p>• Left-aligned menu items for better readability</p>
-                                                <p>• Added backdrop overlay for mobile menu</p>
-                                                <p>• Changed log button to bottom of expanded mobile menu</p>
-                                            </AccordionContent>
-                                        </AccordionItem>
-                                        <AccordionItem value="item-3">
-                                            <AccordionTrigger>Socials & Footer</AccordionTrigger>
-                                            <AccordionContent className='text-left text-neutral-300 space-y-2'>
-                                                <p>• Removed Instagram, WhatsApp, Xbox from socials</p>
-                                                <p>• Added Gmail and Xbox (Gamepad2 icon) to socials</p>
-                                                <p>• LinkedIn now links to profile: pleasure-ndhlovu-n15</p>
-                                                <p>• GitHub now links to: github.com/Pleasuren15</p>
-                                                <p>• Xbox icon now copies gamer tag "Pleasuren15"</p>
-                                                <p>• Phone icon copies number when clicked</p>
-                                                <p>• Removed "Get In Touch" section from footer</p>
-                                            </AccordionContent>
-                                        </AccordionItem>
-                                        <AccordionItem value="item-4">
-                                            <AccordionTrigger>About Me Section</AccordionTrigger>
-                                            <AccordionContent className='text-left text-neutral-300 space-y-2'>
-                                                <p>• Rewrote About Me based on site content</p>
-                                                <p>• Highlighted .NET as primary skill</p>
-                                                <p>• Positioned React as secondary skill</p>
-                                                <p>• Removed specific company and system names</p>
-                                            </AccordionContent>
-                                        </AccordionItem>
-                                    </Accordion>
-                                </DrawerHeader>
-                                <DrawerFooter className="justify-start w-full">
-                                    <DrawerClose asChild>
-                                        <Button variant="secondary" className='bg-red-500 text-white hover:bg-red-700 w-fit'>Cancel</Button>
-                                    </DrawerClose>
-                                </DrawerFooter>
-                            </DrawerContent>
-                        </Drawer>
+                        <button 
+                            className="w-full max-w-[300px] inline-flex h-12 items-center justify-center gap-2 bg-red-500 hover:bg-red-600 px-8 text-base font-semibold text-white cursor-pointer transition-all duration-200"
+                            onClick={openChangelog}
+                        >
+                            <DocumentTextIcon className="inline-block" />
+                            Change Log
+                        </button>
                     </div>
                 </div>
             </div>
+
+            {/* Standalone Changelog Drawer */}
+            <Drawer open={isChangelogOpen} onOpenChange={setIsChangelogOpen}>
+                <DrawerContent className="px-4 sm:px-20 md:px-40 bg-neutral-900 text-white border-neutral-700 rounded-none text-left max-h-[80vh] overflow-y-auto">
+                    <DrawerHeader className="text-left flex flex-col gap-2">
+                        <DrawerTitle className="text-left flex items-center text-xl">
+                            <DocumentTextIcon className="inline-block mr-2" />
+                            Portfolio Change Log
+                        </DrawerTitle>
+                        <DrawerDescription className="text-left text-neutral-400">List of all updates and changes made to this portfolio.</DrawerDescription>
+                        <Accordion type="single" collapsible className="w-full">
+                            <AccordionItem value="item-1">
+                                <AccordionTrigger>Experience Section - Job Cards</AccordionTrigger>
+                                <AccordionContent className='text-left text-neutral-300 space-y-2'>
+                                    <p>• Made job experience cards uniform height for consistent layout</p>
+                                    <p>• Added "Show more/Show less" functionality for long descriptions</p>
+                                    <p>• Implemented smooth sliding animation for expand/collapse</p>
+                                    <p>• Increased visible lines (7 desktop, 6 mobile) before truncation</p>
+                                </AccordionContent>
+                            </AccordionItem>
+                            <AccordionItem value="item-2">
+                                <AccordionTrigger>Navigation Improvements</AccordionTrigger>
+                                <AccordionContent className='text-left text-neutral-300 space-y-2'>
+                                    <p>• Added all site sections: Experience, Education, Projects, Skills</p>
+                                    <p>• Implemented proper smooth-scroll navigation with section IDs</p>
+                                    <p>• Added close button (X) to mobile menu</p>
+                                    <p>• Left-aligned menu items for better readability</p>
+                                    <p>• Added backdrop overlay for mobile menu</p>
+                                    <p>• Changed log button to bottom of expanded mobile menu</p>
+                                </AccordionContent>
+                            </AccordionItem>
+                            <AccordionItem value="item-3">
+                                <AccordionTrigger>Socials & Footer</AccordionTrigger>
+                                <AccordionContent className='text-left text-neutral-300 space-y-2'>
+                                    <p>• Removed Instagram, WhatsApp, Xbox from socials</p>
+                                    <p>• Added Gmail and Xbox (Gamepad2 icon) to socials</p>
+                                    <p>• LinkedIn now links to profile: pleasure-ndhlovu-n15</p>
+                                    <p>• GitHub now links to: github.com/Pleasuren15</p>
+                                    <p>• Xbox icon now copies gamer tag "Pleasuren15"</p>
+                                    <p>• Phone icon copies number when clicked</p>
+                                    <p>• Removed "Get In Touch" section from footer</p>
+                                </AccordionContent>
+                            </AccordionItem>
+                            <AccordionItem value="item-4">
+                                <AccordionTrigger>About Me Section</AccordionTrigger>
+                                <AccordionContent className='text-left text-neutral-300 space-y-2'>
+                                    <p>• Rewrote About Me based on site content</p>
+                                    <p>• Highlighted .NET as primary skill</p>
+                                    <p>• Positioned React as secondary skill</p>
+                                    <p>• Removed specific company and system names</p>
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
+                    </DrawerHeader>
+                </DrawerContent>
+            </Drawer>
         </nav>
     );
 }
