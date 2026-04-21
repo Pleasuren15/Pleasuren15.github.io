@@ -178,7 +178,34 @@ function Navbar() {
                         <DrawerDescription className="text-left text-neutral-400">List of all updates and changes made to this portfolio.</DrawerDescription>
                         <Accordion type="single" collapsible className="w-full">
                             <AccordionItem value="item-1">
-                                <AccordionTrigger>Experience Section - Job Cards</AccordionTrigger>
+                                <AccordionTrigger>Recent Updates</AccordionTrigger>
+                                <AccordionContent className='text-left text-neutral-300 space-y-2'>
+                                    <p>• Fixed socials icons: increased size (w-5 h-5) and stroke width (2) for solid color</p>
+                                    <p>• Changed footer copyright text to white</p>
+                                    <p>• Reduced "About Me" description font size on desktop</p>
+                                </AccordionContent>
+                            </AccordionItem>
+                            <AccordionItem value="item-2">
+                                <AccordionTrigger>Navbar & Navigation</AccordionTrigger>
+                                <AccordionContent className='text-left text-neutral-300 space-y-2'>
+                                    <p>• Added Change Log button to main navbar (desktop)</p>
+                                    <p>• Fixed Change Log button with cursor-pointer</p>
+                                    <p>• Added smooth sliding animation when clicking nav links</p>
+                                    <p>• Reduced icon sizes from 28px to 16px for all navbar icons</p>
+                                    <p>• Fixed icon/text alignment with align-middle</p>
+                                    <p>• Added justify-between layout for logo and menu items</p>
+                                </AccordionContent>
+                            </AccordionItem>
+                            <AccordionItem value="item-3">
+                                <AccordionTrigger>Landing Page</AccordionTrigger>
+                                <AccordionContent className='text-left text-neutral-300 space-y-2'>
+                                    <p>• Fixed "PLEASURE NDHLOVU" text to stay on one line</p>
+                                    <p>• Used viewport-width (vw) units to scale proportionally</p>
+                                    <p>• Added min() functions with pixel caps to prevent scrollbars</p>
+                                </AccordionContent>
+                            </AccordionItem>
+                            <AccordionItem value="item-4">
+                                <AccordionTrigger>Experience Section</AccordionTrigger>
                                 <AccordionContent className='text-left text-neutral-300 space-y-2'>
                                     <p>• Made job experience cards uniform height for consistent layout</p>
                                     <p>• Added "Show more/Show less" functionality for long descriptions</p>
@@ -186,30 +213,18 @@ function Navbar() {
                                     <p>• Increased visible lines (7 desktop, 6 mobile) before truncation</p>
                                 </AccordionContent>
                             </AccordionItem>
-                            <AccordionItem value="item-2">
-                                <AccordionTrigger>Navigation Improvements</AccordionTrigger>
-                                <AccordionContent className='text-left text-neutral-300 space-y-2'>
-                                    <p>• Added all site sections: Experience, Education, Projects, Skills</p>
-                                    <p>• Implemented proper smooth-scroll navigation with section IDs</p>
-                                    <p>• Added close button (X) to mobile menu</p>
-                                    <p>• Left-aligned menu items for better readability</p>
-                                    <p>• Added backdrop overlay for mobile menu</p>
-                                    <p>• Changed log button to bottom of expanded mobile menu</p>
-                                </AccordionContent>
-                            </AccordionItem>
-                            <AccordionItem value="item-3">
+                            <AccordionItem value="item-5">
                                 <AccordionTrigger>Socials & Footer</AccordionTrigger>
                                 <AccordionContent className='text-left text-neutral-300 space-y-2'>
-                                    <p>• Removed Instagram, WhatsApp, Xbox from socials</p>
+                                    <p>• Removed Instagram, WhatsApp from socials</p>
                                     <p>• Added Gmail and Xbox (Gamepad2 icon) to socials</p>
                                     <p>• LinkedIn now links to profile: pleasure-ndhlovu-n15</p>
                                     <p>• GitHub now links to: github.com/Pleasuren15</p>
-                                    <p>• Xbox icon now copies gamer tag "Pleasuren15"</p>
+                                    <p>• Xbox icon copies gamer tag "Pleasuren15"</p>
                                     <p>• Phone icon copies number when clicked</p>
-                                    <p>• Removed "Get In Touch" section from footer</p>
                                 </AccordionContent>
                             </AccordionItem>
-                            <AccordionItem value="item-4">
+                            <AccordionItem value="item-6">
                                 <AccordionTrigger>About Me Section</AccordionTrigger>
                                 <AccordionContent className='text-left text-neutral-300 space-y-2'>
                                     <p>• Rewrote About Me based on site content</p>
