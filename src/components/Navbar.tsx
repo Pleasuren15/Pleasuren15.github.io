@@ -16,16 +16,6 @@ import { HugeiconsUserIcon } from './ui/hugeicons-user.tsx';
 import { HugeiconsMailIcon } from './ui/hugeicons-mail.tsx';
 import ContactModal from './ContactModal.tsx';
 
-const smoothScrollTo = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-        closeMobileMenu();
-        setTimeout(() => {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-    }
-};
-
 // Section IDs matching App.tsx
 const sections = [
     { id: 'home', label: 'Home', icon: HugeiconsHomeIcon },
@@ -41,17 +31,24 @@ const sections = [
 function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isChangelogOpen, setIsChangelogOpen] = useState(false);
+    const [isContactOpen, setIsContactOpen] = useState(false);
+
+    const closeMobileMenu = () => {
+        setIsMobileMenuOpen(false);
+    };
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
-    const openChangelog = () => {
-        setIsChangelogOpen(true);
-    };
-
-    const closeMobileMenu = () => {
-        setIsMobileMenuOpen(false);
+    const smoothScrollTo = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            closeMobileMenu();
+            setTimeout(() => {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
     };
 
     return (
@@ -74,7 +71,7 @@ function Navbar() {
                         <li key={section.id} className='transition-all duration-100 hover:text-red-400'>
                             {section.isButton ? (
                                 <button 
-                                    onClick={() => setIsChangelogOpen(true)}
+                                    onClick={() => section.isContactButton ? setIsContactOpen(true) : setIsChangelogOpen(true)}
                                     className="flex items-center px-3 py-2 font-medium leading-tight transition-all duration-200 hover:bg-red-500/10 rounded-lg whitespace-nowrap cursor-pointer"
                                 >
                                     <section.icon className='mr-2 w-4 h-4 align-middle' />
@@ -237,6 +234,9 @@ function Navbar() {
                     </DrawerHeader>
                 </DrawerContent>
             </Drawer>
+
+            {/* Contact Modal */}
+            <ContactModal open={isContactOpen} onClose={() => setIsContactOpen(false)} />
         </nav>
     );
 }
