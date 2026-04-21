@@ -14,6 +14,17 @@ import { HugeiconsHeartIcon } from './ui/hugeicons-heart.tsx';
 import { HugeiconsHomeIcon } from './ui/hugeicons-home.tsx';
 import { HugeiconsUserIcon } from './ui/hugeicons-user.tsx';
 import { HugeiconsMailIcon } from './ui/hugeicons-mail.tsx';
+import ContactModal from './ContactModal.tsx';
+
+const smoothScrollTo = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+        closeMobileMenu();
+        setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+    }
+};
 
 // Section IDs matching App.tsx
 const sections = [
@@ -23,7 +34,8 @@ const sections = [
     { id: 'education', label: 'Education', icon: GraduationCap },
     { id: 'projects', label: 'Projects', icon: HugeiconsHeartIcon },
     { id: 'skills', label: 'Skills', icon: Zap },
-    { id: 'contact', label: 'Contact', icon: HugeiconsMailIcon },
+    { id: 'contact', label: 'Contact', icon: HugeiconsMailIcon, isButton: true, isContactButton: true },
+    { id: 'changelog', label: 'Change Log', icon: DocumentTextIcon, isButton: true },
 ];
 
 function Navbar() {
@@ -35,14 +47,17 @@ function Navbar() {
     };
 
     const openChangelog = () => {
-        setIsMobileMenuOpen(false);
         setIsChangelogOpen(true);
+    };
+
+    const closeMobileMenu = () => {
+        setIsMobileMenuOpen(false);
     };
 
     return (
         <nav className="relative mt-4">
-            <div className="flex h-16 items-center justify-between sm:px-6 ">
-                <div className="flex items-center gap-4 md:gap-12 ml-4">
+            <div className="flex h-16 items-center justify-between sm:px-6 w-full gap-4">
+                <div className="flex items-center gap-4 md:gap-12 flex-shrink-0">
                     <TrueFocus
                         sentence="Ps .Devs"
                         separator=' '
@@ -51,32 +66,34 @@ function Navbar() {
                         animationDuration={0.5}
                         pauseBetweenAnimations={3}
                     />
-
-                    {/* Desktop Navigation */}
-                    <ul className="hidden md:flex space-x-4">
-                        {sections.map((section) => (
-                            <li key={section.id} className='transition-all duration-100 hover:text-red-400'>
-                                <a href={`#${section.id}`} className="flex items-center px-3 py-2 font-medium">
-                                    <section.icon className='mr-2' />
-                                    {section.label}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
                 </div>
 
-                <div className="flex items-center gap-4">
-                    {/* Change Log Button - Hidden on small screens */}
-                    <div className="hidden sm:block">
-                        <button
-                            onClick={() => setIsChangelogOpen(true)}
-                            className="inline-flex h-11 items-center gap-2 rounded-lg bg-white dark:bg-neutral-900 px-4 sm:px-6 text-sm font-semibold text-neutral-900 dark:text-white cursor-pointer hover:opacity-90 transition-opacity"
-                        >
-                            <DocumentTextIcon className="w-4 h-4" />
-                            Change Log
-                        </button>
-                    </div>
+                {/* Desktop Navigation */}
+                <ul className="hidden md:flex items-center justify-end space-x-1 flex-nowrap flex-grow-0">
+                    {sections.map((section) => (
+                        <li key={section.id} className='transition-all duration-100 hover:text-red-400'>
+                            {section.isButton ? (
+                                <button 
+                                    onClick={() => setIsChangelogOpen(true)}
+                                    className="flex items-center px-3 py-2 font-medium leading-tight transition-all duration-200 hover:bg-red-500/10 rounded-lg whitespace-nowrap cursor-pointer"
+                                >
+                                    <section.icon className='mr-2 w-4 h-4 align-middle' />
+                                    <span className="align-middle">{section.label}</span>
+                                </button>
+                            ) : (
+                                <button 
+                                    onClick={() => smoothScrollTo(section.id)}
+                                    className="flex items-center px-3 py-2 font-medium leading-tight transition-all duration-200 hover:bg-red-500/10 rounded-lg cursor-pointer"
+                                >
+                                    <section.icon className='mr-2 w-4 h-4 align-middle' />
+                                    <span className="align-middle">{section.label}</span>
+                                </button>
+                            )}
+                        </li>
+                    ))}
+                </ul>
 
+                <div className="flex items-center gap-4">
                     {/* Mobile Menu Button with Enhanced Animation */}
                     <button
                         onClick={toggleMobileMenu}
@@ -120,20 +137,19 @@ function Navbar() {
 
                     {/* Navigation Links - Left aligned */}
                     <ul className={`flex flex-col space-y-2 relative z-10 text-left px-4 transition-all duration-800 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                        {sections.map((section, index) => (
+                        {sections.filter(s => s.id !== 'changelog').map((section, index) => (
                             <li
                                 key={section.id}
                                 className={`transition-all duration-600 ${isMobileMenuOpen ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-8 scale-90'}`}
-                                style={{ transitionDelay: isMobileMenuOpen ? `${100 + index * 50}ms` : `${50 + (sections.length - index) * 30}ms` }}
+                                style={{ transitionDelay: isMobileMenuOpen ? `${100 + index * 50}ms` : '0ms' }}
                             >
-                                <a
-                                    href={`#${section.id}`}
-                                    className="flex items-center px-4 py-3 font-medium text-lg hover:bg-red-500/10 transition-all duration-200 rounded-lg border-2 border-transparent hover:border-red-500/30"
-                                    onClick={toggleMobileMenu}
+                                <button
+                                    onClick={() => { smoothScrollTo(section.id); toggleMobileMenu(); }}
+                                    className="flex items-center px-4 py-3 font-medium text-lg leading-tight hover:bg-red-500/10 transition-all duration-200 rounded-lg border-2 border-transparent hover:border-red-500/30 cursor-pointer w-full text-left"
                                 >
-                                    <section.icon className='mr-3' />
-                                    {section.label}
-                                </a>
+                                    <section.icon className='mr-3 w-5 h-5 align-middle' />
+                                    <span className="align-middle">{section.label}</span>
+                                </button>
                             </li>
                         ))}
                     </ul>
@@ -141,11 +157,11 @@ function Navbar() {
                     {/* Change Log Button - Bottom of Mobile Menu */}
                     <div className={`mt-auto mb-8 px-4 w-full transition-all duration-800 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: isMobileMenuOpen ? '500ms' : '0ms' }}>
                         <button 
-                            className="w-full max-w-[300px] inline-flex h-12 items-center justify-center gap-2 bg-red-500 hover:bg-red-600 px-8 text-base font-semibold text-white cursor-pointer transition-all duration-200"
-                            onClick={openChangelog}
+                            className="w-full max-w-[300px] inline-flex h-12 items-center gap-2 bg-red-500 hover:bg-red-600 px-8 text-base font-semibold text-white cursor-pointer transition-all duration-200 leading-tight"
+                            onClick={() => { closeMobileMenu(); setTimeout(() => setIsChangelogOpen(true), 150); }}
                         >
-                            <DocumentTextIcon className="inline-block" />
-                            Change Log
+                            <DocumentTextIcon className="w-5 h-5 align-middle" />
+                            <span className="align-middle">Change Log</span>
                         </button>
                     </div>
                 </div>
@@ -156,7 +172,7 @@ function Navbar() {
                 <DrawerContent className="px-4 sm:px-20 md:px-40 bg-neutral-900 text-white border-neutral-700 rounded-none text-left max-h-[80vh] overflow-y-auto">
                     <DrawerHeader className="text-left flex flex-col gap-2">
                         <DrawerTitle className="text-left flex items-center text-xl">
-                            <DocumentTextIcon className="inline-block mr-2" />
+                            <DocumentTextIcon className="w-5 h-5 mr-2" />
                             Portfolio Change Log
                         </DrawerTitle>
                         <DrawerDescription className="text-left text-neutral-400">List of all updates and changes made to this portfolio.</DrawerDescription>

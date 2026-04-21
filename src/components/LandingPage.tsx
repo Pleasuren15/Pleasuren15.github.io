@@ -17,24 +17,24 @@ const LandingPage: React.FC = () => {
 
   return (
     <div
-      className="flex flex-col items-center justify-between w-full px-4 sm:px-6 md:px-8 lg:px-0 font-bold"
+      className="flex flex-col items-center justify-between w-full px-4 sm:px-6 md:px-8 font-bold"
       style={{ height: "calc(100vh - var(--navbar-height))" }}
     >
       {/* Spacer to push content to center */}
       <div></div>
       
-      <div className="flex flex-col items-center w-full max-w-7xl space-y-3 sm:space-y-4 md:space-y-6">
-        <h3 className="text-center text-3xl sm:text-6xl md:text-8xl lg:text-[10rem] leading-tight whitespace-nowrap overflow-hidden">
-          <DecryptedText
+      <div className="flex flex-col items-center w-[min-content] max-w-full space-y-3 sm:space-y-4 md:space-y-6">
+        <h3 className="text-center text-[min(12vw,100px)] sm:text-[min(10vw,120px)] md:text-[min(8vw,140px)] lg:text-[min(6vw,160px)] leading-tight whitespace-nowrap w-full min-w-max">
+          <span className="whitespace-nowrap"><DecryptedText
             text="PLEASURE NDHLOVU"
             animateOn="view"
             revealDirection="start"
             sequential
             speed={10}
             useOriginalCharsOnly={false}
-          />
+          /></span>
         </h3>
-        <h3 className="flex flex-row flex-nowrap items-center justify-center text-center text-2xl sm:text-4xl md:text-5xl lg:text-9xl font-bold leading-tight">
+        <h3 className="flex flex-row flex-nowrap items-center justify-center text-center text-[5vw] sm:text-[4vw] md:text-[3.5vw] font-bold leading-tight">
           <DecryptedText
             text="SOFTWARE"
             animateOn="view"
@@ -54,7 +54,7 @@ const LandingPage: React.FC = () => {
             rotationInterval={5000}
           />
         </h3>
-        <h3 className="text-center text-sm sm:text-xl md:text-2xl lg:text-4xl font-medium leading-relaxed max-w-4xl px-2">
+        <h3 className="text-center text-[3vw] sm:text-[2.5vw] md:text-[2vw] font-medium leading-relaxed max-w-4xl px-2">
           <DecryptedText
             text="Delivering Software With Precision, Tested For Reliability And Built To Scale."
             animateOn="view"

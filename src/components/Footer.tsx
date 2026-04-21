@@ -15,35 +15,35 @@ type SocialItem = {
 
 const socials: SocialItem[] = [
     {
-        icon: <Linkedin className="w-4 h-4" strokeWidth={1.5} />,
+        icon: <Linkedin className="w-5 h-5" strokeWidth={2} />,
         label: "LinkedIn",
         href: "https://www.linkedin.com/in/pleasure-ndhlovu-n15/",
         color: "#0A66C2",
         hoverBorder: "rgba(10,102,194,0.6)",
     },
     {
-        icon: <Github className="w-4 h-4" strokeWidth={1.5} />,
+        icon: <Github className="w-5 h-5" strokeWidth={2} />,
         label: "GitHub",
         href: "https://github.com/Pleasuren15",
         color: "#e5e5e5",
         hoverBorder: "rgba(229,229,229,0.5)",
     },
     {
-        icon: <Phone className="w-4 h-4" strokeWidth={1.5} />,
+        icon: <Phone className="w-5 h-5" strokeWidth={2} />,
         label: "Phone",
         color: "#10B981",
         hoverBorder: "rgba(16,185,129,0.6)",
         copyOnClick: PHONE,
     },
     {
-        icon: <Mail className="w-4 h-4" strokeWidth={1.5} />,
+        icon: <Mail className="w-5 h-5" strokeWidth={2} />,
         label: "Gmail",
         href: "mailto:Pleasuren15@gmail.com",
         color: "#EA4335",
         hoverBorder: "rgba(234,67,53,0.6)",
     },
     {
-        icon: <Gamepad2 className="w-4 h-4" strokeWidth={1.5} />,
+        icon: <Gamepad2 className="w-5 h-5" strokeWidth={2} />,
         label: "Xbox",
         color: "#107C10",
         hoverBorder: "rgba(16,124,16,0.6)",
@@ -129,7 +129,7 @@ function Footer() {
 
             {/* Bottom bar */}
             <div className="flex items-center justify-between border-t border-neutral-800 pt-4 pb-6">
-                <p className="text-xs text-neutral-500">&copy; 2026 Pleasure Ndhlovu. All rights reserved.</p>
+                <p className="text-xs text-white">&copy; 2026 Pleasure Ndhlovu. All rights reserved.</p>
             </div>
 
             {/* Copy toast */}

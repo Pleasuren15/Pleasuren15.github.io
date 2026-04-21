@@ -44,7 +44,7 @@ const AboutMe: React.FC = () => {
 
                 {/* Left — bio + stats */}
                 <div className="flex flex-col gap-8">
-                    <p className="text-lg sm:text-xl md:text-2xl font-medium leading-relaxed text-neutral-300">
+                    <p className="text-base sm:text-lg md:text-xl font-medium leading-relaxed text-neutral-300">
                         I'm an Intermediate Software Engineer with over 4 years of experience building
                         globally-used software in the iGaming industry. My core strength is .NET development —
                         building scalable backend systems and APIs. I also have solid React skills for

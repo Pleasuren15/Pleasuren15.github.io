@@ -34,7 +34,7 @@ const PATH_VARIANTS: Variants = {
 const HugeiconsHomeIcon = forwardRef<
   HugeiconsHomeIconHandle,
   HugeiconsHomeIconProps
->(({ onMouseEnter, onMouseLeave, className, size = 28, ...props }, ref) => {
+>(({ onMouseEnter, onMouseLeave, className, size = 16, ...props }, ref) => {
   const controls = useAnimation();
   const isControlledRef = useRef(false);
 
