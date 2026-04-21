@@ -23,8 +23,8 @@ const LandingPage: React.FC = () => {
       {/* Spacer to push content to center */}
       <div></div>
       
-      <div className="flex flex-col items-center w-[min-content] max-w-full space-y-3 sm:space-y-4 md:space-y-6">
-        <h3 className="text-center text-[min(12vw,100px)] sm:text-[min(10vw,120px)] md:text-[min(8vw,140px)] lg:text-[min(6vw,160px)] leading-tight whitespace-nowrap w-full min-w-max">
+      <div className="flex flex-col items-center w-[90%] max-w-full space-y-3 sm:space-y-4 md:space-y-6">
+        <h3 className="text-center text-[min(8vw,60px)] sm:text-[min(10vw,100px)] md:text-[min(8vw,140px)] lg:text-[min(6vw,160px)] leading-tight whitespace-nowrap w-full min-w-max">
           <span className="whitespace-nowrap"><DecryptedText
             text="PLEASURE NDHLOVU"
             animateOn="view"
@@ -34,7 +34,7 @@ const LandingPage: React.FC = () => {
             useOriginalCharsOnly={false}
           /></span>
         </h3>
-        <h3 className="flex flex-row flex-nowrap items-center justify-center text-center text-[5vw] sm:text-[4vw] md:text-[3.5vw] font-bold leading-tight">
+        <h3 className="flex flex-row flex-nowrap items-center justify-center text-center text-[3vw] sm:text-[4vw] md:text-[3.5vw] font-bold leading-tight">
           <DecryptedText
             text="SOFTWARE"
             animateOn="view"

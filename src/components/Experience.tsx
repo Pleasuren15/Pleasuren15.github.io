@@ -114,7 +114,7 @@ const ExperienceCard: React.FC<{
             className="exp-fade p-px h-full flex flex-col"
             style={{ background: 'linear-gradient(135deg, #ef4444 0%, #1d4ed8 50%, #ef4444 100%)' }}
         >
-            <div className={`bg-neutral-900 ${p} flex flex-col h-full`}>
+            <div className={`bg-neutral-900 ${p} flex flex-col h-full border-t-2 border-red-500`}>
                 <div className={`flex items-start justify-between ${mb}`}>
                     <div>
                         <h4 className={`${titleSize} font-bold text-white leading-snug`}>{exp.title}</h4>

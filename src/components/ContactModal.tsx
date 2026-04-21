@@ -49,8 +49,8 @@ const ContactModal: React.FC<Props> = ({ open, onClose }) => {
             onClick={e => { if (e.target === overlayRef.current) onClose(); }}
             style={{
                 position: 'fixed', inset: 0, zIndex: 100,
-                background: 'rgba(0,0,0,0.75)',
-                backdropFilter: 'blur(6px)',
+                background: 'rgba(0,0,0,0.8)',
+                backdropFilter: 'blur(8px)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 padding: '1rem',
                 animation: 'fadeIn 0.2s ease',
@@ -59,8 +59,7 @@ const ContactModal: React.FC<Props> = ({ open, onClose }) => {
             <div
                 style={{
                     width: '100%', maxWidth: '480px',
-                    background: 'rgba(10,10,10,0.95)',
-                    border: '1px solid rgba(115,115,115,0.3)',
+                    background: '#ffffff',
                     position: 'relative',
                     animation: 'slideUp 0.25s ease',
                 }}
@@ -74,8 +73,8 @@ const ContactModal: React.FC<Props> = ({ open, onClose }) => {
                 {/* Header */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.25rem 1.5rem 1rem' }}>
                     <div>
-                        <h2 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#fff', margin: 0 }}>Get In Touch</h2>
-                        <p style={{ fontSize: '0.75rem', color: '#737373', marginTop: '2px' }}>I'll get back to you as soon as possible.</p>
+                        <h2 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#000', margin: 0 }}>Get In Touch</h2>
+                        <p style={{ fontSize: '0.75rem', color: '#525252', marginTop: '2px' }}>I'll get back to you as soon as possible.</p>
                     </div>
                     <button
                         onClick={onClose}
@@ -115,8 +114,8 @@ const ContactModal: React.FC<Props> = ({ open, onClose }) => {
                         }}>
                             <Send size={20} strokeWidth={1.5} color="#60a5fa" />
                         </div>
-                        <p style={{ color: '#fff', fontWeight: 600, marginBottom: '0.5rem' }}>Email client opened!</p>
-                        <p style={{ color: '#737373', fontSize: '0.8rem' }}>Complete sending in your email client. I'll respond shortly.</p>
+                        <p style={{ color: '#171717', fontWeight: 600, marginBottom: '0.5rem' }}>Email client opened!</p>
+                        <p style={{ color: '#525252', fontSize: '0.8rem' }}>Complete sending in your email client. I'll respond shortly.</p>
                         <button
                             onClick={onClose}
                             style={{
@@ -142,7 +141,7 @@ const ContactModal: React.FC<Props> = ({ open, onClose }) => {
                     <form onSubmit={handleSubmit} style={{ padding: '1.25rem 1.5rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         {/* Name */}
                         <div>
-                            <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.7rem', fontWeight: 600, color: '#a3a3a3', letterSpacing: '0.08em', marginBottom: '0.4rem' }}>
+                            <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.7rem', fontWeight: 600, color: '#525252', letterSpacing: '0.08em', marginBottom: '0.4rem' }}>
                                 <User size={11} strokeWidth={2} /> NAME
                             </label>
                             <input
@@ -152,14 +151,14 @@ const ContactModal: React.FC<Props> = ({ open, onClose }) => {
                                 required
                                 placeholder="Your full name"
                                 style={inputStyle}
-                                onFocus={e => { e.currentTarget.style.borderColor = 'rgba(59,130,246,0.5)'; e.currentTarget.style.outline = 'none'; }}
-                                onBlur={e => { e.currentTarget.style.borderColor = 'rgba(115,115,115,0.3)'; }}
+                                onFocus={e => { e.currentTarget.style.borderColor = '#ef4444'; e.currentTarget.style.outline = 'none'; }}
+                                onBlur={e => { e.currentTarget.style.borderColor = '#d4d4d4'; }}
                             />
                         </div>
 
                         {/* Email */}
                         <div>
-                            <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.7rem', fontWeight: 600, color: '#a3a3a3', letterSpacing: '0.08em', marginBottom: '0.4rem' }}>
+                            <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.7rem', fontWeight: 600, color: '#525252', letterSpacing: '0.08em', marginBottom: '0.4rem' }}>
                                 <Mail size={11} strokeWidth={2} /> EMAIL
                             </label>
                             <input
@@ -170,14 +169,14 @@ const ContactModal: React.FC<Props> = ({ open, onClose }) => {
                                 required
                                 placeholder="your@email.com"
                                 style={inputStyle}
-                                onFocus={e => { e.currentTarget.style.borderColor = 'rgba(59,130,246,0.5)'; e.currentTarget.style.outline = 'none'; }}
-                                onBlur={e => { e.currentTarget.style.borderColor = 'rgba(115,115,115,0.3)'; }}
+                                onFocus={e => { e.currentTarget.style.borderColor = '#ef4444'; e.currentTarget.style.outline = 'none'; }}
+                                onBlur={e => { e.currentTarget.style.borderColor = '#d4d4d4'; }}
                             />
                         </div>
 
                         {/* Message */}
                         <div>
-                            <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.7rem', fontWeight: 600, color: '#a3a3a3', letterSpacing: '0.08em', marginBottom: '0.4rem' }}>
+                            <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.7rem', fontWeight: 600, color: '#525252', letterSpacing: '0.08em', marginBottom: '0.4rem' }}>
                                 <MessageSquare size={11} strokeWidth={2} /> MESSAGE
                             </label>
                             <textarea
@@ -188,8 +187,8 @@ const ContactModal: React.FC<Props> = ({ open, onClose }) => {
                                 rows={4}
                                 placeholder="What would you like to discuss?"
                                 style={{ ...inputStyle, resize: 'none', lineHeight: '1.5' }}
-                                onFocus={e => { e.currentTarget.style.borderColor = 'rgba(59,130,246,0.5)'; e.currentTarget.style.outline = 'none'; }}
-                                onBlur={e => { e.currentTarget.style.borderColor = 'rgba(115,115,115,0.3)'; }}
+                                onFocus={e => { e.currentTarget.style.borderColor = '#ef4444'; e.currentTarget.style.outline = 'none'; }}
+                                onBlur={e => { e.currentTarget.style.borderColor = '#d4d4d4'; }}
                             />
                         </div>
 
@@ -225,10 +224,10 @@ const ContactModal: React.FC<Props> = ({ open, onClose }) => {
 const inputStyle: React.CSSProperties = {
     width: '100%',
     padding: '0.6rem 0.75rem',
-    background: 'rgba(23,23,23,0.8)',
-    border: '1px solid rgba(115,115,115,0.3)',
-    color: '#e5e5e5',
-    fontSize: '0.85rem',
+    background: '#fafafa',
+    border: '1px solid #d4d4d4',
+    color: '#171717',
+    fontSize: '0.9rem',
     transition: 'border-color 0.2s',
     boxSizing: 'border-box',
 };
